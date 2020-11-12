@@ -1,8 +1,8 @@
 <template>
   <div class="container" id="Head">
     <div class="container-logo">
-      <a href="/" class="logo-head" id="Head-logo">
-        <img src="@/assets/globe.png" alt="world" class="img-logo-head" />
+      <a href="/" class="logo-head" >
+        <img src="@/assets/logo-1.1.png" alt="world" id="Head-logo" class="img-logo-head" />
       </a>
     </div>
     <div class="container-login" @click="setcheck" id="Head-login">
@@ -10,14 +10,14 @@
         ><b-avatar icon="people-fill" style="cursor: pointer;"></b-avatar
       ></a>
     </div>
-    <div class="container-search-head">
+    <!-- <div class="container-search-head">
       <img
         src="@/assets/search.png"
         alt="search"
         class="search-head-img"
         id="search-head-img"
-      />
-    </div>
+      /> -->
+    <!-- </div> -->
     <div class="container-above" id="Head-above">
       <li class="li-head" id="Head-list">
         <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
@@ -56,7 +56,7 @@ export default {
 
 <style>
 .img-logo-head {
-  padding: 5px;
+
   height: 100px;
   width: 100px;
 }
@@ -101,6 +101,7 @@ a:hover {
   list-style-type: none;
 }
 .container-logo {
+  margin-top: 1%;
   height: 100%;
   width: 10%;
   float: left;
@@ -121,10 +122,9 @@ a:hover {
   transition: all 0.5s ease-in;
 }
 .logo-head {
-  font-size: 50px;
+
   cursor: pointer;
-  position: relative;
-  line-height: 2;
+  position: absolute;
   text-align: center;
   transition: all 0.3s ease-in;
 }
