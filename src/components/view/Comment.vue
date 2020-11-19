@@ -32,7 +32,7 @@
       <div v-for="(text,index) in listtext_old" :key="index">
         <b-avatar
           icon="people-fill"
-          style="float: left; margin-top: 2%;"
+          style="float: left; margin-top: 3%; margin-left:-5%;"
         ></b-avatar>
         <div class="container-view-comment-list">
           <span class="text-view-comment-list">{{ text.text }}</span>
@@ -41,7 +41,7 @@
       <div v-for="(text,index) in listtext" :key="index">
         <b-avatar
           icon="people-fill"
-          style="float: right; margin-top: 2%;"
+          style="float: right; margin-top: 3%; margin-right:-5%"
         ></b-avatar>
         <div class="container-view-comment-list2">
           <span class="text-view-comment-list">{{ text.text }}</span>
@@ -107,13 +107,13 @@ export default {
   position: relative;
   margin: auto;
   margin-top: 2%;
-  overflow: auto;
+
   padding: 15px;
 }
 .input-view-comment {
   float: left;
   border-radius: 15px;
-  max-width: 90%;
+  max-width: 80%;
   position: relative;
 }
 .button-view-comment {

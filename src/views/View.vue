@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <Header style=" backgroundColor :khaki;"></Header>
+<div>
+  <Header ></Header>
+  <div class="container-mainview">
+    
     <Head></Head>
     <Photo></Photo>
 
@@ -10,6 +12,8 @@
 
     <Comment></Comment>
   </div>
+</div>
+  
 </template>
 
 <script>
@@ -39,21 +43,29 @@ export default {
     window.scrollTo(0, 0);
     window.addEventListener("scroll", function() {
       if (document.scrollingElement.scrollTop >= 100) {
-        document.getElementById("Head").style =
-          "background: khaki; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
+        document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
         document.getElementById("Head-logo").style = "font-size: 36px;";
         document.getElementById("Head-login").style = "margin-top: 1.5%;";
         console.log("150");
       } else {
-        document.getElementById("Head").style =
-          "background: khaki; height: 100px;";
+        document.getElementById("Head").style = "background: #ECD59F; height: 100px;";
         document.getElementById("Head-logo").style = "font-size: 50px;";
         document.getElementById("Head-login").style = "margin-top: 2%;";
         console.log("100");
       }
     });
+  },
+  beforeDestroy(){
+    this.$store.dispatch("addView",this.$store.getters.getView_home);
+    this.$router.push('/view');
   }
 };
 </script>
 
-<style></style>
+<style>
+.container-mainview{
+  border: 1px solid black;
+  width: 70%;
+  margin: 10% auto;
+}
+</style>

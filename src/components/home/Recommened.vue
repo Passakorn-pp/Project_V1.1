@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       
-      name: "แนะนำ",
       slideIndex: 1,
       silder: 0,
       flickityOptions: {
@@ -55,7 +54,17 @@ export default {
           name: "หอพักบ้านแก้ว",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
-          price : "3500",
+          room:
+          [
+            {
+              nameroom : "ห้องเล็ก",
+              price : "3000",
+            },
+            {
+              nameroom : "ห้องใหญ่",
+              price : "3500",
+            }
+          ],
           wifi: true,
           air: true,
           fan: true,
@@ -63,10 +72,20 @@ export default {
           typeWomen: true
         },
         {
-          name: "หอพักบ้านแก้ว",
+          name: "หอพักเจเต",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
-          price : "3500",
+          room:
+          [
+            {
+              nameroom : "ห้องเล็ก",
+              price : "3000",
+            },
+            {
+              nameroom : "ห้องใหญ่",
+              price : "3500",
+            }
+          ],
           wifi: true,
           air: true,
           fan: true,
@@ -74,10 +93,20 @@ export default {
           typeWomen: true
         },
         {
-          name: "หอพักบ้านแก้ว",
+          name: "หอพักกินนอน",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
-          price : "3500",
+          room:
+          [
+            {
+              nameroom : "ห้องเล็ก",
+              price : "3000",
+            },
+            {
+              nameroom : "ห้องใหญ่",
+              price : "3500",
+            }
+          ],
           wifi: true,
           air: true,
           fan: true,
@@ -85,10 +114,21 @@ export default {
           typeWomen: true
         },
         {
-          name: "หอพักบ้านแก้ว",
+          name: "หอพัก",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
-          price : "3500",
+          room:
+          [
+            {
+              nameroom : "ห้องเล็ก",
+              price : "3500",
+            },
+            {
+              nameroom : "ห้องใหญ่",
+              price : "3500",
+            }
+          ],
+          
           wifi: true,
           air: true,
           fan: true,
@@ -131,26 +171,7 @@ export default {
     currentSlide(n) {
       this.showSlides((this.slideIndex = n));
     },
-    showSlides(n) {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-
-      console.log(slides.length);
-      if (n > slides.length) {
-        this.slideIndex = 1;
-      }
-      if (n < 1) {
-        this.slideIndex = slides.length - 2;
-      }
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-
-      slides[this.slideIndex - 1].style.display = "block";
-      slides[this.slideIndex].style.display = "block";
-      slides[this.slideIndex + 1].style.display = "block";
-      
-    }
+    
   },
   beforeDestroy(){
     

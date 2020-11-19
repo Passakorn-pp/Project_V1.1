@@ -30,8 +30,8 @@ export default {
         }
       ],
       items: [
-        { first_name: "ค่าน้ำ", last_name: this.$store.getters.getView_water_bill+" บาท" },
-        { first_name: "ค่าไฟ", last_name: this.$store.getters.getView_fire_bill+" บาท/หน่วย" },
+        { first_name: "ค่าน้ำ", last_name: this.$store.getters.getView_home.water_bill+" บาท" },
+        { first_name: "ค่าไฟ", last_name: this.$store.getters.getView_home.elect_bill+" บาท/หน่วย" },
         
         { first_name: "Wifi", last_name: "ฟรี 1 id/ห้อง" },
         {

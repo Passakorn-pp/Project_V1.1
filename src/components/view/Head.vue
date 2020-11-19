@@ -4,7 +4,7 @@
       <img src="@/assets/34.jpg" class="img-head-view" >
     </div>
     <div class="cotainer-view-detail-head-view">
-      <h1 class="text-head-view">{{this.$store.getters.getView_name}}</h1>
+      <h1 class="text-head-view">{{this.$store.getters.getView_home.name}}</h1>
       <div style="width: 30%; float: right; margin-top:2%" > 
       <span style="float: right; width: 70%; text-align :left;">{{ status }}</span>
         <b-form-checkbox
@@ -18,37 +18,43 @@
       <br>
       <br>
       <br>
-      <div style="width: 30%; float: left">
-      <b-form-rating v-model="value" readonly variant="warning"></b-form-rating>
+      <div style="width: 40%; float: left; text-align: left; ">
+        <h4 >{{"ราคา "+this.$store.getters.getView_home.room[0].price+"-"+this.$store.getters.getView_home.room[1].price+" บาท"}}</h4>
       </div>
-      <div style="width: 60%; float: right; text-align: right;">
-        <div v-if="this.$store.getters.getView_wifi" >
+      
+      <div style="width: 50%; float: right; margin-right:2%">
+        <div v-if="this.$store.getters.getView_home.wifi" >
           <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: right; margin-left:15px">
           
         </div >
-        <div v-if="this.$store.getters.getView_air">
+        <div v-if="this.$store.getters.getView_home.air">
           <img src="@/assets/air-conditioner (1).png" class="img-icon-view-head" style="float: right; margin-left:15px">
           
         </div>
-        <div v-if="this.$store.getters.getView_fan">
+        <div v-if="this.$store.getters.getView_home.fan">
           <img src="@/assets/fan (1).png" class="img-icon-view-head" style="float: right; margin-left:15px">
           
         </div>
-        <div v-if="this.$store.getters.getView_typeMen">
+        <div v-if="this.$store.getters.getView_home.typeMen">
           <img src="@/assets/man.png" class="img-icon-view-head" style="float: right; margin-left:15px">
           
         </div>
         
-        <div v-if="this.$store.getters.getView_typeWomen">
+        <div v-if="this.$store.getters.getView_home.typeWomen">
           <img src="@/assets/woman.png" class="img-icon-view-head" style="float: right;">
           
         </div>
+        
+        
       </div>
       <br>
       <br>
-      <div style="width: 60%; float: left; text-align: left; margin:1%">
-        <h4 >{{"ราคา "+this.$store.getters.getView_price+" บาท"}}</h4>
+      <div style="width: 20%; float: left">
+        <b-form-rating v-model="value"  variant="warning"></b-form-rating>
       </div>
+      <br>
+      <br>
+      
     </div>
   
     
@@ -76,17 +82,23 @@ export default {
 .cotainer-view-img-head-view{
   width: 30%;
   float: left;
+  position: relative;
+  left: 5%;
+
+  
 }
 .cotainer-view-detail-head-view{
-  width: 60%;
-  
+
+  width: 70%;
+  position: relative;
   float: left;
 }
 .cotainer-view-head {
-  margin-top: 10%;
+  
+  margin-top: 7%;
   position: relative;
-  left: 10%;
-  max-width: 80%;
+  
+  max-width: 100%;
   height: 300px;
   margin-bottom: 5%;
  
@@ -101,9 +113,10 @@ export default {
 
 }
 .img-head-view{
-  height: 300px;
-  width: 300px;
+  height: 250px;
+  width: 80%;
   float: left;
   border-radius:30px;
+  
 }
 </style>

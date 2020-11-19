@@ -83,7 +83,7 @@ a:any-link {
   color: black;
 }
 a:hover {
-  color: brown;
+  color:white;
   text-decoration: none;
 }
 .container {
@@ -92,7 +92,7 @@ a:hover {
   top: 0;
   z-index: 9999;
   position: fixed;
-  background: white;
+  background: #ECD59F;
   transition: all 0.3s ease-in;
 }
 .li-head {

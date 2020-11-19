@@ -41,7 +41,7 @@ export default {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: khaki; 
+  background:#ECD59F; 
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {

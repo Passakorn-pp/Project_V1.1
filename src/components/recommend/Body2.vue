@@ -9,7 +9,7 @@
         <h4 style="text-align: left; margin: 2% 5%">ราคา</h4>
         <div style="width: 80%; margin: auto" >
             <b-form-input id="range-1" v-model="value" type="range" min="0" max="8000" step="100"></b-form-input>
-            <div class="mt-2">Value: {{ value }}</div>
+            <div class="mt-2">ราคา: {{ value }}</div>
         </div>
         <h4 style="text-align: left; margin: 2% 5%">เครื่องใช้ภายในห้อง</h4>
         <div style="width: 80%; margin: auto; text-align: left;">
@@ -42,11 +42,42 @@
           
           <div>
             <div class="container-in-ui-recommend2" style="border-right: 1px solid silver;" @click="setview(user)">
-              <span class="name-home2">
+              <div class="name-home2">
                 {{ user.name }}
-              </span>
+              </div>
+              
+              <div class="name-home3" v-if="user.room[0].price!=user.room[1].price">
+                ราคา {{user.room[0].price+"-"+user.room[1].price+" บาท"}}
+              </div>
+              <div class="name-home3" v-else>
+                ราคา {{user.room[1].price+" บาท"}}
+              </div>
               <div class="rating-recomend2 ">
                 <b-form-rating v-model="value" readonly variant="warning"></b-form-rating>
+              </div>
+              
+              <div style="padding-left: 15px;">  
+                <div v-if="user.wifi">
+                  <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
+                </div>
+                <div v-if="user.air">
+                  <img src="@/assets/air-conditioner (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  
+                </div>
+                <div v-if="user.fan">
+                  <img src="@/assets/fan (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  
+                </div>
+                <div v-if="user.typeMen">
+                  <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  
+                </div>
+                
+                <div v-if="user.typeWomen">
+                  <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  
+                </div>
+                
               </div>
             </div>
           </div>
@@ -54,9 +85,11 @@
           <div>
             <div class="container-in-ui-recommend2" @click="setview(user)">
               <div class="name-home2">
-                ราคา
+                ขนาดห้อง
               </div>
-              <h4 style="margin-top:5%">{{user.price+" บาท"}}</h4>
+              <div v-for="index in user.room.length" :key="index">
+                <h4 style="text-align: left; ">{{user.room[index-1].nameroom}}</h4>
+              </div>
             </div>
           </div>
           
@@ -190,12 +223,13 @@ export default {
 .container-filter-body-detail{
   height: 100%;
   width: 100%;
+  
 }
 .container-filter-body-head{
   font-weight: 500;
   height: 10%;
   width: 100%;
-  background:#f6c026;
+  background:#e4c785;
   color: white;
   
   border-top-left-radius: 30px;
@@ -209,7 +243,8 @@ export default {
   height: max-content;
   float: left;
   border-radius: 30px;
-  background:#f6e78b;
+  background:#f8f6e7;
+  color: black;
 }
 .img-filter {
   position: absolute;
@@ -251,14 +286,21 @@ export default {
   width: 100%;
 }
 .name-home2 {
-  padding: 15px;
-  font: 28px;
+  padding-left: 15px;
+  font-size: 30px;
   font-weight: 700;
-  float: left;
+  text-align: left;
+}
+.name-home3{
+  padding-left: 15px;
+  padding-bottom: 15px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: left;
 }
 .rating-recomend2 {
   width: max-content;
-  height: 100px;
+  margin-bottom: 3%;
   position: relative;
   top: -3%;
   left: 5%;

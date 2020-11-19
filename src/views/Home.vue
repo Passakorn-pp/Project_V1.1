@@ -42,35 +42,21 @@ export default {
 
     window.addEventListener("scroll", function() {
       if (document.scrollingElement.scrollTop >= 100) {
-        document.getElementById("Head").style =
-          "background: white;  height: 80px; border-bottom-left-radius: 15px; ";
-        document.getElementById("Head-logo").style =
-          "font-size: 36px; color: #F6C026;";
+        document.getElementById("Head").style ="background: #ECD59F;  height: 80px; border-bottom-left-radius: 15px; ";
+        
         document.getElementById("Head-login").style = "margin-top: 1.5%; ";
         document.getElementById("Head-above").style = "margin-right: 2.0%; ";
-        document.getElementById("search-head-img").style =
-          "height: 40px; width: 40px;";
 
-        let x = document.getElementsByClassName("text-above");
-        let i;
-        for (i = 0; i < x.length; i++) {
-          x[i].style = "color: #F6C026;";
-        }
+
+        
         console.log("150");
       } else {
-        document.getElementById("search-head-img").style =
-          "height: 50px; width: 50px;";
-        document.getElementById("Head").style = "height: 100px;";
-        document.getElementById("Head-logo").style = "font-size: 50px;";
+        
+        document.getElementById("Head").style = "height: 100px; background: #ECD59F;";
         document.getElementById("Head-login").style = "margin-top: 2%;";
         document.getElementById("Head-above").style = "margin-right: 2.5%;";
-        document.getElementsByClassName("text-above").style = "color: black;";
 
-        let x = document.getElementsByClassName("text-above");
-        let i;
-        for (i = 0; i < x.length; i++) {
-          x[i].style = "color: black;";
-        }
+        
         console.log("100");
       }
     });
