@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     user: localStorage.getItem('user') || null,
     homeclick: localStorage.getItem('homeclick') || null,
-    homeall:localStorage.getItem('homeall') || null
+    homeall: localStorage.getItem('homeall') || null,
+    state: localStorage.getItem('state')||false
   },
   getters:{
     getState(state){
@@ -46,9 +47,16 @@ export default new Vuex.Store({
     Error(state){
       state.error = true
     },
+    logout(state){
+      state.user = null,
+      state.state = false,
+      
+      localStorage.setItem('user',state.user)
+      localStorage.setItem('state',state.state)
+    },
     Sethome(state,value){
       state.homeall = value,
-      localStorage.setItem('homeall',state.home)
+      localStorage.setItem('homeall',state.homeall)
     },
 
   },
@@ -58,11 +66,15 @@ export default new Vuex.Store({
     },
     retrieveToken(context,credentials){
       
-      if(credentials.usename == "passakorn" && credentials.password == "0876993889"){
+      if(credentials.usename == "asd" && credentials.password == "asd"){
         context.commit('SetUser',credentials.usename)
       }else{
         context.commit('Error')
       }
+      console.log("aaa");
+    },
+    logout(context){
+      context.commit('logout')
     },
     addhome(context,value){
       context.commit('Sethome',value)   

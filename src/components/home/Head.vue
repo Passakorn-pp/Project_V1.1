@@ -1,15 +1,24 @@
 <template>
   <div class="container" id="Head">
     <div class="container-logo">
-      <a href="/" class="logo-head" >
+      <router-link to="/" class="logo-head" >
         <img src="@/assets/logo-1.1.png" alt="world" id="Head-logo" class="img-logo-head" />
-      </a>
+      </router-link>
     </div>
-    <div class="container-login" @click="setcheck" id="Head-login">
-      <a href="/register"
+    <div class="container-login"  id="Head-login" v-if="!this.$store.getters.getView_use" style="margin-top: 2%;">
+      <router-link to="/register"
         ><b-avatar icon="people-fill" style="cursor: pointer;"></b-avatar
-      ></a>
+      ></router-link>
     </div>
+    
+    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret class="container-login" v-else>
+      <template #button-content>
+        <img src="@/assets/man.png"  class="img">
+      </template>
+      <b-dropdown-item href="#">หอพักของฉัน</b-dropdown-item>
+      <b-dropdown-item @click="logout()">logout</b-dropdown-item>
+
+    </b-dropdown>
     <!-- <div class="container-search-head">
       <img
         src="@/assets/search.png"
@@ -18,16 +27,18 @@
         id="search-head-img"
       /> -->
     <!-- </div> -->
+    
     <div class="container-above" id="Head-above">
-      <li class="li-head" id="Head-list">
-        <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
-      </li>
-      <li class="li-head" id="Head-list">
-        <a href="#" class="text-above" v-show="check">ลงชื่อเข้าใช้</a>
-      </li>
       <li class="li-head" id="Head-list">
         <a href="#" class="text-above">เกี่ยวกับ</a>
       </li>
+      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState">
+        <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
+      </li>
+      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState">
+        <a href="/profile" class="text-above" v-show="check">ถูกใจ</a>
+      </li>
+      
     </div>
   </div>
 </template>
@@ -42,12 +53,12 @@ export default {
     };
   },
   methods: {
-    setcheck() {
-      this.check = !this.check;
-      console.log(this.check);
-    },
+
     scrollTo(selector) {
       document.querySelector(selector).scrollIntoView({ behavior: "smooth" });
+    },
+    logout(){
+      this.$store.dispatch("logout");
     }
   },
   mounted() {}
@@ -56,7 +67,7 @@ export default {
 
 <style>
 .img-logo-head {
-
+  
   height: 100px;
   width: 100px;
 }
@@ -69,6 +80,7 @@ export default {
   transition: all 0.2s ease-in;
 }
 .container-search-head {
+
   width: 40%;
   height: 50%;
   background: white;
@@ -130,9 +142,19 @@ a:hover {
 }
 .container-login {
   float: right;
-  margin-top: 2%;
+  margin: 5px 0px;
+  margin-right: 20px;
   height: 40px;
   width: 40px;
+
   transition: all 0.3s ease-in;
+  position: relative;
+}
+.container-login img {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  right: 15%;
+  position: relative;
 }
 </style>

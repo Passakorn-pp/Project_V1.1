@@ -16,7 +16,14 @@
       <b-button type="submit" variant="primary" @click="login()">Submit</b-button>
       <br>
     </div>
-  
+    <div style="width:50%; margin:auto">
+      <b-button type="submit" variant="primary" @click="logout()">ออกจากระบบ</b-button>
+      <br>
+    </div>
+    <div>
+      {{this.$store.getters.getView_use}}
+    </div>
+
     
    
     <div class="container-register-login-line" @click="show_registesr">
@@ -80,6 +87,7 @@
       />
       <br />
       <button class="register-login-form-button">ยืนยัน</button>
+
     </div>
   </div>
 </template>
@@ -100,17 +108,24 @@ export default {
     back_to2() {
       document.getElementById("container-register-login-form").style =
         "left: 150%; ";
-      console.log("aaa");
+      
     },
     login(){
       this.$store.dispatch("retrieveToken",{
         usename : this.usename,
         password : this.password 
       });
-
+      if(this.$store.getters.getState==true)
+      {
+        this.$router.push('/');
+      }
       
+    },
+    logout(){
+      this.$store.dispatch("logout");
     }
-  }
+  },
+
 };
 </script>
 

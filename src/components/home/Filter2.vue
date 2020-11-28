@@ -1,27 +1,32 @@
 <template>
+<div>
+  <div style="margin: 3% auto">
+    <H3>ช่วยเลือกหอพัก</H3>
+  </div>
   <div class="container-filter2">
     <div class="container-filter-type" >
-      <br>
+
       <img src="@/assets/user.png" class="container-filter-type-img" @click="link()">
-      <p style="color:black">ใกล้มหาลัย</p>
+      <p style="color:black">หอพักทั้งหมด</p>
     </div>
       
     <div class="container-filter-type" >
-      <br>
+
       <img src="@/assets/user.png" class="container-filter-type-img">
-      <p style="color:black">ราคายอดนิยม</p>
+      <p style="color:black">หอพักเงียบสงบ</p>
     </div>
     <div class="container-filter-type" >
-      <br>
+
       <img src="@/assets/user.png" class="container-filter-type-img">
-      <p style="color:black">เรทติ้ง</p>
+      <p style="color:black">หอพักครื้นเครง</p>
     </div>
     <div class="container-filter-type" >
-      <br>
+
       <img src="@/assets/user.png" class="container-filter-type-img">
-      <p style="color:black">คณะ</p>
+      <p style="color:black">หอพักย่านของกิน</p>
     </div>
   </div>
+</div>  
 </template>
 
 <script>
@@ -36,32 +41,29 @@ export default {
 
 <style>
 .container-filter2{
-  height: 100px;
+  height: 100%;
   width: 100%;
-  margin: auto;
+  margin: 5% auto;
   margin-bottom: 5%;
   position: relative;
-  
+
 }
 .container-filter-type:hover{
   cursor: pointer;
   box-shadow: 0 0 8px #f6c026;
 }
 .container-filter-type{
-  background: white;
-  height: 120px;
-  width: 120px;
-  margin: auto;
-  float: left;
-  position: relative;
-  left: 32%;
-  margin-right: 30px;
-  border-radius:100px;
+
+  height: 200px;
+  width: 200px;
+  margin: auto 0.5%;
+  display: inline-block;
 
 }
 .container-filter-type-img{
-  height: 50px;
-  width: 50px;
+  height: 120px;
+  width: 120px;
+  margin: 5% auto;
   color:#f6c026;
 
 }

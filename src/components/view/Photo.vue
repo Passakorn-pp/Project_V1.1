@@ -1,12 +1,20 @@
 <template>
   <div>
-    <div style="margin: auto; width:50%">
+    <div style="margin: auto; width:70%">
       <flickity ref="flickity" :options="flickityOptions" >
-        <div class="carousel-cell" v-for="index in 5" :key="index">
-          <img src="@/assets/34.jpg" class="img-view">
+        <div class="carousel-cell" v-for="index in 10" :key="index">
+          <h2 class="img-view" >{{index}} </h2>
+            
         </div>
-    </flickity>
-
+      </flickity>
+    </div>
+    <div style="margin: 1% auto; width:70%">
+      <flickity ref="flickity2" :options="flickityOptions" >
+        <div class="carousel-cell-small" v-for="index in 10" :key="index" @click="setphoto(index)">
+          <h2 class="img-view" >{{index}} </h2>
+              
+        </div>
+      </flickity>
     </div>
     
   </div>
@@ -22,20 +30,34 @@ export default {
   data() {
     return {
       flickityOptions: {
-        initialIndex: 3,
-        prevNextButtons: false,
         pageDots: false,
-        wrapAround: true
-        
+        wrapAround: true,
+        draggable: false,
+        prevNextButtons: true,
         // any options from Flickity can be used
       },
         
        }
   },
+   methods: {
+    setphoto(index) {
+      this.$refs.flickity.select(index-1);
+      this.$refs.flickity2.select(index-1);
+    },
+  }
 };
 </script>
 
 <style>
+.carousel-cell-small{
+  width: 125px;
+  height: 125px;
+  color: black;
+  position: relative;
+  float: left;
+  margin-right: 15px;
+  background: aquamarine;
+}
 .carousel-cell {
   width:100%; /* full width */
   height: 400px;

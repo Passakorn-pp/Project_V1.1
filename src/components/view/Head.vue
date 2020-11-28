@@ -1,7 +1,7 @@
 <template>
   <div class="cotainer-view-head" id="head-view">
     <div class="cotainer-view-img-head-view">
-      <img src="@/assets/34.jpg" class="img-head-view" >
+      <img :src="this.$store.getters.getView_home.img" class="img-head-view" >
     </div>
     <div class="cotainer-view-detail-head-view">
       <h1 class="text-head-view">{{this.$store.getters.getView_home.name}}</h1>
@@ -100,7 +100,7 @@ export default {
   
   max-width: 100%;
   height: 300px;
-  margin-bottom: 5%;
+
  
 }
 .text-head-view {

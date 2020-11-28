@@ -1,16 +1,44 @@
 <template>
   <div class="container-view-table">
-
-    <div>
-      <b-table
-        striped
-        hover
-        :items="items"
-        :fields="fields"
-        outlined
-        class="container-view-demo-table"
-      ></b-table>
-    </div>
+      <div class="box-filter">
+        <div class="left">
+          <img src="@/assets/water-drop.png" class="img">
+        </div>
+        <div class="right">
+          <span class="text-filter">ค่าน้ำ</span>
+          <br>
+          <span class="text-filter">{{this.$store.getters.getView_home.water_bill}}</span>
+        </div>
+          
+      </div>
+      <div class="box-filter">
+        <div class="left">
+          <img src="@/assets/lightning.png" class="img">
+        </div>
+        <div class="right">
+          <span class="text-filter">ค่าไฟ</span>
+          <br>
+          <span class="text-filter">{{this.$store.getters.getView_home.elect_bill}}</span>
+        </div>
+      </div>  
+      <div class="box-filter" v-if="this.$store.getters.getView_home.typeMen==true">
+        <div class="left">
+          <img src="@/assets/man.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >หอพักชาย</span>
+          
+        </div>
+      </div>  
+      <div class="box-filter"  v-if="this.$store.getters.getView_home.typeWomen==true">
+        <div class="left">
+          <img src="@/assets/woman.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >หอพักหญิง</span>
+          
+        </div>    
+      </div>  
   </div>
 </template>
 
@@ -19,26 +47,7 @@ export default {
   data() {
     return {
       
-      fields: [
-        {
-          key: "first_name",
-          label: "ค่าใช้จ่าย"
-        },
-        {
-          key: "last_name",
-          label: "ราคา/เดือน"
-        }
-      ],
-      items: [
-        { first_name: "ค่าน้ำ", last_name: this.$store.getters.getView_home.water_bill+" บาท" },
-        { first_name: "ค่าไฟ", last_name: this.$store.getters.getView_home.elect_bill+" บาท/หน่วย" },
-        
-        { first_name: "Wifi", last_name: "ฟรี 1 id/ห้อง" },
-        {
-          first_name: "ที่อยู่หอพัก",
-          last_name: "เขต - แขวง - จังหวัด - รหัสไปรษณี -"
-        }
-      ]
+     
     };
   },
   
@@ -47,15 +56,53 @@ export default {
 
 <style>
 .container-view-table {
-  max-width: 50%;
+  max-width: 90%;
   max-height: 100%;
-  border: 5px solid;
-  margin: auto;
-  margin-top: 8%;
-}
-.container-view-demo-table {
-  height: 80%;
-  max-width: 80%;
+  border: 1px solid;
   margin: 5% auto;
+  background: #ECD59F;
+  text-align: left;
+
 }
+
+.container-view-table .box-filter{
+  height: 50px;
+  width: 150px;
+  border-radius: 15px;
+  border: 1px solid;
+  position: relative;
+  display: inline-block;
+  margin: 0.5%;
+  margin-top: 1%;
+
+  background: white;
+
+  
+}
+.right .text-filter{
+  font-size: 12px;
+  
+}
+.left .img{
+  width: 65%;
+  height: 65%;
+  position: relative;
+  margin: 5%;
+  left: 10%;
+}
+.box-filter .left{
+  width: 40%;
+
+
+  float: left;
+
+}
+.box-filter .right{
+
+  width: 60%;
+
+  float: left;
+
+}
+
 </style>

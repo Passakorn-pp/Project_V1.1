@@ -6,11 +6,12 @@
     
     <div class="container-Recommened" >
         <div class="container-Recommened-slide-overflow">
-      
-          <flickity ref="flickity" :options="flickityOptions">
+         
+          
+          <flickity ref="flickity" :options="flickityOptions" >
             <br>
               <div v-for="(s,i) in slides" :key="i" class="container-Recommened-card" @click="setview(s)">
-                <img src="@/assets/34.jpg" class="container-Recommened-card-img" >
+                <img :src="s.img" class="container-Recommened-card-img" >
                 <div class="container-Recommened-card-text">
                   <br>
                   <br>
@@ -40,10 +41,10 @@ export default {
       slideIndex: 1,
       silder: 0,
       flickityOptions: {
-        initialIndex: 3,
-        prevNextButtons: false,
+        prevNextButtons: true,
         pageDots: false,
-        wrapAround: true
+        wrapAround: true,
+        draggable: false
         
         // any options from Flickity can be used
       },
@@ -54,6 +55,7 @@ export default {
           name: "หอพักบ้านแก้ว",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
+          img : "https://sv1.picz.in.th/images/2020/11/24/jdwk2R.jpg",
           room:
           [
             {
@@ -72,9 +74,10 @@ export default {
           typeWomen: true
         },
         {
-          name: "หอพักเจเต",
+          name: "หอพักเจเค",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
+          img : "https://sv1.picz.in.th/images/2020/11/24/jdc9Rt.jpg",
           room:
           [
             {
@@ -96,6 +99,7 @@ export default {
           name: "หอพักกินนอน",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
+          img : "https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg",
           room:
           [
             {
@@ -114,9 +118,10 @@ export default {
           typeWomen: true
         },
         {
-          name: "หอพัก",
+          name: "หอพักทับแก้ว",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
+          img : "https://sv1.picz.in.th/images/2020/11/24/jdctMl.jpg",
           room:
           [
             {
@@ -138,11 +143,11 @@ export default {
       ]
     };
   },
-  async created(){
-    var response = await fetch('http://127.0.0.1:8000/api/horpaks/');
-    this.slides = await response.json();
+  // async created(){
+  //   var response = await fetch('http://127.0.0.1:8000/api/horpaks/');
+  //   this.slides = await response.json();
     
-  },
+  // },
   methods: {
     next() {
       this.$refs.flickity.next();
@@ -159,18 +164,8 @@ export default {
     check(index) {
       console.log(index);
     },
-    slide_lift(){
-      document.getElementById("detail_slide").style = "left : -20px "
-    },
-    slide_right(){
-      document.getElementById("detail_slide").style = "left : 20px"
-    },
-    plusSlides(n) {
-      this.showSlides((this.slideIndex += n));
-    },
-    currentSlide(n) {
-      this.showSlides((this.slideIndex = n));
-    },
+
+
     
   },
   beforeDestroy(){

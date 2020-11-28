@@ -5,16 +5,15 @@
     <br>
     <br>
     <br>
-    <Filter2></Filter2>
+    <br>
+    <br>
+    
   </div>
 </template>
 
 <script>
-import Filter2 from "@/components/home/Filter2.vue";
 export default {
-  components:{
-    Filter2
-  }
+  
 };
 </script>
 

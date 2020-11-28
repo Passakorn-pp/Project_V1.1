@@ -39,12 +39,12 @@ export default {
   
   },
   mounted() {
-
+    window.scrollTo(0, 0);
     window.addEventListener("scroll", function() {
       if (document.scrollingElement.scrollTop >= 100) {
         document.getElementById("Head").style ="background: #ECD59F;  height: 80px; border-bottom-left-radius: 15px; ";
         
-        document.getElementById("Head-login").style = "margin-top: 1.5%; ";
+
         document.getElementById("Head-above").style = "margin-right: 2.0%; ";
 
 
@@ -53,7 +53,6 @@ export default {
       } else {
         
         document.getElementById("Head").style = "height: 100px; background: #ECD59F;";
-        document.getElementById("Head-login").style = "margin-top: 2%;";
         document.getElementById("Head-above").style = "margin-right: 2.5%;";
 
         

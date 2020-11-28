@@ -24,13 +24,11 @@ export default {
     window.addEventListener("scroll", function() {
       if (document.scrollingElement.scrollTop >= 100) {
         document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
-        document.getElementById("Head-logo").style = "font-size: 36px;";
-        document.getElementById("Head-login").style = "margin-top: 1.5%;";
+
         console.log("150");
       } else {
         document.getElementById("Head").style ="background: #ECD59F; height: 100px;";
-        document.getElementById("Head-logo").style = "font-size: 50px;";
-        document.getElementById("Head-login").style = "margin-top: 2%;";
+
         console.log("100");
       }
     });

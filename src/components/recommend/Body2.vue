@@ -36,7 +36,7 @@
         <div class="container-ui-recommend2">
           <div @click="setview(user)">
             <div class="container-in-ui-recommend2">
-              <b-img class="img-recommend2" src="https://placekitten.com/300/300"/>
+              <b-img class="img-recommend2" :src="user.img"/>
               </div>
           </div>
           
@@ -188,11 +188,11 @@ export default {
       ]
     }
   },
-  async created(){
-    var response = await fetch('http://127.0.0.1:8000/api/horpaks/');
-    this.users = await response.json();
+  // async created(){
+  //   var response = await fetch('http://127.0.0.1:8000/api/horpaks/');
+  //   this.users = await response.json();
     
-  },
+  // },
   beforeMount() {
     this.fetchData();
   },
