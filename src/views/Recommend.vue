@@ -3,19 +3,25 @@
     <Header ></Header>
     <Head></Head>
     <Body2></Body2>
+    <Add></Add>
+    <Sell></Sell>
   </div>
+  
 </template>
 
 <script>
 import Head from "@/components/recommend/Head.vue";
 import Body2 from "@/components/recommend/Body2.vue";
 import Header from "@/components/home/Head.vue";
-
+import Add from "@/components/recommend/Add.vue";
+import Sell from "@/components/recommend/Sell.vue";
 export default {
   components: {
     Head,
     Body2,
-    Header
+    Header,
+    Add,
+    Sell
   },
   mounted() {
     
@@ -40,5 +46,6 @@ export default {
 .con {
   height: 100%;
   width: 100%;
+  outline: none;
 }
 </style>

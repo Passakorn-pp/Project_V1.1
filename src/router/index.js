@@ -5,6 +5,7 @@ import Recommend from "../views/Recommend.vue";
 import View from "../views/View.vue";
 import Register from "../views/Register";
 import Profile from "../views/Profile";
+import Myhor from "../views/Myhor";
 import Carousel3d from 'vue-carousel-3d';
 
 Vue.use(Carousel3d);
@@ -37,6 +38,11 @@ const routes = [
     path: "/profile",
     name: "profile",
     component: Profile
+  },
+  {
+    path: "/myhor",
+    name: "myhor",
+    component: Myhor
   }
 ];
 

@@ -15,7 +15,7 @@
       <template #button-content>
         <img src="@/assets/man.png"  class="img">
       </template>
-      <b-dropdown-item href="#">หอพักของฉัน</b-dropdown-item>
+      <b-dropdown-item @click="myhor()">หอพักของฉัน</b-dropdown-item>
       <b-dropdown-item @click="logout()">logout</b-dropdown-item>
 
     </b-dropdown>
@@ -59,6 +59,9 @@ export default {
     },
     logout(){
       this.$store.dispatch("logout");
+    },
+    myhor(){
+      this.$router.push('/myhor');
     }
   },
   mounted() {}

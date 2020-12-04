@@ -54,7 +54,16 @@
       </div>
       <br>
       <br>
-      
+      <div style="width: 100%; text-align: left;">
+        <h5 style="width: 15%; float: left; ">ที่อยู่หอพัก </h5>
+        <h6 style="width: 85%; float: left; margin-top:0.5%; "> หอพัก แขวง เขต จังหวัด รหัสไปษณี</h6>
+      </div>
+      <br>
+      <br>
+      <div style="width: 100%; text-align: left; margin-top:-1.5%">
+        <h5 style="width: 17%; float: left; ">ติดต่อหอพัก </h5>
+        <h6 style="width: 83%; float: left; margin-top:0.5%; "> โทร เฟส ไลน์ </h6>
+      </div>
     </div>
   
     
@@ -84,7 +93,7 @@ export default {
   float: left;
   position: relative;
   left: 5%;
-
+  
   
 }
 .cotainer-view-detail-head-view{
