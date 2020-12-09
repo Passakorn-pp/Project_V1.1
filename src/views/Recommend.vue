@@ -1,10 +1,16 @@
 <template>
-  <div class="con">
-    <Header ></Header>
-    <Head></Head>
-    <Body2></Body2>
-    <Add></Add>
-    <Sell></Sell>
+  <div >
+    <div>
+      <Header ></Header>
+      <Head></Head>
+      <Body2></Body2>
+      <!-- <Add></Add> -->
+      <Sell></Sell>
+    </div>
+    <div style="margin-top:80%">
+      <About></About>
+    </div>
+    
   </div>
   
 </template>
@@ -13,15 +19,17 @@
 import Head from "@/components/recommend/Head.vue";
 import Body2 from "@/components/recommend/Body2.vue";
 import Header from "@/components/home/Head.vue";
-import Add from "@/components/recommend/Add.vue";
+// import Add from "@/components/recommend/Add.vue";
 import Sell from "@/components/recommend/Sell.vue";
+import About from "@/components/home/About.vue";
 export default {
   components: {
     Head,
     Body2,
     Header,
-    Add,
-    Sell
+    // Add,
+    Sell,
+    About,
   },
   mounted() {
     

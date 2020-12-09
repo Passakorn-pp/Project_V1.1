@@ -17,7 +17,7 @@ export default {
     height: 20%;
     width: 15%;
     background: lightblue;
-    position: fixed;
+    position: absolute;
     right: 2%;
     top: 20%;
 }

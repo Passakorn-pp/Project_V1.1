@@ -14,7 +14,7 @@ export default {
 .tablemodify{
     border: 1px solid silver;
     border-radius: 15px;
-    margin: 10% auto;
+    margin: 5% auto;
     height: 300px;
     width: 70%;
 }

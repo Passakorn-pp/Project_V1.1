@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div class="container-Recommened-header" id="container-detail-header"> 
+    <div class="container-Recommened-header" id="container-detail-header" v-if="this.$store.getters.getView_use"> 
       <h3 class="header-text" style="font-size: 50px;"><h1 style="display: inline-block; font-size: 100px;">คุณ</h1>อาจจะชอบ</h3>
+    </div>
+    <div class="container-Recommened-header" id="container-detail-header" v-else> 
+      <h3 class="header-text" style="font-size: 50px;"><h1 style="display: inline-block; font-size: 100px;">ระยะทาง</h1>ใกล้มหาลัย</h3>
     </div>
     
     <div class="container-Recommened" >
@@ -13,9 +16,13 @@
               <div v-for="(s,i) in slides" :key="i" class="container-Recommened-card" @click="setview(s)">
                 <img :src="s.img" class="container-Recommened-card-img" >
                 <div class="container-Recommened-card-text">
-                  <br>
-                  <br>
-                  <p>{{s.name}}</p>
+                  <h6 style="float: left;">{{s.name}} </h6>
+                  <div style="display: inline-block;">
+                    <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%"></b-form-rating>      
+                  </div>
+                  
+                  <h6 style="line-height: 0.5 ;">ราคา {{s.room[0].price}}-{{s.room[1].price}} บาท</h6>
+                  <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย{{s.distance}} เมตร</h6>
                 </div> 
               </div>
               
@@ -61,12 +68,20 @@ export default {
             {
               nameroom : "ห้องเล็ก",
               price : "3000",
+              free : 4,
             },
             {
               nameroom : "ห้องใหญ่",
               price : "3500",
+              free : 10,
             }
           ],
+          face:"aaa",
+          line:"aaa",
+          call:"aaa",
+          address:"",
+          star: 4,
+          distance: 2000,
           wifi: true,
           air: true,
           fan: true,
@@ -83,12 +98,20 @@ export default {
             {
               nameroom : "ห้องเล็ก",
               price : "3000",
+              free : 5,
             },
             {
               nameroom : "ห้องใหญ่",
               price : "3500",
+              free : 5,
             }
           ],
+          face:"aaa",
+          line:"aaa",
+          call:"aaa",
+          address:"",
+          star: 5,
+          distance: 3000,
           wifi: true,
           air: true,
           fan: true,
@@ -105,12 +128,20 @@ export default {
             {
               nameroom : "ห้องเล็ก",
               price : "3000",
+              free : 6,
             },
             {
               nameroom : "ห้องใหญ่",
               price : "3500",
+              free : 1,
             }
           ],
+          face:"aaa",
+          line:"aaa",
+          call:"aaa",
+          address:"",
+          star: 5,
+          distance: 1000,
           wifi: true,
           air: true,
           fan: true,
@@ -127,13 +158,20 @@ export default {
             {
               nameroom : "ห้องเล็ก",
               price : "3500",
+              free : 10,
             },
             {
               nameroom : "ห้องใหญ่",
               price : "3500",
+              free : 2,
             }
           ],
-          
+          face:"aaa",
+          line:"aaa",
+          call:"aaa",
+          address:"",
+          star: 4,
+          distance: 500,
           wifi: true,
           air: true,
           fan: true,
@@ -194,7 +232,9 @@ export default {
 .container-Recommened-card-text{
   width: 100%;
   height: 35%;
-
+  text-align: left;
+  padding: 2%;
+  background: #f8f6e7;
 }
 .container-Recommened-card:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

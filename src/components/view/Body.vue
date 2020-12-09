@@ -1,6 +1,10 @@
 <template>
-  <div >
-    <div v-for="(rooms,index) in this.$store.getters.getView_home.room.length" :key="index">
+  <div style="margin-bottom:3%">
+    <div class="contianer-room-head">
+      <h4>ขนาดห้องพัก</h4>
+    </div>
+    <div style="border: 1px solid silver; max-width: 90%; margin:auto; background: #f8f6e7;">
+      <div v-for="(rooms,index) in this.$store.getters.getView_home.room.length" :key="index">
         <div class="contianer-room">
           <div class="left">
             <img src="@/assets/33.jpg" class="img-room" />
@@ -9,7 +13,7 @@
           <div class="center">
             <div class="view-center-text" >{{nameroom[index].nameroom}}</div>
             <div class="text-detil-room">ราคา {{nameroom[index].price}}</div>
-            <div style="widht:100%; margin-left:5%">
+            <div style="widht:100%; margin-left:5%; margin-top:1%">
               <div v-if="home.wifi" >
                 <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:15px">
                 
@@ -74,6 +78,8 @@
           
         </div>
     </div>
+    </div>
+    
   </div>
 </template>
 
@@ -92,13 +98,26 @@ export default {
 </script>
 
 <style>
+.contianer-room-head{
+  width: 90%;
+  max-height: 100%;
+  text-align: left;
+  background: #ECD59F;
+  margin: auto;
+  margin-top:5%;
+  padding: 0.5%;
+  border: 1px solid silver;
+}
 .contianer-room{
   width: 80%;
   height: 250px;
-  border: 1px solid black;
+  border: 1px solid silver;
   border-radius: 15px;
-  margin: 5% auto;
+  margin:auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
   overflow: hidden;
+  background: white;
 }
 
 .contianer-room .left{
@@ -115,7 +134,7 @@ export default {
 }
 .view-center-text{
   color: black;
-  font-size: 18px;
+  font-size: 22px;
   text-align: left;
   padding: 5%;
 }
@@ -143,7 +162,7 @@ export default {
   float: right;
 }
 .text-detil-room{
-  font-size: 18px;
+  font-size: 20px;
   text-align: left;
   margin: 0 5%;
   margin-bottom: 2%;

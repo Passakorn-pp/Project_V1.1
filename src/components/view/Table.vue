@@ -1,4 +1,8 @@
 <template>
+<div>
+  <div class="container-view-table-head">
+    <h4>ค่าใช้จ่ายต่างๆ/สิ่งอำนวยความสะดวก</h4>
+  </div>
   <div class="container-view-table">
       <div class="box-filter">
         <div class="left">
@@ -40,6 +44,8 @@
         </div>    
       </div>  
   </div>
+</div>
+  
 </template>
 
 <script>
@@ -55,12 +61,23 @@ export default {
 </script>
 
 <style>
+.container-view-table-head{
+  max-width: 90%;
+  max-height: 100%;
+  text-align: left;
+  padding: 0.5%;
+  background: #ECD59F;
+  margin: auto;
+  margin-top:5%;
+  border: 1px solid silver;
+
+}
 .container-view-table {
   max-width: 90%;
   max-height: 100%;
-  border: 1px solid;
-  margin: 5% auto;
-  background: #ECD59F;
+  border: 1px solid silver;
+  margin: auto;
+  background: #f8f6e7;
   text-align: left;
 
 }
@@ -69,7 +86,7 @@ export default {
   height: 50px;
   width: 150px;
   border-radius: 15px;
-  border: 1px solid;
+  border: 1px solid silver;
   position: relative;
   display: inline-block;
   margin: 0.5%;

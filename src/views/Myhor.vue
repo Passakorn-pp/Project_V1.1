@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <div style="background: #f8f6e7;">
       <Header ></Header>
+      
+      <div style="transform: translateY(150px);">
         <div class="myhor-tab">
                 
             <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">หอพักของฉัน</button>
             <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">แก้ไขข้อมูล</button>
-                
+            <button v-on:click="activetab=3" v-bind:class="[ activetab === 3 ? 'active' : '' ]" style="width:15%">การเข้าชมหอพัก</button>
         </div>
-    
-    <div class="container-mainview" v-if="activetab === 1">
+        <div class="container-mainview" v-if="activetab === 1">
             <Head></Head>
             <Photo></Photo>
 
@@ -17,10 +18,19 @@
             <Body></Body>
 
             <Comment></Comment> 
-    </div>
-    <div class="container-mainview" v-if="activetab === 2">
-        <Mohor></Mohor>
-    </div>
+        </div>
+        <div class="container-mainview" v-if="activetab === 2">
+            <Mohor></Mohor>
+        </div>
+        <div class="container-mainview" v-if="activetab === 3">
+            <Recommend></Recommend>
+        </div>
+      </div>
+        
+        
+    
+    
+    <About></About>
   </div>
 </template>
 
@@ -32,6 +42,8 @@ import Photo from "@/components/view/Photo.vue";
 import Comment from "@/components/view/Comment.vue";
 import Header from "@/components/home/Head.vue";
 import Mohor from "@/components/myhome/Mohor.vue";
+import Recommend from "@/components/myhome/Recommend.vue";
+import About from "@/components/home/About.vue";
 export default {
     components: {
     Photo,
@@ -40,7 +52,9 @@ export default {
     Head,
     Comment,
     Header,
-    Mohor
+    Mohor,
+    About,
+    Recommend,
   },
     data() {
         return {
@@ -57,16 +71,14 @@ export default {
   border: 1px solid silver;
   width: 70%;
   margin:auto;
-  
+  background: white;
   transition: 0.5s ease-in;
- 
+  margin-bottom: 15%;
 }
 .myhor-tab{
   width: 70%;
-  
   height: 50px;
   margin: auto;
-  margin-top:10%;
   position: relative;
 
 }

@@ -41,7 +41,7 @@
         </div>
         
         <div v-if="this.$store.getters.getView_home.typeWomen">
-          <img src="@/assets/woman.png" class="img-icon-view-head" style="float: right;">
+          <img src="@/assets/woman.png" class="img-icon-view-head" style="float: right; ">
           
         </div>
         
@@ -49,12 +49,12 @@
       </div>
       <br>
       <br>
-      <div style="width: 20%; float: left">
-        <b-form-rating v-model="value"  variant="warning"></b-form-rating>
+      <div style="width: 20%; float: left; margin-top:-3%; margin-left:-2%" >
+        <b-form-rating v-model="value" readonly no-border  variant="warning" style="background: none;"></b-form-rating>
       </div>
       <br>
       <br>
-      <div style="width: 100%; text-align: left;">
+      <div style="width: 100%; text-align: left; margin-top:-3%;" >
         <h5 style="width: 15%; float: left; ">ที่อยู่หอพัก </h5>
         <h6 style="width: 85%; float: left; margin-top:0.5%; "> หอพัก แขวง เขต จังหวัด รหัสไปษณี</h6>
       </div>

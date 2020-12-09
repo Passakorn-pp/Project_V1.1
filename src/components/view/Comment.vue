@@ -85,6 +85,7 @@ export default {
   border: 1.5px solid silver;
   margin: auto;
   margin-bottom: 5%;
+  background: white;
 }
 .container-view-comment-header {
   height: 100px;

@@ -47,14 +47,24 @@
     </div> -->
     
     <div class="body-recommend-tab">
-        <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ทั้งหมด</button>
-        <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ลดราคา</button>
+      
+      <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ทั้งหมด</button>
+      <button v-on:click="activetab=0" v-bind:class="[ activetab === 0 ? 'active' : '' ]">แนะนำ</button>
+      <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]" style="width: 15%;">หอพักเงียบสงบ</button>
+      <button v-on:click="activetab=3" v-bind:class="[ activetab === 3 ? 'active' : '' ]" style="width: 15%;">หอพักครื้นเครง</button>
+      <button v-on:click="activetab=4" v-bind:class="[ activetab === 4 ? 'active' : '' ]" style="width: 20%;">หอพักย่านของกิน</button>
+      <button v-on:click="activetab=5" v-bind:class="[ activetab === 5 ? 'active' : '' ]">ลดราคา</button>
     </div>
 
     <div class="content">
         <div v-if="activetab === 1" class="container-recommend-body2">
             <div class="container-select">
-
+              <b-table
+                style="background: #f8f6e7;"
+                :fields="fields"
+                sort-icon-right
+                responsive="sm"
+              ></b-table>
             </div>
             <div v-for="(user,index) in this.$store.getters.gethome" :key="index"  >
               <div class="container-ui-recommend2">
@@ -65,7 +75,7 @@
                 </div>
                 
                 <div>
-                  <div class="container-in-ui-recommend2" style="border-right: 1px solid silver;" v-if="active_pic === 1" >
+                  <div class="container-in-ui-recommend2" style="border-right: 1px solid silver; width: 42%;" v-if="active_pic === 1" >
                     <div class="name-home2">
                       {{ user.name }}
                     </div>
@@ -75,6 +85,9 @@
                     </div>
                     <div class="name-home3" v-else>
                       ราคา {{user.room[1].price+" บาท"}}
+                    </div>
+                    <div class="name-home3">
+                      ระยะทางจากมหาลัย 300 เมตร
                     </div>
                     <div class="rating-recomend2 ">
                       <b-form-rating v-model="value" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -120,12 +133,19 @@
                   </div>
                 </div>
                 <div>
-                  <div class="container-in-ui-recommend2" @click="setview(user)">
+                  <div class="container-in-ui-recommend2" @click="setview(user)" style="width: 25%;">
                     <div class="name-home2">
                       ขนาดห้อง
                     </div>
                     <div v-for="index in user.room.length" :key="index">
-                      <button style="  float: left;  margin-left:2%; margin-top:4%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button>
+                      <div class="ss">
+
+                        <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button> 
+                        <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{user.room[index-1].free}}</h3> ห้อง</h6>
+                      </div>
+                         
+                      
+                      
                     </div>
                   </div>
                 </div>
@@ -133,23 +153,24 @@
               
               </div>
             </div>
-            
-            <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
           </div>
         </div>
         <div v-if="activetab === 2" class="container-recommend-body2">
             
         </div>
+        <div v-if="activetab === 3" class="container-recommend-body2">
+            
+        </div>
+        <div v-if="activetab === 4" class="container-recommend-body2">
+            
+        </div>
+        <div v-if="activetab === 5" class="container-recommend-body2">
+            
+        </div>
+        <div v-if="activetab === 0" class="container-recommend-body2">
+            
+        </div>
+
 
     
     
@@ -164,6 +185,12 @@ export default {
   },
   data() {
     return {
+      fields: [
+          { key: 'ราคา', sortable: true },
+          { key: 'ระยะทาง', sortable: true },
+          { key: 'Rateing', sortable: true },
+
+      ],
       def : {
             type : 'pie'
       },
@@ -268,19 +295,27 @@ export default {
 </script>
 
 <style>
+.ss{
+  width: 100%;
+  margin-top: 2%;
+  overflow: hidden;
+  
+}
 .pic-chart-body{
   width: 70%;
   height: 100%;
   font-size: 8px;
   margin: auto;
   transform: translateY(-60px);
+  
+
 }
 .container-pic-chart-body{
   width: 20%;
   height: 50px;
   position: relative;
   left: 1%;
-  transform: translateY(40px);
+  transform: translateY(20px);
 }
 
 .body-recommend-tab button{
@@ -319,9 +354,7 @@ export default {
   width: 100%;
   height: 70px;
   
-  background: turquoise;
   margin: auto;
-  margin-bottom: 2%;
 }
 .container-filter-body-detail{
   height: 100%;
@@ -339,14 +372,14 @@ export default {
   border-top-right-radius: 30px;
 }
 .container-filter-body {
-  position: sticky;
+  position: relative;
   top: 20%;
   left: 2%;
   width: 20%;
   height: max-content;
   float: left;
   border-radius: 30px;
-  background:#f8f6e7;
+  background:#f8f8f8;
   color: black;
 }
 .img-filter {
@@ -367,16 +400,16 @@ export default {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
 .container-ui-recommend2 {
-  max-width: 90%;
+  max-width: 100%;
   height: 220px;
   
   border: 1px solid silver;
   overflow: auto;
-  border-radius: 15px;
+
   cursor: pointer;
   background: #f8f6e7;
   margin: auto;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 }
 .container-in-ui-recommend2 {
   width: 33%;
@@ -414,12 +447,5 @@ export default {
   top: 20%;
   text-align: left;
 }
-.container-recommend-page2 {
-  margin-top: 5%;
-  margin-bottom: 5%;
-  position: absolute;
-  left: 50%;
 
-  transform: translate(-50%, -50%);
-}
 </style>

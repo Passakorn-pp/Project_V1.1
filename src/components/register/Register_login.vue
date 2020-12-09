@@ -115,9 +115,13 @@ export default {
         usename : this.usename,
         password : this.password 
       });
-      if(this.$store.getters.getState==true)
+      if(this.$store.getters.getState==1)
       {
         this.$router.push('/');
+      }
+      if(this.$store.getters.getState==2)
+      {
+        this.$router.push('/myhor');
       }
       
     },

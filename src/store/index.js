@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: localStorage.getItem('user') || null,
+    user: localStorage.getItem('user') || 0,
     homeclick: localStorage.getItem('homeclick') || null,
     homeall: localStorage.getItem('homeall') || null,
     state: localStorage.getItem('state')||false
@@ -40,7 +40,13 @@ export default new Vuex.Store({
     },
     SetUser(state,value){
       state.user = value,
-      state.state = true
+      state.state = 1,
+      localStorage.setItem('user',state.user)
+      localStorage.setItem('state',state.state)
+    },
+    SetUserhor(state,value){
+      state.user = value,
+      state.state = 2,
       localStorage.setItem('user',state.user)
       localStorage.setItem('state',state.state)
     },
@@ -68,6 +74,9 @@ export default new Vuex.Store({
       
       if(credentials.usename == "asd" && credentials.password == "asd"){
         context.commit('SetUser',credentials.usename)
+      }
+      else if(credentials.usename == "aa" && credentials.password == "aa"){
+        context.commit('SetUserhor',credentials.usename)
       }else{
         context.commit('Error')
       }

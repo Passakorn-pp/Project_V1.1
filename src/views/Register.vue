@@ -1,19 +1,22 @@
 <template>
   <div class="register">
-    <Header style=" backgroundColor :khaki;"></Header>
+    <Header ></Header>
     <div class="container-home-register">
       <Register_login></Register_login>
     </div>
+    <About style="transform: translateY(150px);"></About>
   </div>
 </template>
 
 <script>
 import Register_login from "@/components/register/Register_login.vue";
 import Header from "@/components/home/Head.vue";
+import About from "@/components/home/About.vue";
 export default {
   components: {
     Register_login,
-    Header
+    Header,
+    About,
   },
   mounted() {
     window.addEventListener("scroll", function() {
@@ -38,19 +41,15 @@ export default {
   border-radius: 15px;
   border: 1px solid silver;
   padding: 5%;
-  margin: 0;
-  position: absolute;
+  margin: auto;
+  position: relative;
   top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   overflow: hidden;
+  transform: translateY(150px);
   margin-bottom: 5%;
   background: rgb(235, 235, 233);
 }
 .register {
-  background-image: url("../assets/13.jpg");
-  background-size: cover;
-  width: 1550px;
-  height: 1000px;
+  background: #fceecd;
 }
 </style>

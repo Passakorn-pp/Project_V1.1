@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="background: #f8f6e7;">
   <Header ></Header>
   <div class="container-mainview" id="c-main">
     
@@ -19,6 +19,7 @@
   <div class="container-tapview" id="c-tap">
     <RecommenTap></RecommenTap>
   </div>
+  <About></About>
 </div>
   
 </template>
@@ -31,7 +32,7 @@ import Photo from "@/components/view/Photo.vue";
 import Header from "@/components/home/Head.vue";
 import Comment from "@/components/view/Comment.vue";
 import RecommenTap from '../components/view/RecommenTap.vue';
-
+import About from "@/components/home/About.vue";
 
 export default {
   data() {
@@ -47,7 +48,8 @@ export default {
     Table,
     Head,
     Comment,
-    RecommenTap
+    RecommenTap,
+    About,
   },
   methods:{
     tap(c){
@@ -103,13 +105,14 @@ export default {
   height: 80%;
   transform: translateX(700px);
   overflow: auto;
+  
 }
 .container-mainview{
   border: 1px solid silver;
   width: 70%;
-  margin: 10% auto;
+  margin: 6% auto;
   transition: 0.5s ease-in;
- 
+  background: white;
 }
 .button-tap{
   z-index: 15;

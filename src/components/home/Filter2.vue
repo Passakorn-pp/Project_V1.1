@@ -1,28 +1,28 @@
 <template>
 <div>
-  <div style="margin: 3% auto">
-    <H3>ช่วยเลือกหอพัก</H3>
+  <div style="margin: auto; margin-top:5%;">
+    <h3>ช่วยเลือกหอพัก</h3>
   </div>
   <div class="container-filter2">
     <div class="container-filter-type" >
 
-      <img src="@/assets/user.png" class="container-filter-type-img" @click="link()">
+      <img src="@/assets/all.png" class="container-filter-type-img" @click="link()">
       <p style="color:black">หอพักทั้งหมด</p>
     </div>
       
     <div class="container-filter-type" >
 
-      <img src="@/assets/user.png" class="container-filter-type-img">
+      <img src="https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg" class="container-filter-type-img">
       <p style="color:black">หอพักเงียบสงบ</p>
     </div>
     <div class="container-filter-type" >
 
-      <img src="@/assets/user.png" class="container-filter-type-img">
+      <img src="https://sv1.picz.in.th/images/2020/11/24/jdctMl.jpg" class="container-filter-type-img">
       <p style="color:black">หอพักครื้นเครง</p>
     </div>
     <div class="container-filter-type" >
 
-      <img src="@/assets/user.png" class="container-filter-type-img">
+      <img src="https://sv1.picz.in.th/images/2020/11/24/jdwk2R.jpg" class="container-filter-type-img">
       <p style="color:black">หอพักย่านของกิน</p>
     </div>
   </div>
@@ -43,7 +43,7 @@ export default {
 .container-filter2{
   height: 100%;
   width: 100%;
-  margin: 5% auto;
+  margin: 2% auto;
   margin-bottom: 5%;
   position: relative;
 
@@ -54,17 +54,18 @@ export default {
 }
 .container-filter-type{
 
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   margin: auto 0.5%;
   display: inline-block;
 
 }
 .container-filter-type-img{
-  height: 120px;
-  width: 120px;
-  margin: 5% auto;
-  color:#f6c026;
+  height: 210px;
+  width: 250px;
+  margin: auto;
+  margin-bottom:5% ;
+  color:#f6c026
 
 }
 </style>

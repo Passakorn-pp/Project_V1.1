@@ -11,6 +11,7 @@
     <div class="container-mainview" v-if="activetab === 2">
       <Like></Like>
     </div>
+    <About></About>
   </div>
 </template>
 
@@ -18,11 +19,13 @@
 import Header from "@/components/home/Head.vue";
 import Moregister from "@/components/profile/Moregister.vue";
 import Like from "@/components/profile/Like.vue";
+import About from "@/components/home/About.vue";
 export default {
   components: {
     Header,
     Moregister,
-    Like 
+    Like,
+    About, 
   },
   data() {
     return {
