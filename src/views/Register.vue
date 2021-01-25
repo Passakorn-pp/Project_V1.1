@@ -45,11 +45,13 @@ export default {
   position: relative;
   top: 60%;
   overflow: hidden;
-  transform: translateY(150px);
+  transform: translateY(110px);
   margin-bottom: 5%;
-  background: rgb(235, 235, 233);
+  /* background: rgb(235, 235, 233); */
+  background: #fceecd;
 }
 .register {
-  background: #fceecd;
+  /* background: #fceecd; */
+  background: rgb(235, 235, 233);
 }
 </style>

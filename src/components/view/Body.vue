@@ -6,8 +6,12 @@
     <div style="border: 1px solid silver; max-width: 90%; margin:auto; background: #f8f6e7;">
       <div v-for="(rooms,index) in this.$store.getters.getView_home.room.length" :key="index">
         <div class="contianer-room">
-          <div class="left">
-            <img src="@/assets/33.jpg" class="img-room" />
+          <div class="left" v-if="index==1">
+            <img src="https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg" class="img-room" />
+            
+          </div>
+          <div class="left" v-else>
+            <img src="https://sv1.picz.in.th/images/2020/12/10/j5fj60.jpg" class="img-room" />
             
           </div>
           <div class="center">
@@ -40,7 +44,7 @@
 
           <div class="right">
             
-            <img src="@/assets/46.png" class="contianer-Qrcode" />
+            <img src="@/assets/QRCode.png" class="contianer-Qrcode" />
             
           </div>
           <!-- <img src="@/assets/33.jpg" class="img-room" />

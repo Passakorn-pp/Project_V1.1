@@ -59,7 +59,7 @@ export default {
       
       slides: [
         {
-          name: "หอพักบ้านแก้ว",
+          name: "หอพักอนงค์",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
           img : "https://sv1.picz.in.th/images/2020/11/24/jdwk2R.jpg",
@@ -69,16 +69,18 @@ export default {
               nameroom : "ห้องเล็ก",
               price : "3000",
               free : 4,
+              img : "",
             },
             {
               nameroom : "ห้องใหญ่",
               price : "3500",
               free : 10,
+              img : "",
             }
           ],
-          face:"aaa",
-          line:"aaa",
-          call:"aaa",
+          face:"หอพักอนงค์",
+          line:"หอพักอนงค์",
+          call:"012-345-6789",
           address:"",
           star: 4,
           distance: 2000,
@@ -86,10 +88,11 @@ export default {
           air: true,
           fan: true,
           typeMen: true,
-          typeWomen: true
+          typeWomen: true,
+          comment: "",
         },
         {
-          name: "หอพักเจเค",
+          name: "หอพักสนามจันทร์",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
           img : "https://sv1.picz.in.th/images/2020/11/24/jdc9Rt.jpg",
@@ -106,9 +109,9 @@ export default {
               free : 5,
             }
           ],
-          face:"aaa",
-          line:"aaa",
-          call:"aaa",
+          face:"หอพักสนามจันทร์",
+          line:"หอพักสนามจันทร์",
+          call:"012-345-6789",
           address:"",
           star: 5,
           distance: 3000,
@@ -119,7 +122,7 @@ export default {
           typeWomen: true
         },
         {
-          name: "หอพักกินนอน",
+          name: "หอพักวีเจ",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
           img : "https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg",
@@ -136,9 +139,9 @@ export default {
               free : 1,
             }
           ],
-          face:"aaa",
-          line:"aaa",
-          call:"aaa",
+          face:"หอพักวีเจ",
+          line:"หอพักวีเจ",
+          call:"012-345-6789",
           address:"",
           star: 5,
           distance: 1000,
@@ -149,7 +152,7 @@ export default {
           typeWomen: true
         },
         {
-          name: "หอพักทับแก้ว",
+          name: "หอพักน้ำไทย",
           water_bill : "150 บาท/เดือน",
           elect_bill : "7 บาท/หน่วย",
           img : "https://sv1.picz.in.th/images/2020/11/24/jdctMl.jpg",
@@ -166,9 +169,9 @@ export default {
               free : 2,
             }
           ],
-          face:"aaa",
-          line:"aaa",
-          call:"aaa",
+          face:"หอพักน้ำไทย",
+          line:"หอพักน้ำไทย",
+          call:"012-345-6789",
           address:"",
           star: 4,
           distance: 500,

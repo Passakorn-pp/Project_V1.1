@@ -2,16 +2,16 @@
   <div>
     <div style="margin: auto; width:70%">
       <flickity ref="flickity" :options="flickityOptions" >
-        <div class="carousel-cell" v-for="index in 10" :key="index">
-          <h2 class="img-view" >{{index}} </h2>
+        <div class="carousel-cell" v-for="(r,index) in rooms" :key="index">
+          <img :src="r.room" style="width: 100%; height: 100%;">
             
         </div>
       </flickity>
     </div>
     <div style="margin: 1% auto; width:70%">
       <flickity ref="flickity2" :options="flickityOptions" >
-        <div class="carousel-cell-small" v-for="index in 10" :key="index" @click="setphoto(index)">
-          <h2 class="img-view" >{{index}} </h2>
+        <div class="carousel-cell-small" v-for="(r,index) in rooms" :key="index" @click="setphoto(index)">
+          <img :src="r.room" style="width: 100%; height: 100%;">
               
         </div>
       </flickity>
@@ -36,13 +36,54 @@ export default {
         prevNextButtons: true,
         // any options from Flickity can be used
       },
-        
-       }
+      rooms:[
+        {
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fADI.jpg",
+        },
+        {
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fj60.jpg",
+        }
+        ,
+        {
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fOY8.jpg",
+        }
+        ,
+        {
+          
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fbRR.jpg",
+        }
+        ,
+        {
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5flMu.jpg",
+        }
+        ,
+        {
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fD1Z.jpg",
+        }
+        ,
+        {
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5flMu.jpg",
+        }
+        ,
+        {
+          room:"",
+        }
+        ,
+        {
+          room:"",
+        }
+        ,
+        {
+          room:"",
+        }
+      ]
+    }
   },
    methods: {
     setphoto(index) {
-      this.$refs.flickity.select(index-1);
-      this.$refs.flickity2.select(index-1);
+      console.log(index);
+      this.$refs.flickity.select(index);
+      this.$refs.flickity2.select(index);
     },
   }
 };

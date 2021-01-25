@@ -1,17 +1,20 @@
 <template>
-  <div>
+  <div style="background: #f8f6e7;">
     <Header ></Header>
-    <div class="profile-tab">       
-      <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ข้อมูลส่วนตัว</button>
-      <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ถูกใจ</button>         
+    <div style="  transform: translateY(150px);">
+      <div class="profile-tab">       
+        <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ข้อมูลส่วนตัว</button>
+        <!-- <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ถูกใจ</button>          -->
+      </div>
+      <div class="container-mainview" v-if="activetab === 1">
+        <Moregister></Moregister>
+      </div>
+      <div class="container-mainview" v-if="activetab === 2">
+        <Like></Like>
+      </div>
     </div>
-    <div class="container-mainview" v-if="activetab === 1">
-      <Moregister></Moregister>
-    </div>
-    <div class="container-mainview" v-if="activetab === 2">
-      <Like></Like>
-    </div>
-    <About></About>
+    
+    <About style="  transform: translateY(150px);"></About>
   </div>
 </template>
 
@@ -40,16 +43,16 @@ export default {
   border: 1px solid silver;
   width: 70%;
   margin:auto;
-  
+  margin-bottom: 5%;
+  background: white;
   transition: 0.5s ease-in;
  
 }
 .profile-tab{
   width: 70%;
-  
+  border-radius: 15px;
   height: 50px;
   margin: auto;
-  margin-top:10%;
   position: relative;
 
 }

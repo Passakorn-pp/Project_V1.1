@@ -13,13 +13,13 @@
     </div>
     
     <div style="width:50%; margin:auto">
-      <b-button type="submit" variant="primary" @click="login()">Submit</b-button>
+      <b-button type="submit" style="background: #e4be65;" @click="login()">ยืนยัน</b-button>
       <br>
     </div>
-    <div style="width:50%; margin:auto">
+    <!-- <div style="width:50%; margin:auto">
       <b-button type="submit" variant="primary" @click="logout()">ออกจากระบบ</b-button>
       <br>
-    </div>
+    </div> -->
     <div>
       {{this.$store.getters.getView_use}}
     </div>
@@ -27,12 +27,12 @@
     
    
     <div class="container-register-login-line" @click="show_registesr">
-      <img
+      <!-- <img
         src="@/assets/LINE_SOCIAL_Basic.png"
         class="img-login-line"
         id="img-login-line"
-      />
-      <span class="text-login-line">ลงชื่อเข้าใช้ด้วยไลน์</span>
+      /> -->
+      <span class="text-login-line">สมัครสมาชิก</span>
     </div>
 
     <div
@@ -45,14 +45,14 @@
         class="arrow-left-register-login-form"
       ></b-icon>
       <h2 class="text-head-register">สมัครสมาชิก</h2>
-      <label class="text-register">ชื่อผู้ใช้</label>
+      <!-- <label class="text-register">ชื่อผู้ใช้</label>
       <br />
       <b-icon icon="person-fill" class="register-login-form-icon"></b-icon>
       <input
         type="text"
         placeholder="ชื่อ-นามสกุล"
         class="register-login-form"
-      />
+      /> -->
 
       <label class="text-register"> เพศ</label>
       <br />
@@ -62,22 +62,22 @@
       <label for="หญิง" class="register-login-checkbox">หญิง</label>
       <br />
 
-      <label class="text-register">มหาวิทยาลัย</label>
+      <!-- <label class="text-register">มหาวิทยาลัย</label>
       <br />
       <b-icon icon="" class="register-login-form-icon"></b-icon>
       <input
         type="text"
         placeholder="มหาวิทยาลัย"
         class="register-login-form"
-      />
+      /> -->
 
       <label class="text-register"> คณะ</label>
       <br />
       <b-icon icon="book-half" class="register-login-form-icon"></b-icon>
       <input type="text" placeholder="คณะ" class="register-login-form" />
 
-      <label class="text-register"> เบอร์โทรศัพท์</label>
-      <br />
+      <!-- <label class="text-register"> เบอร์โทรศัพท์</label> -->
+      <!-- <br />
 
       <b-icon icon="camera" class="register-login-form-icon"></b-icon>
       <input
@@ -85,7 +85,7 @@
         placeholder="เบอร์โทรศัพท์"
         class="register-login-form"
       />
-      <br />
+      <br /> -->
       <button class="register-login-form-button">ยืนยัน</button>
 
     </div>
@@ -165,9 +165,8 @@ input[type="text"]:focus {
   width: 60%;
   height: 80%;
   border-radius: 10px;
-
-  border: 1px solid #3e8e41;
-  background: #f4efaf;
+  border: 1px solid silver;
+  background: #fdf5e1;
   padding: 5%;
   margin: 0;
   position: absolute;
@@ -204,27 +203,23 @@ input[type="text"]:focus {
   border-left: none;
 }
 .register-login-form-button:hover {
-  background: violet;
+  background: #e4be65;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
 }
 .register-login-form-button:focus {
   outline: none;
 }
 .register-login-form-button:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+  background-color: #e4be65;
 }
 .register-login-form-button {
   position: relative;
   margin-top: 5%;
   border-radius: 50px;
   height: 50px;
-  width: 70%;
+  width: 50%;
   border: 1px solid silver;
-  text-decoration: none;
-  background-size: cover;
-  background-image: url("14.jpg");
+  background: #e7cc8d;
 
   color: black;
 }
@@ -262,7 +257,8 @@ input[type="text"]:focus {
   cursor: pointer;
 }
 .container-register-login-line:hover {
-  background: #bedff7;
+  background:#3e8e41;
+  color: white;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
 }
 .img-login-line {
@@ -278,7 +274,7 @@ input[type="text"]:focus {
 .text-login-line {
   position: relative;
   line-height: 4;
-  margin-left: -10%;
+  margin: auto;
   font-size: 24px;
   font-weight: 500;
 }
@@ -286,8 +282,7 @@ input[type="text"]:focus {
   width: 80%;
   padding: 1%;
   float: left;
-  background-size: cover;
-  background-image: url("14.jpg");
+  background: #e4be65;
   color: black;
 
   margin-left: -10.5%;

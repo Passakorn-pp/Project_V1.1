@@ -32,10 +32,10 @@
       <li class="li-head" id="Head-list">
         <a href="#" class="text-above">เกี่ยวกับ</a>
       </li>
-      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState">
+      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState==1">
         <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
       </li>
-      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState">
+      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState==1">
         <a href="/profile" class="text-above" v-show="check">ถูกใจ</a>
       </li>
       
