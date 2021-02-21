@@ -1,8 +1,15 @@
 <template>
-  <div style="background: #f8f6e7;">
+  <div >
       <Header ></Header>
-      
-      <div style="transform: translateY(150px);">
+      <div class="r_myhor">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div >
         <div class="myhor-tab">
                 
             <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">หอพักของฉัน</button>
@@ -26,10 +33,12 @@
             <Recommend></Recommend>
         </div>
       </div>
-        
-        
-    
-    
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      </div>
     <About></About>
   </div>
 </template>
@@ -66,24 +75,28 @@ export default {
 </script>
 
 <style scoped>
-
+.r_myhor{
+  background: #f8f6e7;
+  height: 100%;
+}
 .container-mainview{
   border: 1px solid silver;
   width: 70%;
+  min-width: 1050px;
   margin:auto;
   background: white;
   transition: 0.5s ease-in;
-  margin-bottom: 15%;
 }
 .myhor-tab{
   width: 70%;
+  min-width: 1050px;
   height: 50px;
   margin: auto;
   position: relative;
 
 }
 .myhor-tab button{
-  width: 10%;
+  width: 15%;
   height: 70%;
   float: left;
   border-top-left-radius: 15px;

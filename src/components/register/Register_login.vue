@@ -27,14 +27,14 @@
     
    
     <div class="container-register-login-line" @click="show_registesr">
-      <!-- <img
+      <img
         src="@/assets/LINE_SOCIAL_Basic.png"
         class="img-login-line"
         id="img-login-line"
-      /> -->
+      />
       <span class="text-login-line">สมัครสมาชิก</span>
     </div>
-
+    <button @click="aaaa">aaaa</button>
     <div
       class="container-register-login-form"
       id="container-register-login-form"
@@ -87,7 +87,7 @@
       />
       <br /> -->
       <button class="register-login-form-button">ยืนยัน</button>
-
+      
     </div>
   </div>
 </template>
@@ -101,9 +101,40 @@ export default {
     }
   },
   methods: {
+    aaaa(){
+      const liff = this.$liff
+      liff.logout()
+      localStorage.setItem('state',0)
+    },
     show_registesr() {
-      document.getElementById("container-register-login-form").style =
-        "left: 50%; ";
+      const liff = this.$liff // เรียก property ของ LIFF
+      liff.init({
+        liffId: '1655683528-q1XK2z5a'
+      }).then(() => {
+        console.log('LIFF initialize finished')
+        // get user profile
+
+        if (liff.isLoggedIn()) {
+          liff.getProfile()
+          .then(profile => {
+            localStorage.setItem('state',1)
+            console.log(JSON.stringify(profile))
+            this.userProfile = profile
+           
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+        } else {
+          console.log('LIFF is not logged in')
+          liff.login() // login
+          
+        }
+      }).catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+      // document.getElementById("container-register-login-form").style =
+      //   "left: 50%; ";
     },
     back_to2() {
       document.getElementById("container-register-login-form").style =
@@ -134,6 +165,7 @@ export default {
 </script>
 
 <style scoped>
+
 input[type="text"]:focus {
   background-color: white;
   outline: none;

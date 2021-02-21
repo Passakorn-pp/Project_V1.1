@@ -1,20 +1,24 @@
 <template>
-  <div style="background: #f8f6e7;">
+  <div >
+    
     <Header ></Header>
-    <div style="  transform: translateY(150px);">
-      <div class="profile-tab">       
-        <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ข้อมูลส่วนตัว</button>
-        <!-- <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ถูกใจ</button>          -->
-      </div>
-      <div class="container-mainview" v-if="activetab === 1">
-        <Moregister></Moregister>
-      </div>
-      <div class="container-mainview" v-if="activetab === 2">
-        <Like></Like>
+    <div class="background">
+      <div style="transform: translateY(150px);">
+        <div class="profile-tab">       
+          <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ข้อมูลส่วนตัว</button>
+          <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ถูกใจ</button>         
+        </div>
+        <div class="container-mainview" v-if="activetab === 1">
+          <Moregister></Moregister>
+        </div>
+        <div class="container-mainview" v-if="activetab === 2">
+          <Like></Like>
+        </div>
       </div>
     </div>
     
-    <About style="  transform: translateY(150px);"></About>
+    
+    <About ></About>
   </div>
 </template>
 
@@ -39,9 +43,15 @@ export default {
 </script>
 
 <style scoped>
+.background{
+  background: #f8f6e7; 
+  height: 700px;
+  min-width: 900px;
+}
 .container-mainview{
   border: 1px solid silver;
   width: 70%;
+  min-width: 900px;
   margin:auto;
   margin-bottom: 5%;
   background: white;
@@ -50,6 +60,7 @@ export default {
 }
 .profile-tab{
   width: 70%;
+  min-width: 900px;
   border-radius: 15px;
   height: 50px;
   margin: auto;
@@ -57,7 +68,7 @@ export default {
 
 }
 .profile-tab button{
-  width: 10%;
+  width: 15%;
   height: 70%;
   float: left;
   border-top-left-radius: 15px;

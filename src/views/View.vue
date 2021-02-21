@@ -14,11 +14,11 @@
 
   </div >
   
-  <button class="button-tap" id="button-tap" @click="tap(!check)"  >หอพักใกล้เคียง</button>
-  <button class="button-tap" id="button-tap2" style="top: 55%;" @click="tap(!check)">หอพักแนะนำ</button>
-  <div class="container-tapview" id="c-tap">
+  <!-- <button class="button-tap" id="button-tap" @click="tap(!check)"  >หอพักใกล้เคียง</button>
+  <button class="button-tap" id="button-tap2" style="top: 55%;" @click="tap(!check)">หอพักแนะนำ</button> -->
+  <!-- <div class="container-tapview" id="c-tap">
     <RecommenTap></RecommenTap>
-  </div>
+  </div> -->
   <About></About>
 </div>
   
@@ -31,7 +31,7 @@ import Body from "@/components/view/Body.vue";
 import Photo from "@/components/view/Photo.vue";
 import Header from "@/components/home/Head.vue";
 import Comment from "@/components/view/Comment.vue";
-import RecommenTap from '../components/view/RecommenTap.vue';
+// import RecommenTap from '../components/view/RecommenTap.vue';
 import About from "@/components/home/About.vue";
 
 export default {
@@ -48,7 +48,7 @@ export default {
     Table,
     Head,
     Comment,
-    RecommenTap,
+    // RecommenTap,
     About,
   },
   methods:{
@@ -108,7 +108,9 @@ export default {
 .container-mainview{
   border: 1px solid silver;
   width: 70%;
-  margin: 6% auto;
+  min-width: 1050px;
+  margin: auto;
+  margin-top:6%;
   transition: 0.5s ease-in;
   background: white;
 }

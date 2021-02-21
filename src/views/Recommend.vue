@@ -1,35 +1,31 @@
 <template>
   <div >
-    <div>
+    <div >
       <Header ></Header>
-      <Head></Head>
-      <Body2></Body2>
+      <div class="container-main-recommend">
+        <Body2></Body2>
+      </div>
+      
       <!-- <Add></Add> -->
       <Sell></Sell>
     </div>
-    <div style="margin-top:80%">
-      <About></About>
-    </div>
+    
   </div>
   
 </template>
 
 <script>
-import Head from "@/components/recommend/Head.vue";
 import Body2 from "@/components/recommend/Body2.vue";
 import Header from "@/components/home/Head.vue";
 // import Add from "@/components/recommend/Add.vue";
 import Sell from "@/components/recommend/Sell.vue";
-import About from "@/components/home/About.vue";
 
 export default {
   components: {
-    Head,
     Body2,
     Header,
     // Add,
     Sell,
-    About,
   },
   mounted() {
     window.scrollTo(0, 0);
@@ -47,10 +43,9 @@ export default {
 };
 </script>
 
-<style>
-.con {
-  height: 100%;
-  width: 100%;
-  outline: none;
+<style scoped>
+
+.container-main-recommend{
+  
 }
 </style>

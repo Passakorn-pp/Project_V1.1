@@ -156,7 +156,7 @@ export default {
 .container-home-search {
   display: none;
   height: 300px;
-  width: 500px;
+  width: 70%;
   top: 20%;
   left: 20%;
   position: absolute;

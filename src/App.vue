@@ -9,7 +9,36 @@
 <script>
 
 export default {
-  
+  created(){
+    const liff = this.$liff // เรียก property ของ LIFF
+    liff.init({
+      liffId: '1655683528-q1XK2z5a'
+    }).then(() => {
+      console.log('LIFF initialize finished')
+      // get user profile
+
+      if (liff.isLoggedIn()) {
+        liff.getProfile()      
+        .then(profile => {
+          console.log(JSON.stringify(profile) +" :profile")
+          this.userProfile = profile
+          console.log(this.userProfile['userId'] +": userid");
+          const token = liff.getAccessToken()
+          console.log(token +" :token");
+          localStorage.setItem('user',this.userProfile['displayName'])
+          localStorage.setItem('img_user',this.userProfile['pictureUrl'])
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+
+        
+        
+      }
+    }).catch((err) => {
+      console.error('LIFF initialize error', err)
+    })
+  }
 }
 </script>
 <style lang="scss">

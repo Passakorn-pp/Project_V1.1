@@ -11,14 +11,15 @@
       ></router-link>
     </div>
     
-    <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret class="container-login" v-else>
+    <!-- <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret class="container-login" v-else>
       <template #button-content>
         <img src="@/assets/man.png"  class="img">
       </template>
       <b-dropdown-item @click="myhor()">หอพักของฉัน</b-dropdown-item>
       <b-dropdown-item @click="logout()">logout</b-dropdown-item>
 
-    </b-dropdown>
+    </b-dropdown> -->
+    
     <!-- <div class="container-search-head">
       <img
         src="@/assets/search.png"
@@ -29,16 +30,24 @@
     <!-- </div> -->
     
     <div class="container-above" id="Head-above">
+      <li class="li-head">
+
+        <router-link to="/register"><button class="button-login">
+          <img :src="img_user"  class="container-login-img">
+          {{user}}
+        </button></router-link >
+        
+      </li>
       <li class="li-head" id="Head-list">
         <a href="/test" class="text-above">เทส</a>
       </li>
       <li class="li-head" id="Head-list">
         <a href="#about" class="text-above">เกี่ยวกับ</a>
       </li>
-      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState==1">
+      <li class="li-head" id="Head-list" v-if="state==1">
         <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
       </li>
-      <li class="li-head" id="Head-list" v-if="this.$store.getters.getState==1">
+      <li class="li-head" id="Head-list" v-if="state==1">
         <a href="/profile" class="text-above" v-show="check">ถูกใจ</a>
       </li>
       
@@ -52,7 +61,10 @@ export default {
   data() {
     return {
       check: true,
-      container: true
+      container: true,
+      img_user : localStorage.getItem('img_user'),
+      user : localStorage.getItem('user'),
+      state : localStorage.getItem('state')
     };
   },
   methods: {
@@ -65,13 +77,20 @@ export default {
     },
     myhor(){
       this.$router.push('/myhor');
-    }
+    },
+
   },
-  mounted() {}
+
 };
 </script>
 
 <style>
+.button-login{
+  width: 150px;
+  border: none;
+  border: 1px solid silver;
+  border-radius: 3px;
+}
 .img-logo-head {
   
   height: 100px;
@@ -111,6 +130,7 @@ a:hover {
   z-index: 9999;
   position: fixed;
   background: #ECD59F;
+  /* background: rgb(226, 226, 226); */
   transition: all 0.3s ease-in;
 }
 .li-head {
@@ -125,17 +145,17 @@ a:hover {
   float: left;
 }
 .container-above {
-  height: 100%;
-  width: 30%;
+  height: 40%;
+  width: 50%;
   float: right;
   margin-right: 2.5%;
   transition: all 0.3s ease-in;
+  transform: translate(0, 60%);
 }
 .text-above {
   font-size: 24px;
   cursor: pointer;
   position: relative;
-  line-height: 4;
   font-weight: 200;
   transition: all 0.5s ease-in;
 }
@@ -156,11 +176,13 @@ a:hover {
   transition: all 0.3s ease-in;
   position: relative;
 }
-.container-login img {
-  height: 50px;
-  width: 50px;
+.container-login-img {
+  height: 30px;
+  width: 30px;
   cursor: pointer;
-  right: 15%;
-  position: relative;
+  float: right;
+  border: 1px solid silver;
+  border-radius: 15px;
 }
+
 </style>

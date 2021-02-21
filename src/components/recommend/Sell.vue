@@ -47,7 +47,7 @@ export default {
     background: #f8f6e7;
     z-index: 99;
     position: absolute;
-    right: 1%;
+    right: 2%;
     top: 25%;
     overflow: auto;
 
@@ -75,5 +75,10 @@ export default {
     float: left;
     width: 60%;
     height: 100%;
+}
+@media only screen and (max-width: 1400px){
+    .container-sell{
+        display: none;
+    }
 }
 </style>

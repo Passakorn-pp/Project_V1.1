@@ -7,12 +7,13 @@ import router from "./router";
 import store from "./store";
 import VueAgile from 'vue-agile';
 import VueSession from 'vue-session';
+import VCalendar from 'v-calendar';
 Vue.use(VueSession)
 
-import VCalendar from 'v-calendar';
-Vue.use(VCalendar);
 
+Vue.use(VCalendar);
 Vue.use(VueAgile);
+Vue.prototype.$liff = window.liff
 Vue.config.productionTip = false;
 
 new Vue({

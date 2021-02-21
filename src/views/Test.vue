@@ -1,6 +1,6 @@
 <template>
   <div >
-    <br>
+    <!-- <br>
     <select v-model="currentOrder" >
       <option value="name">name</option>
       <option value="value">value</option>
@@ -17,12 +17,19 @@
       <span>{{item}}</span>
       <br>
     </div>
-      
+    <img src="@/assets/13.jpg" class="test-img">   -->
+
+
+
   </div>
+
+  
 </template>
 
 <script>
+
 export default {
+
  data(){
    return{
     table : true,
@@ -67,6 +74,8 @@ export default {
       var equal = arr1.every(i => arr2.includes(i));
       console.log(equal);
       
+      arr1.indexOf
+
       for(var item in this.items){
         if(this.items[item].filter.some(i => this.languages.includes(i)) == true){
           useitem.push(this.items[item])
@@ -99,14 +108,30 @@ export default {
       }else{
          this.isCheckAll = false;
       }
-    }
+    },
+    result(res) {
+            console.log(res)
+        }
  },
  computed:{
    
- }
+ },
+
 }
 </script>
 
 <style>
+@media only screen and (max-width:800px){
+  .test-img{
+  width: 1000px;
+  height: 1000px;
+  }
+}
+@media only screen and (min-width:1200px){
+  .test-img{
+  width: 200px;
+  height: 200px;
+  }
+}
 
 </style>

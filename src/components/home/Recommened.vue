@@ -8,7 +8,7 @@
     </div>
     
     <div class="container-Recommened" id="axz">
-        <div class="container-Recommened-slide-overflow">
+
          
           
           <flickity ref="flickity" :options="flickityOptions" >
@@ -18,7 +18,7 @@
                 <div class="container-Recommened-card-text">
                   <h6 style="float: left;">{{s.name}} </h6>
                   <div style="display: inline-block;">
-                    <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%"></b-form-rating>      
+                    <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%" class="rating-recommend"></b-form-rating>      
                   </div>
                   
                   <h6 style="line-height: 0.5 ;">ราคา {{s.room[0].price}}-{{s.room[1].price}} บาท</h6>
@@ -28,7 +28,7 @@
               
           </flickity>
           
-        </div>
+        
     </div>  
   </div>
 </template>
@@ -90,7 +90,7 @@ export default {
           typeMen: true,
           typeWomen: true,
           comment: "",
-          selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["table","refrigerator","tv","woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักสนามจันทร์",
@@ -121,7 +121,7 @@ export default {
           fan: true,
           typeMen: true,
           typeWomen: true,
-          selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["table","refrigerator","tv","woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักวีเจ",
@@ -152,7 +152,7 @@ export default {
           fan: true,
           typeMen: true,
           typeWomen: true,
-          selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["table","refrigerator","tv","woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักน้ำไทย",
@@ -183,7 +183,7 @@ export default {
           fan: true,
           typeMen: true,
           typeWomen: true,
-          selected: ["fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["table","refrigerator","tv","woman","man","wifi","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },     
       ]
     };
@@ -302,8 +302,7 @@ export default {
   border-radius: 30px;
   color: white;
   margin: auto;
-  margin-top: 10%;
-  
+
   
 }
 
@@ -315,10 +314,10 @@ export default {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  position: absolute;
+  position: relative;
   /* background: #f2f2f7; */
   left: 10%;
-  margin-top: -8%;
+  margin-top: 2%;
   border-radius: 2px;
   
 }
@@ -359,6 +358,19 @@ export default {
   margin: auto;
   margin-left: 2%;
   margin-right: 2%;
+}
+@media only screen and (max-width: 800px) {
+   .container-Recommened-card{
+     height: 250px;
+     width: 250px;
+   }
+   .container-Recommened-card-img{
+     height: 50%;
+   }
+   .container-Recommened-card-text{
+     height: 50%;
+
+   }
 }
 </style>
 <!-- <div class="container-card">

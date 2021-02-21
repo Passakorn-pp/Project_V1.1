@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h4 style="padding:2%; background: #e4c785; width: 60%; margin:auto; margin-top:3%; border-top-left-radius: 15px; border-top-right-radius: 15px;">ข้อมูลส่วนตัว</h4>
+  <div >
+    <h4 style="padding:2%; background: #e4c785; width: 60%; min-width: 500px; margin:auto; margin-top:3%; border-top-left-radius: 15px; border-top-right-radius: 15px;">ข้อมูลส่วนตัว</h4>
     <div class="table-modify">
       <div style="padding:4%; ">
         <label>คณะ : </label>
@@ -39,6 +39,7 @@ export default {
     margin:  auto;
     height: 300px;
     width: 60%;
+    min-width: 500px;
     border: 1px solid silver;
     overflow: hidden;
     margin-bottom: 5%;

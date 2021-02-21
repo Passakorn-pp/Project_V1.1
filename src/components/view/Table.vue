@@ -25,24 +25,103 @@
           <span class="text-filter">{{this.$store.getters.getView_home.elect_bill}}</span>
         </div>
       </div>  
-      <div class="box-filter" v-if="this.$store.getters.getView_home.typeMen==true">
+      <div class="box-filter" v-if="showFilter('man')">
         <div class="left">
           <img src="@/assets/man.png" class="img">
         </div>
         <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >หอพักชาย</span>
-          
+          <span class="text-filter" >หอพักชาย</span>         
         </div>
       </div>  
-      <div class="box-filter"  v-if="this.$store.getters.getView_home.typeWomen==true">
+      <div class="box-filter"  v-if="showFilter('woman')">
         <div class="left">
           <img src="@/assets/woman.png" class="img">
         </div>
         <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >หอพักหญิง</span>
-          
+          <span class="text-filter" >หอพักหญิง</span> 
         </div>    
-      </div>  
+      </div>
+      <div class="box-filter"  v-if="showFilter('wifi')">
+        <div class="left">
+          <img src="@/assets/wifi.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >wifi</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('air')">
+        <div class="left">
+          <img src="@/assets/air-conditioner (1).png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >แอร์</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('fan')">
+        <div class="left">
+          <img src="@/assets/fan (1).png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >พัดลม</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('tv')">
+        <div class="left">
+          <img src="@/assets/television.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >ทีวี</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('refrigerator')">
+        <div class="left">
+          <img src="@/assets/refrigerator.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >ตู้เย็น</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('table')">
+        <div class="left">
+          <img src="@/assets/desk.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >โต๊ะ</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('parking_lot')">
+        <div class="left">
+          <img src="@/assets/elevator.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >ลานจอดรถ</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('security camera')">
+        <div class="left">
+          <img src="@/assets/cctv.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >กล้องวงจร</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('keycard')">
+        <div class="left">
+          <img src="@/assets/key-card.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >ระบบคีย์การ์ด</span> 
+        </div>    
+      </div> 
+      <div class="box-filter"  v-if="showFilter('laundry')">
+        <div class="left">
+          <img src="@/assets/laundry-shop.png" class="img">
+        </div>
+        <div class="right" style="line-height: 2.5;">
+          <span class="text-filter" >ร้านซักรีด</span> 
+        </div>    
+      </div> 
+      
   </div>
 </div>
   
@@ -56,7 +135,22 @@ export default {
      
     };
   },
-  
+  methods:{
+    showFilter(item){
+      var home = []
+      var h = this.$store.getters.getView_home.selected.length
+      for(var i=0; i<h; i++){
+        home.push(this.$store.getters.getView_home.selected[i])
+      }
+
+      if(home.indexOf(item) != -1){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
 };
 </script>
 

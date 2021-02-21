@@ -1,10 +1,12 @@
 <template>
-  <div class="register">
+  <div >
     <Header ></Header>
-    <div class="container-home-register">
-      <Register_login></Register_login>
+    <div class="register">
+      <div class="container-home-register">
+        <Register_login></Register_login>
+      </div>
     </div>
-    <About style="transform: translateY(150px);"></About>
+    <About ></About>
   </div>
 </template>
 
@@ -36,20 +38,20 @@ export default {
 .container-home-register {
   width: 60%;
   height: 600px;
+  min-width: 800px;
   border-radius: 15px;
   border: 1px solid silver;
   padding: 5%;
   margin: auto;
   position: relative;
-  top: 60%;
+  transform:  translateY(120px);
   overflow: hidden;
-  transform: translateY(110px);
-  margin-bottom: 5%;
   /* background: rgb(235, 235, 233); */
   background: #fceecd;
 }
 .register {
   /* background: #fceecd; */
   background: rgb(235, 235, 233);
+  height: 800px;
 }
 </style>

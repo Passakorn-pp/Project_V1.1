@@ -1,5 +1,12 @@
 <template>
   <div>
+    <div style="width:100%">
+      <button style="float: left; transform: translateX(50px); " id="b_main_recommend">
+        <img src="@/assets/filter.png" style="height: 25px; width:25px">
+        ตัวเลือกค้นหา
+      </button>
+      <h3 style="display: inline-block;">รายการหอพัก</h3>
+    </div>
     <div class="container-filter-body">
       <div class="container-filter-body-head">
         <h2 style="  line-height: 2;" >ค้นหาตามใจชอบ</h2>
@@ -11,6 +18,10 @@
             <b-form-input id="range-1" v-model="value" type="range" min="0" max="8000" step="100"></b-form-input>
             <div class="mt-2">ราคา: {{ value }}</div>
         </div>
+        <div style="width: 80%; margin: 2% auto; text-align: left;">
+        <b-form-checkbox-group v-model="selected" :options="optiontype"  switches
+        ></b-form-checkbox-group>
+        </div>
         <h4 style="text-align: left; margin: 2% 5%">เครื่องใช้ภายในห้อง</h4>
         <div style="width: 80%; margin: auto; text-align: left;">
         <b-form-checkbox-group v-model="selected" :options="optionsroom" stacked switches
@@ -21,11 +32,11 @@
         <b-form-checkbox-group v-model="selected" :options="options" stacked switches
         ></b-form-checkbox-group>
         </div>
-        <h4 style="text-align: left; margin: 2% 5%">คณะ</h4>
+        <!-- <h4 style="text-align: left; margin: 2% 5%">คณะ</h4>
         <div style="width: 80%; margin: auto; text-align: left;">
         <b-form-checkbox-group v-model="selected" :options="faculty" stacked switches
         ></b-form-checkbox-group>
-        </div>
+        </div> -->
       </div>
       <br>
 
@@ -104,27 +115,60 @@
                     </div>
                     
                     <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
-                      <div v-if="user.wifi">
+                      <div v-if="showfilter('man',index)">
+                        <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <div v-if="showfilter('woman',index)">
+                        <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <div v-if="showfilter('wifi',index)">
                         <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
                       </div>
-                      <div v-if="user.air">
+
+                      <div v-if="showfilter('air',index)">
                         <img src="@/assets/air-conditioner (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                        
                       </div>
-                      <div v-if="user.fan">
+
+                      <div v-if="showfilter('fan',index)">
                         <img src="@/assets/fan (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                        
-                      </div>
-                      <div v-if="user.typeMen">
-                        <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                        
                       </div>
                       
-                      <div v-if="user.typeWomen">
-                        <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                        
+                      <div v-if="showfilter('tv',index)">
+                        <img src="@/assets/television.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <div v-if="showfilter('refrigerator',index)">
+                        <img src="@/assets/refrigerator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <div v-if="showfilter('table',index)">
+                        <img src="@/assets/desk.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <br>
+                      <br>
+                      
+                      <div v-if="showfilter('parking_lot',index)">
+                        <img src="@/assets/parking-area.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                       </div>
                       
+                      <div v-if="showfilter('elevators',index)">
+                        <img src="@/assets/elevator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <div v-if="showfilter('security camera',index)">
+                        <img src="@/assets/cctv.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <div v-if="showfilter('keycard',index)">
+                        <img src="@/assets/key-card.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
+
+                      <div v-if="showfilter('laundry',index)">
+                        <img src="@/assets/laundry-shop.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                      </div>
                     </div>
 
                     
@@ -170,17 +214,21 @@
         <div v-if="activetab === 0" class="container-recommend-body2">
             
         </div>
-
+        <div style="width: 100%; float: left; margin-top:10%">
+          <About></About>
+        </div>
   
     
-    
+          
   </div>
 </template>
 
 <script>
-
+import About from "@/components/home/About.vue";
 export default {
-
+components: {
+    About,
+  },
   data() {
     return {
       f_pice: true,
@@ -202,13 +250,18 @@ export default {
       active_pic:1,
       activetab: Number(localStorage.getItem('indexfilter')),
       value: 3000,
-      selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"], // Must be an array reference!
+      selected: ["woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"], // Must be an array reference!
+      optiontype:[
+        {text: 'หอชาย', value: 'man'},
+        {text: 'หอหญิง', value: 'woman'},
+      ],
       optionsroom: [
+        { text: 'wifi', value: 'wifi' },
         { text: 'แอร์', value: 'air' },
         { text: 'พัดลม', value: 'fan' },
         { text: 'ทีวี', value: 'tv' },
         { text: 'ตู้เย็น', value: 'refrigerator' },
-        { text: 'โต้ะ', value: 'table' },
+        { text: 'โต๊ะ', value: 'table' },
       ],
       options: [
         { text: 'ลานจอดรถ', value: 'parking_lot' },
@@ -309,12 +362,29 @@ export default {
       return useitem;
 
       
+    },
+    showfilter(item,index){
+      var home = this.$store.getters.gethome;
+      console.log(item +" item")
+      console.log(home[index].selected +"aaa");
+      if(home[index].selected.indexOf(item) != -1){
+        return true;
+      }
+      else{
+        return false;
+      }
+      
     }
   }
 };
 </script>
 
 <style>
+.container-main-recommend{
+  width: 100%;
+  position: absolute;
+  top:20%;
+}
 .container-filter-sort{
   width: 100%;
   height: 50px;
@@ -392,6 +462,7 @@ export default {
 }
 .body-recommend-tab{
   width: 55%;
+  min-width: 800px;
   float: left;
   height: 50px;
   position: relative;
@@ -404,7 +475,7 @@ export default {
   margin: auto;
 }
 .container-filter-body-detail{
-  height: 100%;
+  height: 650px;
   width: 100%;
   
 }
@@ -420,7 +491,7 @@ export default {
 }
 .container-filter-body {
   position: relative;
-  top: 20%;
+
   left: 2%;
   width: 20%;
   height: max-content;
@@ -437,6 +508,7 @@ export default {
 }
 .container-recommend-body2 {
   width: 55%;
+  min-width: 800px;
   float: left;
   height: 100%;
   position: relative;
@@ -493,6 +565,36 @@ export default {
 
   top: 20%;
   text-align: left;
+}
+#b_main_recommend{
+  display: none;
+}
+@media only screen and (max-width: 1400px){
+  .body-recommend-tab{
+    width: 70%;
+  }
+  .container-recommend-body2{
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 1300px){
+  .body-recommend-tab{
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 1200px){
+  .container-filter-body{
+    display: none;
+  }
+  .body-recommend-tab{
+    width: 100%;
+  }
+  .container-recommend-body2{
+    width: 90%;
+  }
+  #b_main_recommend{
+    display: inline-block;
+  }
 }
 
 </style>
