@@ -1,5 +1,5 @@
 <template>
-  <div class="container-home-about">
+  <div class="container-home-about" id="about">
     <div class="aboutus">
       <img src="@/assets/logo-1.1.png" style="height:100px; width:100px;">
     </div>

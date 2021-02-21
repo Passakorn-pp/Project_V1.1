@@ -66,15 +66,15 @@ export default {
         }
         ,
         {
-          room:"",
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fD1Z.jpg",
         }
         ,
         {
-          room:"",
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fbRR.jpg",
         }
         ,
         {
-          room:"",
+          room:"https://sv1.picz.in.th/images/2020/12/10/j5fADI.jpg",
         }
       ]
     }

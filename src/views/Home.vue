@@ -3,10 +3,10 @@
     <Head></Head>
     <!-- <Photo_slide></Photo_slide> -->
     <Search></Search>
-    <Recommened ></Recommened>
+    <Recommened id="homeR"></Recommened>
     <!-- <New></New> -->
     <Filter2 ></Filter2>
-    <About></About>
+    <About ></About>
     
     
     
@@ -48,15 +48,13 @@ export default {
         document.getElementById("Head-above").style = "margin-right: 2.0%; ";
 
 
-        
-        console.log("150");
+
       } else {
         
         document.getElementById("Head").style = "height: 100px; background: #ECD59F;";
         document.getElementById("Head-above").style = "margin-right: 2.5%;";
 
-        
-        console.log("100");
+
       }
     });
   }

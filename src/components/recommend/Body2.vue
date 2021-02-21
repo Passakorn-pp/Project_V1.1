@@ -2,7 +2,7 @@
   <div>
     <div class="container-filter-body">
       <div class="container-filter-body-head">
-        <h2 style="  line-height: 2;">ค้นหาตามใจชอบ</h2>
+        <h2 style="  line-height: 2;" >ค้นหาตามใจชอบ</h2>
 
       </div>
       <div class="container-filter-body-detail">
@@ -30,24 +30,9 @@
       <br>
 
     </div>
-    
-    <!-- <div class="body-recommend-tab">
-      <button class="body-recommend-tab-button" @click="tabs('all')">
-        ทั้งหมด
-      </button>
-      <button class="body-recommend-tab-button" @click="tabs('sell')">
-        ลดราคา
-      </button>
-    </div>
 
-    <div class="container-recommend-body2 tab" id="all">
-      
-    <div class="container-recommend-body2 tab" id="sell" style="display:none">
-
-    </div> -->
     
     <div class="body-recommend-tab">
-      
       <button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ทั้งหมด</button>
       <button v-on:click="activetab=0" v-bind:class="[ activetab === 0 ? 'active' : '' ]">แนะนำ</button>
       <button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]" style="width: 15%;">หอพักเงียบสงบ</button>
@@ -58,15 +43,40 @@
 
     <div class="content">
         <div v-if="activetab === 1" class="container-recommend-body2">
-            <div class="container-select">
+            <!-- <div class="container-select">
               <b-table
                 style="background: #f8f6e7;"
                 :fields="fields"
                 sort-icon-right
                 responsive="sm"
               ></b-table>
-            </div>
-            <div v-for="(user,index) in this.$store.getters.gethome" :key="index"  >
+            </div> -->
+            <!-- <div class="container-filter-sort">
+              <div class="filter-sort">
+                <h6>ราคา</h6>
+                <div style="float: left; margin-left: 5%; margin-top: 3%">
+                  <b-icon icon="caret-up" style="display: block;" variant="secondary"></b-icon>
+                  <b-icon icon="caret-down" style="display: block;" variant="secondary"></b-icon>
+                </div>
+              </div>
+              <div class="filter-sort">
+                <h6>ระยะทาง</h6>
+                <div style="float: left; margin-left: 5%; margin-top: 3%">
+                  <b-icon icon="caret-up" style="display: block;" variant="secondary"></b-icon>
+                  <b-icon icon="caret-down" style="display: block;" variant="secondary"></b-icon>
+                </div>
+                
+              </div>
+              <div class="filter-sort" >
+                <h6>rating</h6>
+                <div style="float: left; margin-left: 5%; margin-top: 3%">
+                  <b-icon icon="caret-up" style="display: block;" variant="secondary"></b-icon>
+                  <b-icon icon="caret-down" style="display: block;" variant="secondary"></b-icon>
+                </div>
+                
+              </div> -->
+            <!-- </div> -->
+            <div v-for="(user,index) in listitem()" :key="index"  >
               <div class="container-ui-recommend2">
                 <div >
                   <div class="container-in-ui-recommend2" @click="setview(user)">
@@ -75,7 +85,7 @@
                 </div>
                 
                 <div>
-                  <div class="container-in-ui-recommend2" style="border-right: 1px solid silver; width: 42%;" v-if="active_pic === 1" >
+                  <div class="container-in-ui-recommend2" style="border-right: 1px solid silver; width: 42%; height: 213px;" >
                     <div class="name-home2">
                       {{ user.name }}
                     </div>
@@ -87,13 +97,13 @@
                       ราคา {{user.room[1].price+" บาท"}}
                     </div>
                     <div class="name-home3">
-                      ระยะทางจากมหาลัย 300 เมตร
+                      ระยะทางจากมหาลัย {{user.distance}} เมตร
                     </div>
                     <div class="rating-recomend2 ">
-                      <b-form-rating v-model="value" readonly no-border variant="warning" style="background: none;"></b-form-rating>
+                      <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
                     </div>
                     
-                    <div style="padding-left: 15px; margin-top:-2%">  
+                    <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
                       <div v-if="user.wifi">
                         <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
                       </div>
@@ -116,24 +126,13 @@
                       </div>
                       
                     </div>
-                    <div class="container-pic-chart-body">
-                      <button @click="active_pic=2" > <img src="@/assets/chart-pie.png" style="height: 30px; width: 30px;"> </button>
-                    </div>
+
                     
                   </div>
                 </div>
-                <div class="container-in-ui-recommend2" v-if="active_pic === 2" >
-                  <Chart 
-                    :def="def"
-                    :data="data"
-                    class="pic-chart-body"
-                  ></Chart>
-                  <div class="container-pic-chart-body" style="transform: translateY(-55px);" >
-                      <button @click="active_pic=1" > <img src="@/assets/chart-pie.png" style="height: 30px; width: 30px;"> </button>
-                  </div>
-                </div>
+                
                 <div>
-                  <div class="container-in-ui-recommend2" @click="setview(user)" style="width: 25%;">
+                  <div class="container-in-ui-recommend2" @click="setview(user)" style="width: 25%; height: 213px;">
                     <div class="name-home2">
                       ขนาดห้อง
                     </div>
@@ -143,19 +142,20 @@
                         <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button> 
                         <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{user.room[index-1].free}}</h3> ห้อง</h6>
                       </div>
-                         
-                      
-                      
+
                     </div>
                   </div>
                 </div>
-                
+                <div style="float: left; width: 67%;">
+ 
+                  
+                </div>
               
               </div>
             </div>
           </div>
         </div>
-        <div v-if="activetab === 2" class="container-recommend-body2">
+        <div v-if="activetab === 2" class="container-recommend-body2" id="tab_b">
             
         </div>
         <div v-if="activetab === 3" class="container-recommend-body2">
@@ -171,20 +171,19 @@
             
         </div>
 
-
+  
     
     
   </div>
 </template>
 
 <script>
-import Chart from 'vue-chartless'
+
 export default {
-  components: {
-      Chart
-  },
+
   data() {
     return {
+      f_pice: true,
       fields: [
           { key: 'ราคา', sortable: true },
           { key: 'ระยะทาง', sortable: true },
@@ -201,9 +200,9 @@ export default {
           { label: 'Belgrade', value:'220' }
       ],
       active_pic:1,
-      activetab: 1,
+      activetab: Number(localStorage.getItem('indexfilter')),
       value: 3000,
-      selected: [], // Must be an array reference!
+      selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"], // Must be an array reference!
       optionsroom: [
         { text: 'แอร์', value: 'air' },
         { text: 'พัดลม', value: 'fan' },
@@ -287,15 +286,62 @@ export default {
     setview(value){
       this.$store.dispatch("addView",value);
       this.$router.push('/view');
-      
-    },
 
+    },
+    listitem(){
+      console.log(localStorage.getItem('indexfilter')+" :index");
+      var useitem = [];
+      var home = this.$store.getters.gethome;
+      var price = Number(this.value);
+      
+      for(var item in home){
+        
+        var a = Number(home[item].room[0].price);
+        if(home[item].selected.every(i => this.selected.includes(i)) == true ){
+          if(price >= a){
+            console.log(price+": value");
+            console.log( home[item].room[0].price+": home");
+            useitem.push(home[item]);
+          }
+          
+        }
+      }
+      return useitem;
+
+      
+    }
   }
 };
 </script>
 
 <style>
+.container-filter-sort{
+  width: 100%;
+  height: 50px;
+  background: #f8f6e7;
+  margin-bottom: 0.5%;
+  overflow: hidden;
+  border-bottom: 1px solid silver;
+}
+.filter-sort{
+  width: 33.3%;
+  text-align: left;
+  float: left;
+  overflow: hidden;
+  
+}
+.filter-sort h6{
+    margin: 5% 30%;
+    float: left;
+    font-weight: 700;
+    color: black;
+}
+.progress-faculty{
+  height: 5px;
+  width: 100%;
+}
 .ss{
+  
   width: 100%;
   margin-top: 2%;
   overflow: hidden;
@@ -307,7 +353,7 @@ export default {
   font-size: 8px;
   margin: auto;
   transform: translateY(-60px);
-  
+
 
 }
 .container-pic-chart-body{
@@ -315,6 +361,7 @@ export default {
   height: 50px;
   position: relative;
   left: 1%;
+
   transform: translateY(20px);
 }
 
@@ -394,7 +441,7 @@ export default {
   height: 100%;
   position: relative;
   left: 4%;
-  border: 1px solid silver;
+  border-top: 1px solid silver;
 }
 .container-ui-recommend2:hover {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
@@ -404,12 +451,12 @@ export default {
   height: 220px;
   
   border: 1px solid silver;
-  overflow: auto;
 
+  transition: 0.2s ease-in-out;
   cursor: pointer;
   background: #f8f6e7;
   margin: auto;
-  margin-bottom: 2%;
+  margin-top: 1%;
 }
 .container-in-ui-recommend2 {
   width: 33%;

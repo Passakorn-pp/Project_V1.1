@@ -30,7 +30,10 @@
     
     <div class="container-above" id="Head-above">
       <li class="li-head" id="Head-list">
-        <a href="#" class="text-above">เกี่ยวกับ</a>
+        <a href="/test" class="text-above">เทส</a>
+      </li>
+      <li class="li-head" id="Head-list">
+        <a href="#about" class="text-above">เกี่ยวกับ</a>
       </li>
       <li class="li-head" id="Head-list" v-if="this.$store.getters.getState==1">
         <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>

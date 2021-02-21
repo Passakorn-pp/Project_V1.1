@@ -7,7 +7,7 @@
       <h3 class="header-text" style="font-size: 50px;"><h1 style="display: inline-block; font-size: 100px;">ระยะทาง</h1>ใกล้มหาลัย</h3>
     </div>
     
-    <div class="container-Recommened" >
+    <div class="container-Recommened" id="axz">
         <div class="container-Recommened-slide-overflow">
          
           
@@ -67,7 +67,7 @@ export default {
           [
             {
               nameroom : "ห้องเล็ก",
-              price : "3000",
+              price : "2800",
               free : 4,
               img : "",
             },
@@ -90,6 +90,7 @@ export default {
           typeMen: true,
           typeWomen: true,
           comment: "",
+          selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักสนามจันทร์",
@@ -119,7 +120,8 @@ export default {
           air: true,
           fan: true,
           typeMen: true,
-          typeWomen: true
+          typeWomen: true,
+          selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักวีเจ",
@@ -130,7 +132,7 @@ export default {
           [
             {
               nameroom : "ห้องเล็ก",
-              price : "3000",
+              price : "2700",
               free : 6,
             },
             {
@@ -149,7 +151,8 @@ export default {
           air: true,
           fan: true,
           typeMen: true,
-          typeWomen: true
+          typeWomen: true,
+          selected: ["air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักน้ำไทย",
@@ -179,7 +182,8 @@ export default {
           air: true,
           fan: true,
           typeMen: true,
-          typeWomen: true
+          typeWomen: true,
+          selected: ["fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },     
       ]
     };
