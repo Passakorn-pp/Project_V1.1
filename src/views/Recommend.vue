@@ -8,6 +8,7 @@
       
       <!-- <Add></Add> -->
       <Sell></Sell>
+      
     </div>
     
   </div>
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-import Body2 from "@/components/recommend/Body2.vue";
+import Body2 from "@/components/recommend/Body2 copy.vue";
 import Header from "@/components/home/Head.vue";
 // import Add from "@/components/recommend/Add.vue";
 import Sell from "@/components/recommend/Sell.vue";

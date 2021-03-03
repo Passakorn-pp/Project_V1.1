@@ -2,17 +2,21 @@
   <div >
     
     <Header ></Header>
-    <div class="background">
+    <div class="background" >
+      
       <div style="transform: translateY(150px);">
         <div class="profile-tab">       
           <router-link to="/profile"><button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ข้อมูลส่วนตัว</button></router-link>
-          <router-link to="/profile/like"><button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ถูกใจ</button></router-link>         
+          <router-link to="/profile/like"><button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ถูกใจ</button></router-link>  
         </div>
         <div class="container-mainview" v-if="activetab === 1">
-          <Moregister></Moregister>
         </div>
-        <div class="container-mainview" v-if="activetab === 2">
+        <div class="container-mainview" >
+          <Like></Like>
         </div>
+      </div>
+      <div class="background2">
+
       </div>
     </div>
     
@@ -23,37 +27,46 @@
 
 <script>
 import Header from "@/components/home/Head.vue";
-import Moregister from "@/components/profile/Moregister.vue";
+import Like from "@/components/profile/Like.vue";
 import About from "@/components/home/About.vue";
 export default {
   components: {
     Header,
-    Moregister,
+    Like,
     About, 
   },
   data() {
     return {
-      activetab: 1,
+      activetab: 2,
     }
   },
 };
 </script>
 
 <style scoped>
+.background2{
+  background: #f8f6e7; 
+  min-width: 900px;
+  height: 150px;
+}
 .background{
   background: #f8f6e7; 
-  height: 700px;
   min-width: 900px;
+  position: relative;
+  height: max-content;
 }
 .container-mainview{
   border: 1px solid silver;
+  position: relative;
   width: 70%;
+  height: max-content;
+  max-height: 1000px;
   min-width: 900px;
   margin:auto;
   margin-bottom: 5%;
   background: white;
   transition: 0.5s ease-in;
- 
+  overflow: auto;
 }
 .profile-tab{
   width: 70%;
@@ -89,4 +102,5 @@ export default {
 .profile-tab button:focus{
   outline: none;
 }
+
 </style>

@@ -1,9 +1,9 @@
 <template>
     <div>
         <Header ></Header>
-        <div class="register2">
-            <div class="container-home-register2">
-                <Register></Register>
+        <div class="register3">
+            <div class="container-home-register3">
+                <RegisterDormitory></RegisterDormitory>
             </div>
         </div>
         <About ></About>
@@ -13,10 +13,10 @@
 <script>
 import About from "@/components/home/About.vue";
 import Header from "@/components/home/Head.vue";
-import Register from "@/components/register/Register.vue";
+import RegisterDormitory from "@/components/register/RegisterDormitory.vue";
 export default {
     components: {
-        Register,
+        RegisterDormitory,
         Header,
         About,
     },
@@ -35,25 +35,23 @@ export default {
 </script>
 
 <style>
-.container-home-register2 {
+.container-home-register3 {
   width: 60%;
-  height: 450px;
+  height: 800px;
   min-width: 800px;
-  border-radius: 15px;
   border: 1px solid silver;
   padding: 5%;
   margin: auto;
   position: relative;
   transform:  translateY(120px);
-  overflow: hidden;
   /* background: rgb(235, 235, 233); */
   /* background: #fceecd; */
-
+  overflow: auto;
   background: white;
 }
-.register2 {
+.register3 {
   /* background: #fceecd; */
   background: rgb(235, 235, 233);
-  height: 600px;
+  height: 1000px;
 }
 </style>

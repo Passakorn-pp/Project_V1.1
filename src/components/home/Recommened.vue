@@ -13,7 +13,7 @@
           
           <flickity ref="flickity" :options="flickityOptions" >
             <br>
-              <div v-for="(s,i) in slides" :key="i" class="container-Recommened-card" @click="setview(s)">
+              <div v-for="(s,i) in recommend" :key="i" class="container-Recommened-card" @click="setview(s)">
                 <img :src="s.img" class="container-Recommened-card-img" >
                 <div class="container-Recommened-card-text">
                   <h6 style="float: left;">{{s.name}} </h6>
@@ -21,7 +21,7 @@
                     <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%" class="rating-recommend"></b-form-rating>      
                   </div>
                   
-                  <h6 style="line-height: 0.5 ;">ราคา {{s.room[0].price}}-{{s.room[1].price}} บาท</h6>
+                  <h6 style="line-height: 0.5 ;">ราคา {{ s.room && s.room.length > 0 ? s.room[0].price : '' }}-{{s.room['1'].price}} บาท</h6>
                   <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย{{s.distance}} เมตร</h6>
                 </div> 
               </div>
@@ -34,7 +34,8 @@
 </template>
 
 <script>
-
+import Axios from "axios";
+let mongo_api = "http://127.0.0.1:8000/api/getuser";
 // import { slider, slideritem } from 'vue-concise-slider';
 import Flickity from 'vue-flickity';
 export default {
@@ -55,7 +56,9 @@ export default {
         
         // any options from Flickity can be used
       },
-      students:[],
+      recommend:[
+        {}
+      ],
       
       slides: [
         {
@@ -84,13 +87,9 @@ export default {
           address:"",
           star: 4,
           distance: 2000,
-          wifi: true,
-          air: true,
-          fan: true,
-          typeMen: true,
-          typeWomen: true,
+
           comment: "",
-          selected: ["table","refrigerator","tv","woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักสนามจันทร์",
@@ -116,12 +115,7 @@ export default {
           address:"",
           star: 5,
           distance: 3000,
-          wifi: true,
-          air: true,
-          fan: true,
-          typeMen: true,
-          typeWomen: true,
-          selected: ["table","refrigerator","tv","woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักวีเจ",
@@ -147,12 +141,7 @@ export default {
           address:"",
           star: 5,
           distance: 1000,
-          wifi: true,
-          air: true,
-          fan: true,
-          typeMen: true,
-          typeWomen: true,
-          selected: ["table","refrigerator","tv","woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["woman","man","wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },
         {
           name: "หอพักน้ำไทย",
@@ -178,12 +167,7 @@ export default {
           address:"",
           star: 4,
           distance: 500,
-          wifi: true,
-          air: true,
-          fan: true,
-          typeMen: true,
-          typeWomen: true,
-          selected: ["table","refrigerator","tv","woman","man","wifi","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+          selected: ["woman","man","wifi","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
         },     
       ]
     };
@@ -193,6 +177,13 @@ export default {
   //   this.slides = await response.json();
     
   // },
+  async created(){
+    await Axios.get(mongo_api)
+      .then(res => {
+        this.recommend = res.data
+      })
+      .catch(err => alert(err));
+  },
   methods: {
     next() {
       this.$refs.flickity.next();

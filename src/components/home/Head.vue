@@ -30,26 +30,40 @@
     <!-- </div> -->
     
     <div class="container-above" id="Head-above">
-      <li class="li-head">
 
-        <router-link to="/register"><button class="button-login">
-          <img :src="img_user"  class="container-login-img">
-          {{user}}
-        </button></router-link >
+      <li class="li-head" id="manu-mini">
+        <b-dropdown right  variant="light">
+          <template #button-content>
+            <b-icon icon="list" scale="2"> </b-icon> <span style="margin-left:10px;">Manu</span>
+          </template>
+          <b-dropdown-item-button><router-link to="/test">เทส</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="#about">เกี่ยวกับ</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="/profile" v-show="check">ข้อมูลส่วนตัว</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="/profile/like" v-show="check">ถูกใจ</router-link ></b-dropdown-item-button>
+        </b-dropdown>
+      </li>
+      <li class="li-head" >
+          <router-link to="/login"><button class="button-login">
+            <img :src="img_user"  class="container-login-img">
+            {{user}}
+          </button></router-link >
+      </li>
+      <div id="manu">
         
-      </li>
-      <li class="li-head" id="Head-list">
-        <a href="/test" class="text-above">เทส</a>
-      </li>
-      <li class="li-head" id="Head-list">
-        <a href="#about" class="text-above">เกี่ยวกับ</a>
-      </li>
-      <li class="li-head" id="Head-list" v-if="state==1">
-        <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
-      </li>
-      <li class="li-head" id="Head-list" v-if="state==1">
-        <a href="/profile" class="text-above" v-show="check">ถูกใจ</a>
-      </li>
+        <li class="li-head" id="Head-list" >
+          <a href="/test" class="text-above">เทส</a>
+        </li>
+        <li class="li-head" id="Head-list">
+          <a href="#about" class="text-above">เกี่ยวกับ</a>
+        </li>
+        <li class="li-head" id="Head-list" v-if="state==1">
+          <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
+        </li>
+        <li class="li-head" id="Head-list" v-if="state==1">
+          <a href="/profile/like" class="text-above" v-show="check">ถูกใจ</a>
+        </li>
+      </div>
+      
       
     </div>
   </div>
@@ -85,11 +99,15 @@ export default {
 </script>
 
 <style>
+#manu-mini{
+  display: none;
+}
 .button-login{
-  width: 150px;
+  width: 100px;
   border: none;
-  border: 1px solid silver;
-  border-radius: 3px;
+  background: white;
+  height: 40px;
+  border-radius: 5px;
 }
 .img-logo-head {
   
@@ -120,7 +138,7 @@ a:any-link {
   color: black;
 }
 a:hover {
-  color:white;
+  color:tomato;
   text-decoration: none;
 }
 .container {
@@ -184,5 +202,12 @@ a:hover {
   border: 1px solid silver;
   border-radius: 15px;
 }
-
+@media only screen and (max-width: 1150px){
+  #manu-mini{
+    display: block;
+  }
+  #manu{
+    display: none;
+  }  
+}
 </style>

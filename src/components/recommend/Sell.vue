@@ -4,7 +4,7 @@
           <div class="cotainer-sell-room-head">
               <h3>ลดราคา</h3>
           </div>
-          <div v-for="(room,index) in this.$store.getters.gethome" :key="index">
+          <div v-for="(room,index) in this.listitems" :key="index">
               <div class="cotainer-sell-room">
                   <div class="cotainer-sell-room-left">
                       <img class="img-sell-room" :src="room.img"/>
@@ -21,8 +21,21 @@
 </template>
 
 <script>
+import Axios from "axios";
+let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default {
-    
+    data(){
+        return{
+            listitems : []
+        }
+    },
+    async created(){
+      await Axios.get(mongo_api)
+        .then(res => {
+          this.listitems = res.data
+        })
+        .catch(err => alert(err));
+    },
 }
 </script>
 
@@ -42,25 +55,24 @@ export default {
     height: 100px;
 }
 .container-sell{
-    height: 100%;
+    height: max-content;
     width: 18%;
     background: #f8f6e7;
     z-index: 99;
     position: absolute;
     right: 2%;
     top: 25%;
-    overflow: auto;
-
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
 .cotainer-sell-room{
-    height: 100%;
+    height: 100px;
     width: 90%;
     overflow: hidden;
     background: white;
     margin: auto;
     margin-top: 2%;
+    margin-bottom: 2%;
     
 }
 .cotainer-sell-room-left{

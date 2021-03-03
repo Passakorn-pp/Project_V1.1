@@ -1,17 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
+import Axios from "axios";
 Vue.use(Vuex);
 
+let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default new Vuex.Store({
   state: {
+    foods: localStorage.getItem('datatest')||[],
     user: localStorage.getItem('user') || 0,
     homeclick: localStorage.getItem('homeclick') || null,
     homeall: localStorage.getItem('homeall') || null,
     state: localStorage.getItem('state')||false
   },
   getters:{
+    foods: state => state.foods,
     getState(state){
+      
       return state.state
     },
     getError(state){
@@ -33,6 +37,11 @@ export default new Vuex.Store({
     
   },
   mutations: {
+    fetchFood(state, { res }) {
+      state.foods = res.data;
+      localStorage.setItem('datatest',state.foods)
+      console.log(state.foods);
+    },
     SetView(state,value){
       state.homeclick = value,
       localStorage.setItem('homeclick',state.homeclick)
@@ -67,6 +76,11 @@ export default new Vuex.Store({
 
   },
   actions: {
+    async fetchFood({ commit }) {
+      await Axios.get(mongo_api)
+        .then(res => commit("fetchFood", { res }))
+        .catch(err => alert(err));
+    },
     addView(context,value){
       context.commit('SetView',value)   
     },

@@ -1,36 +1,39 @@
 <template>
-  <div class="container-register-login">
-    <h2>ลงชื่อเข้าใช้</h2>
-
-    <div @click="setsize" class="container-register-login-line" id="login-line">
-      <img
-        src="@/assets/LINE_SOCIAL_Basic.png"
-        class="img-login-line"
-        id="img-login-line"
-      />
-      <span class="text-login-line" v-show="check">ลงชื่อเข้าใช้ด้วยไลน์</span>
-
-      <div
-        class="container-from-login-line"
-        v-show="check == false"
-        id="form-login-line"
-      >
-        <input
-          type="email"
-          v-model="form.email"
-          placeholder="อีเมลของคุณ"
-          class="container-login-line-email"
+  <div>
+    <div v-if="typeUser == null || typeUser == 1">
+      <h2>เข้าสู่ระบบด้วย LINE</h2>
+      <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto"></div>
+      <br>
+      <br>
+      <div class="container-register-login-line" @click="show_registesr">
+        <img
+          src="@/assets/LINE_SOCIAL_Basic.png"
+          class="img-login-line"
+          id="img-login-line"
         />
-        <input
-          type="password"
-          v-model="form.password"
-          placeholder="รหัสผ่านของคุณ"
-          class="container-login-line-password"
-        />
-        <br />
-        <button class="container-login-line-submit">ยืนยัน</button>
+        <span class="text-login-line">Login with LINE</span>
+      </div>
+      <div style=" width:80%; hight: 100px;  margin: auto; margin-top:5%">
+        <h4 style="display: inline-block;">ลงทะเบียนเป็นเจ้าของหอพัก</h4>
+        <a href="/Login" @click="type_register()"><h4 style="display: inline-block; margin-left:2%;  color: #e4c275;">ลงทะเบียนที่นี้</h4></a>
       </div>
     </div>
+
+    <div v-else>
+      <h2>ลงทะเบียนเป็นเจ้าของหอพักด้วย LINE</h2>
+      <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto"></div>
+      <br>
+      <br>
+      <div class="container-register-login-line" @click="show_registesr">
+        <img
+          src="@/assets/LINE_SOCIAL_Basic.png"
+          class="img-login-line"
+          id="img-login-line"
+        />
+        <span class="text-login-line">Login with LINE</span>
+      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -38,44 +41,95 @@
 export default {
   data() {
     return {
-      check: true,
-      form: {
-        email: "",
-        password: ""
-      }
-    };
+      typeUser: localStorage.getItem('typeUser')||null
+    }
   },
   methods: {
-    setsize() {
-      this.check = false;
-
-      document.getElementById("login-line").style = "height: 400px; ";
-      document.getElementById("img-login-line").style = " left: 45%; ";
-      document.getElementById("form-login-line").style = "  ";
+    async type_register(){
+      await localStorage.setItem('typeUser',2)
     },
-    back_to2() {
-      this.check = true;
-      document.getElementById("login-line").style = "height: 100px; ";
-      document.getElementById("img-login-line").style = " left: 5%; ";
-    }
+    show_registesr() {
+      const liff = this.$liff // เรียก property ของ LIFF
+      liff.init({
+        liffId: '1655683528-q1XK2z5a'
+      }).then(() => {
+        console.log('LIFF initialize finished')
+        // get user profile
+
+        if (liff.isLoggedIn()) {
+          liff.getProfile()
+          .then(profile => {
+            localStorage.setItem('state',1)
+            console.log(JSON.stringify(profile))
+            this.userProfile = profile
+           
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+        } else {
+          console.log('LIFF is not logged in')
+          liff.login() // login
+          
+        }
+      }).catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+      // document.getElementById("container-register-login-form").style =
+      //   "left: 50%; ";
+    },
+  },
+  beforeDestroy(){
+    localStorage.setItem('typeUser',1)
   }
 };
 </script>
 
-<style>
+<style scoped>
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  background: white;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: khaki;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
 .container-register-login {
   width: 80%;
   height: 100%;
   margin: auto;
 }
 .container-register-login-line {
-  width: 80%;
+  width: 70%;
   height: 100px;
   margin: auto;
-  margin-top: 10%;
   border-radius: 15px;
-  border: 1px solid silver;
+  border: 1px solid #3e8e41;
   transition: all 0.3s ease-in;
+  background: white;
+  cursor: pointer;
+}
+.container-register-login-line:hover {
+  background:#3e8e41;
+  color: white;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
 }
 .img-login-line {
   height: 50px;
@@ -90,58 +144,20 @@ export default {
 .text-login-line {
   position: relative;
   line-height: 4;
-  margin-left: -10%;
+  margin: auto;
   font-size: 24px;
   font-weight: 500;
 }
-.container-from-login-line {
-  max-width: 80%;
-
-  position: relative;
-  margin: auto;
-  margin-top: 20%;
-  height: 100px;
-
-  transition: all 0.3s ease-in;
-}
-.container-login-line-email {
-  position: relative;
-  margin-top: 3%;
-  border-radius: 15px;
-  height: 50px;
-  width: 70%;
-  border: 1px solid silver;
-}
-.container-login-line-password {
-  position: relative;
-  margin-top: 4%;
-  border-radius: 15px;
-  height: 50px;
-  width: 70%;
-  border: 1px solid silver;
-}
-.container-login-line-submit {
-  position: relative;
-  margin-top: 4%;
-  border-radius: 15px;
-  height: 50px;
-  width: 20%;
-  border: 1px solid silver;
-  text-decoration: none;
-}
-.container-login-line-submit:focus {
-  outline: none;
-}
-.container-login-line-submit:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-.arrow-left-register-login-line {
-  height: 40px;
-  width: 40px;
+.text-head-register {
+  width: 80%;
+  padding: 1%;
   float: left;
-  cursor: pointer;
-  color: yellowgreen;
+  background: #e4be65;
+  color: black;
+
+  margin-left: -10.5%;
+
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 </style>
