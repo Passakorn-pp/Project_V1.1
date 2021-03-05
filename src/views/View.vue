@@ -3,14 +3,14 @@
   <Header ></Header>
   <div class="container-mainview" id="c-main">
     
-    <Head></Head>
-    <Photo></Photo>
+    <Head :room="this.room"></Head>
+    <Photo :room="this.room"></Photo>
 
-    <Table></Table>
+    <Table :room="this.room"></Table>
 
-    <Body></Body>
+    <Body :room="this.room"></Body>
 
-    <Comment></Comment>
+    <Comment :room="this.room"></Comment>
 
   </div >
   
@@ -33,12 +33,14 @@ import Header from "@/components/home/Head.vue";
 import Comment from "@/components/view/Comment.vue";
 // import RecommenTap from '../components/view/RecommenTap.vue';
 import About from "@/components/home/About.vue";
-
+import Axios from "axios";
+let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default {
   data() {
     return {
       name: "palm",
-      check: true
+      check: true,
+      room: null
     };
   },
   components: {
@@ -51,24 +53,38 @@ export default {
     // RecommenTap,
     About,
   },
-  methods:{
-    tap(c){
-      this.check = !this.check
-      console.log(this.check)
-      if(c==false){
-        document.getElementById("c-main").style = "transform: translateX(-400px) ",
-        document.getElementById("c-tap").style = "transform: translateX(-50px) ",
-        document.getElementById("button-tap").style = "transform: translateX(-570px) "
-        document.getElementById("button-tap2").style = "transform: translateX(-570px); top:50%"
-      }
-      else{
-        document.getElementById("c-main").style = "transform: translateX(0px) ",
-        document.getElementById("c-tap").style = "transform: translateX(700px) ",
-        document.getElementById("button-tap").style = "transform: translateX(0px); transform: rotate(90deg); "
-        document.getElementById("button-tap2").style = "transform: translateX(0px); top:55%; transform: rotate(90deg);"
-      }
+  // methods:{
+  //   tap(c){
+  //     this.check = !this.check
+  //     console.log(this.check)
+  //     if(c==false){
+  //       document.getElementById("c-main").style = "transform: translateX(-400px) ",
+  //       document.getElementById("c-tap").style = "transform: translateX(-50px) ",
+  //       document.getElementById("button-tap").style = "transform: translateX(-570px) "
+  //       document.getElementById("button-tap2").style = "transform: translateX(-570px); top:50%"
+  //     }
+  //     else{
+  //       document.getElementById("c-main").style = "transform: translateX(0px) ",
+  //       document.getElementById("c-tap").style = "transform: translateX(700px) ",
+  //       document.getElementById("button-tap").style = "transform: translateX(0px); transform: rotate(90deg); "
+  //       document.getElementById("button-tap2").style = "transform: translateX(0px); top:55%; transform: rotate(90deg);"
+  //     }
       
-    }
+  //   }
+  // },
+  // methods:{
+  //   async fetchFood() {
+  //     await this.$store.dispatch("fetchFood");
+
+  //   },
+  // },
+  async created(){
+    await Axios.post(mongo_api,{"name" : this.$route.params.Name})
+        .then(res => {
+          this.room = res.data[0]
+          console.log(this.room);
+        })
+        .catch(err => alert(err));
   },
   mounted() {
     window.scrollTo(0, 0);
@@ -82,10 +98,7 @@ export default {
       }
     });
   },
-  beforeDestroy(){
-    this.$store.dispatch("addView",this.$store.getters.getView_home);
 
-  }
 };
 </script>
 

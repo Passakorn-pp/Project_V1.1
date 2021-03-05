@@ -1,10 +1,10 @@
 <template>
   <div class="cotainer-view-head" id="head-view">
     <div class="cotainer-view-img-head-view">
-      <img :src="this.$store.getters.getView_home.img" class="img-head-view" >
+      <img :src="room.img" class="img-head-view" >
     </div>
     <div class="cotainer-view-detail-head-view">
-      <h1 class="text-head-view">{{this.$store.getters.getView_home.name}}</h1>
+      <h1 class="text-head-view"> {{room.name}}</h1>
       <div style="width: 30%; float: right; margin-top:2%" > 
       <span style="float: right; width: 70%; text-align :left;">{{ status }}</span>
         <b-form-checkbox
@@ -19,11 +19,11 @@
       <br>
       <br>
       <div style="width: 40%; float: left; text-align: left; ">
-        <h4 >{{"ราคา "+this.$store.getters.getView_home.room[0].price+"-"+this.$store.getters.getView_home.room[1].price+" บาท"}}</h4>
+        <h4 >{{"ราคา "+room.room[0].price+"-"+room.room[1].price+" บาท"}}</h4>
       </div>
       
-      <div style="width: 50%; float: right; margin-right:2%">
-        <div v-if="this.$store.getters.getView_home.wifi" >
+      <!-- <div style="width: 50%; float: right; margin-right:2%">
+        <div v-if="room.wifi" >
           <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: right; margin-left:15px">
           
         </div >
@@ -46,7 +46,7 @@
         </div>
         
         
-      </div>
+      </div> -->
       <br>
       <br>
       <div style="width: 20%; float: left; margin-top:-3%; margin-left:-2%" >
@@ -62,9 +62,9 @@
       <br>
       <div style="width: 100%; text-align: left; margin-top:-1.5%">
         <h5 style="width: 17%; float: left; ">ติดต่อหอพัก </h5>
-        <h6 style="width: 83%; float: left; margin-top:0.5%; "> <img src="@/assets/phone.png" style="width:20px; hight:20px"> {{this.$store.getters.getView_home.call}} </h6>
-        <h6 style="width: 83%; float: left; margin-top:0.5%; margin-left:17%; "> <img src="@/assets/line.png" style="width:20px; hight:20px"> {{this.$store.getters.getView_home.line}} </h6>
-        <h6 style="width: 83%; float: left; margin-top:0.5%; margin-left:17%;"> <img src="@/assets/facebook.png" style="width:20px; hight:20px"> {{this.$store.getters.getView_home.face}} </h6>
+        <h6 style="width: 83%; float: left; margin-top:0.5%; "> <img src="@/assets/phone.png" style="width:20px; hight:20px"> {{room.call}} </h6>
+        <h6 style="width: 83%; float: left; margin-top:0.5%; margin-left:17%; "> <img src="@/assets/line.png" style="width:20px; hight:20px"> {{room.line}} </h6>
+        <h6 style="width: 83%; float: left; margin-top:0.5%; margin-left:17%;"> <img src="@/assets/facebook.png" style="width:20px; hight:20px"> {{room.face}} </h6>
       </div>
     </div>
   
@@ -76,6 +76,9 @@
 
 <script>
 export default {
+  props: [
+    'room'
+  ],
   data() {
     return {
       status: 'เพิ่มในรายการที่สนใจ',

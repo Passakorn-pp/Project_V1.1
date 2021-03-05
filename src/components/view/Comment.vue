@@ -53,6 +53,9 @@
 
 <script>
 export default {
+  props: [
+    'room'
+  ],
   data() {
     return {
       text: "",

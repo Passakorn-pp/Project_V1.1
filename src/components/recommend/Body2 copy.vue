@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <div style="width:100%">
       <!-- <button style="float: left; transform: translateX(50px); " id="b_main_recommend">
         <img src="@/assets/filter.png" style="height: 25px; width:25px">
@@ -300,8 +301,8 @@ components: {
   },
   methods: {
     setview(value){
-      this.$store.dispatch("addView",value);
-      this.$router.push('/view');
+      // this.$store.dispatch("addView",value);
+      this.$router.push({name:'view',params:{Name:value.name}});
 
     },
 
@@ -353,6 +354,11 @@ components: {
 </script>
 
 <style>
+.loading{
+  height: 500px;
+  width: 500px;
+  background: forestgreen;
+}
 .container-main-recommend{
   width: 100%;
   position: absolute;

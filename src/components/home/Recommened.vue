@@ -193,8 +193,8 @@ export default {
       this.$refs.flickity.previous();
     },
     setview(value){
-      this.$store.dispatch("addView",value);
-      this.$router.push('/view');
+      // this.$store.dispatch("addView",value);
+      this.$router.push({name:'view',params:{Name:value.name}});
       
     },
     check(index) {
@@ -206,7 +206,7 @@ export default {
   },
   beforeDestroy(){
     
-    this.$store.dispatch("addhome",this.slides);
+    // this.$store.dispatch("addhome",this.slides);
   }
 };
 </script>
@@ -214,7 +214,7 @@ export default {
 <style>
 
 .container-Recommened-slide-overflow{
-
+  
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -252,7 +252,9 @@ export default {
   background: white;
   float: left;
   
+
 }
+
 .row:after {
   content: "";
   display: table;

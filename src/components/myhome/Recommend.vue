@@ -51,9 +51,12 @@ export default {
   components: {
     Flickity
   },
+  props: [
+    'room'
+  ],
   data() {
     return {
-      home :  this.$store.getters.getView_home,
+      home :  this.room,
       flickityOptions: {
         pageDots: false,
         wrapAround: false,
@@ -146,7 +149,7 @@ export default {
   
   width:75%; 
   padding:1%;
-  text-align: left;
+  text-align: center;
   background: #ECD59F;
   margin:auto;
   border-top-left-radius: 15px;

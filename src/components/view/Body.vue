@@ -4,7 +4,7 @@
       <h4>ขนาดห้องพัก</h4>
     </div>
     <div style="border: 1px solid silver; max-width: 90%; margin:auto; background: #f8f6e7;">
-      <div v-for="(rooms,index) in this.$store.getters.getView_home.room.length" :key="index">
+      <div v-for="(rooms,index) in room.room" :key="index">
         <div class="contianer-room">
           <div class="left" v-if="index==1">
             <img src="https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg" class="img-room" />
@@ -15,9 +15,9 @@
             
           </div>
           <div class="center">
-            <div class="view-center-text" >{{nameroom[index].nameroom}}</div>
-            <div class="text-detil-room">ราคา {{nameroom[index].price}}</div>
-            <div style="widht:100%; margin-left:5%; margin-top:1%">
+            <div class="view-center-text" >{{rooms.nameroom}}</div>
+            <div class="text-detil-room">ราคา {{rooms.price}}</div>
+            <!-- <div style="widht:100%; margin-left:5%; margin-top:1%">
               <div v-if="home.wifi" >
                 <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:15px">
                 
@@ -39,7 +39,7 @@
                 <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:15px">
                 
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="right">
@@ -89,11 +89,12 @@
 
 <script>
 export default {
+  props: [
+    'room'
+  ],
   data() {
     return {
-      nameroom : this.$store.getters.getView_home.room, 
-      price : null,
-      home :  this.$store.getters.getView_home
+
     }
   },
   

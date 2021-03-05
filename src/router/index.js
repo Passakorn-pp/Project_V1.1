@@ -29,7 +29,7 @@ const routes = [
     component: Recommend
   },
   {
-    path: "/view",
+    path: "/view/:Name",
     name: "view",
     component: View
   },

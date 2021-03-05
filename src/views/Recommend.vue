@@ -22,6 +22,10 @@ import Header from "@/components/home/Head.vue";
 import Sell from "@/components/recommend/Sell.vue";
 
 export default {
+  data() {
+    return{
+    };
+  },
   components: {
     Body2,
     Header,
@@ -39,6 +43,7 @@ export default {
 
       }
     });
+
   },
   
 };
@@ -46,7 +51,4 @@ export default {
 
 <style scoped>
 
-.container-main-recommend{
-  
-}
 </style>

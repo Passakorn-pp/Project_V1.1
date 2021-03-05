@@ -9,6 +9,7 @@
             list="my-list-id"
             class="container-home-search-input"
             placeholder="สถานที่"
+            v-model="selec_place"
           ></b-form-input>
           <datalist id="my-list-id">
             <option v-for="(size, index) in place" :key="index">{{
@@ -17,9 +18,9 @@
           </datalist>
         
           <b-button
-            type="submit"
             variant="warning"
             class="container-home-search-submit"
+            @click="submit()"
             >Submit</b-button
           >
         </b-form>
@@ -30,61 +31,38 @@
 </template>
 
 <script>
-// import Filter2 from "@/components/home/Filter2.vue";
+import Axios from "axios";
+let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default {
   data() {
     return {
-      form: {
-        name_place: "",
-        date: "",
-        checked: [],
-        radio: null,
-        selected: "A"
-      },
-
-      options_radio: [
-        { text: "รายวัน", radio: "รายวัน" },
-        { text: "รายปี", radio: "รายปี" }
-      ],
-      options_select: [
-        { item: "A", name: "ห้องเล็ก" },
-        { item: "B", name: "ห้องใหญ่" }
-      ],
-      place: [
-        { name: "กรุงเทพ", active: true },
-        { name: "ดอนเมือง", active: true },
-        { name: "นครปฐม", active: true },
-        { name: "ราชบุรี", active: true },
-        { name: "ร้อยเอ็ด", active: true },
-        { name: "เพรชบุรี", active: true },
-        { name: "เลย", active: true },
-        { name: "เชียงใหม่", active: true }
-      ]
+      place: null,
+      selec_place : null
     };
   },
-  components:{
-        // Filter2,
+  async created(){
+    await Axios.get(mongo_api)
+      .then(res => {
+        this.place = res.data
+      })
+      .catch(err => alert(err));
   },
-  computed: {
-    state() {
-      return Boolean(this.radio);
-    }
-  },
-  methods: {
-    openCity(evt, cityName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("container-home-search");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+  methods:{
+    submit(){
+      var check = false;
+      for(var i in this.place){
+        if(this.selec_place == this.place[i].name){
+          check = true;
+          this.$router.push({name:'view',params:{Name:this.selec_place}});
+        }
       }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      if(check == false){
+        alert("ไม่มีข้อมูลหอพักในระบบ")
       }
-      document.getElementById(cityName).style.display = "block";
-      tablinks[evt].className += " active";
+      
     }
   }
+  
 };
 </script>
 <style>

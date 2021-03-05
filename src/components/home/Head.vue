@@ -1,15 +1,15 @@
 <template>
   <div class="container" id="Head">
     <div class="container-logo">
-      <router-link to="/" class="logo-head" >
+      <a href="/" class="logo-head" >
         <img src="@/assets/logo-1.1.png" alt="world" id="Head-logo" class="img-logo-head" />
-      </router-link>
+      </a>
     </div>
-    <div class="container-login"  id="Head-login" v-if="!this.$store.getters.getView_use" style="margin-top: 2%;">
+    <!-- <div class="container-login"  id="Head-login" v-if="!this.$store.getters.getView_use" style="margin-top: 2%;">
       <router-link to="/register"
         ><b-avatar icon="people-fill" style="cursor: pointer;"></b-avatar
       ></router-link>
-    </div>
+    </div> -->
     
     <!-- <b-dropdown size="lg"  variant="link" toggle-class="text-decoration-none" no-caret class="container-login" v-else>
       <template #button-content>
@@ -38,15 +38,28 @@
           </template>
           <b-dropdown-item-button><router-link to="/test">เทส</router-link ></b-dropdown-item-button>
           <b-dropdown-item-button><router-link to="#about">เกี่ยวกับ</router-link ></b-dropdown-item-button>
-          <b-dropdown-item-button><router-link to="/profile" v-show="check">ข้อมูลส่วนตัว</router-link ></b-dropdown-item-button>
-          <b-dropdown-item-button><router-link to="/profile/like" v-show="check">ถูกใจ</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="/profile" v-if="check">ข้อมูลส่วนตัว</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="/profile/like" v-if="check">ถูกใจ</router-link ></b-dropdown-item-button>
         </b-dropdown>
       </li>
       <li class="li-head" >
-          <router-link to="/login"><button class="button-login">
-            <img :src="img_user"  class="container-login-img">
-            {{user}}
-          </button></router-link >
+          <div v-if="this.check" >
+            <b-dropdown right  variant="light">
+              <template #button-content>
+                <div style="widht:100px; display: inline-block;">
+                  <img :src="img_user"  class="container-login-img">
+                  <span style="margin-right:10px; line-height: 1.6em;">{{user}}</span>
+                </div>
+                  
+              </template>
+              <b-dropdown-item-button @click="Logout()">Logout</b-dropdown-item-button>
+            </b-dropdown>
+          </div>
+          <div v-else>
+            <router-link to="/login">
+              <b-avatar icon="people-fill" style="cursor: pointer;"></b-avatar>
+            </router-link >
+          </div>
       </li>
       <div id="manu">
         
@@ -56,11 +69,11 @@
         <li class="li-head" id="Head-list">
           <a href="#about" class="text-above">เกี่ยวกับ</a>
         </li>
-        <li class="li-head" id="Head-list" v-if="state==1">
-          <a href="/profile" class="text-above" v-show="check">ข้อมูลส่วนตัว</a>
+        <li class="li-head" id="Head-list" >
+          <a href="/profile" class="text-above" v-if="check">ข้อมูลส่วนตัว</a>
         </li>
-        <li class="li-head" id="Head-list" v-if="state==1">
-          <a href="/profile/like" class="text-above" v-show="check">ถูกใจ</a>
+        <li class="li-head" id="Head-list" >
+          <a href="/profile/like" class="text-above" v-if="check">ถูกใจ</a>
         </li>
       </div>
       
@@ -76,8 +89,8 @@ export default {
     return {
       check: true,
       container: true,
-      img_user : localStorage.getItem('img_user'),
-      user : localStorage.getItem('user'),
+      img_user : null,
+      user : null,
       state : localStorage.getItem('state')
     };
   },
@@ -92,8 +105,45 @@ export default {
     myhor(){
       this.$router.push('/myhor');
     },
+    Logout(){
+      const liff = this.$liff
+      this.check = false
+      liff.logout();
+    }
 
   },
+  created(){
+    const liff = this.$liff // เรียก property ของ LIFF
+    this.check = false
+    liff.init({
+      liffId: '1655683528-q1XK2z5a'
+    }).then(() => {
+      console.log('LIFF initialize finished')
+      // get user profile
+
+      if (liff.isLoggedIn()) {
+        liff.getProfile()      
+        .then(profile => {
+          console.log(JSON.stringify(profile) +" :profile")
+          this.userProfile = profile
+          console.log(this.userProfile['userId'] +": userid");
+          const token = liff.getAccessToken()
+          console.log(token +" :token");
+          this.check = true;
+          this.user =  this.userProfile['displayName']
+          this.img_user = this.userProfile['pictureUrl']
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+
+        
+        
+      }
+    }).catch((err) => {
+      console.error('LIFF initialize error', err)
+    })
+  }
 
 };
 </script>
@@ -101,13 +151,6 @@ export default {
 <style>
 #manu-mini{
   display: none;
-}
-.button-login{
-  width: 100px;
-  border: none;
-  background: white;
-  height: 40px;
-  border-radius: 5px;
 }
 .img-logo-head {
   
@@ -199,8 +242,8 @@ a:hover {
   width: 30px;
   cursor: pointer;
   float: right;
-  border: 1px solid silver;
   border-radius: 15px;
+  margin-right: 5px;
 }
 @media only screen and (max-width: 1150px){
   #manu-mini{

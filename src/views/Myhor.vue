@@ -17,20 +17,20 @@
             <button v-on:click="activetab=3" v-bind:class="[ activetab === 3 ? 'active' : '' ]" style="width:15%">การเข้าชมหอพัก</button>
         </div>
         <div class="container-mainview" v-if="activetab === 1">
-            <Head></Head>
-            <Photo></Photo>
+            <Head :room="this.room"></Head>
+            <Photo :room="this.room"></Photo>
 
-            <Table></Table>
+            <Table :room="this.room"></Table>
 
-            <Body></Body>
+            <Body :room="this.room"></Body>
 
-            <Comment></Comment> 
+            <Comment :room="this.room"></Comment>
         </div>
         <div class="container-mainview" v-if="activetab === 2">
-            <Mohor></Mohor>
+            <Mohor :room="this.room"></Mohor>
         </div>
         <div class="container-mainview" v-if="activetab === 3">
-            <Recommend></Recommend>
+            <Recommend :room="this.room"></Recommend>
         </div>
       </div>
       <br>
@@ -53,6 +53,8 @@ import Header from "@/components/home/Head.vue";
 import Mohor from "@/components/myhome/Mohor.vue";
 import Recommend from "@/components/myhome/Recommend.vue";
 import About from "@/components/home/About.vue";
+import Axios from "axios";
+let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default {
     components: {
     Photo,
@@ -65,12 +67,21 @@ export default {
     About,
     Recommend,
   },
-    data() {
-        return {
-            activetab: 1,
-            
-        }
-    },
+  data() {
+      return {
+          activetab: 1,
+          room:null
+      }
+  },
+  async created(){
+    await Axios.post(mongo_api,{"name" : "หอพักอนงค์"})
+        .then(res => {
+          this.room = res.data[0]
+          console.log(this.room);
+        })
+        .catch(err => alert(err));
+  },
+
 }
 </script>
 

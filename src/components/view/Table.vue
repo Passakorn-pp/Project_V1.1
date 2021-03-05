@@ -11,7 +11,7 @@
         <div class="right">
           <span class="text-filter">ค่าน้ำ</span>
           <br>
-          <span class="text-filter">{{this.$store.getters.getView_home.water_bill}}</span>
+          <span class="text-filter">{{room.water_bill}}</span>
         </div>
           
       </div>
@@ -22,7 +22,7 @@
         <div class="right">
           <span class="text-filter">ค่าไฟ</span>
           <br>
-          <span class="text-filter">{{this.$store.getters.getView_home.elect_bill}}</span>
+          <span class="text-filter">{{room.elect_bill}}</span>
         </div>
       </div>  
       <div class="box-filter" v-if="showFilter('man')">
@@ -129,6 +129,9 @@
 
 <script>
 export default {
+  props: [
+    'room'
+  ],
   data() {
     return {
       
@@ -138,9 +141,9 @@ export default {
   methods:{
     showFilter(item){
       var home = []
-      var h = this.$store.getters.getView_home.selected.length
+      var h = this.room.selected.length
       for(var i=0; i<h; i++){
-        home.push(this.$store.getters.getView_home.selected[i])
+        home.push(this.room.selected[i])
       }
 
       if(home.indexOf(item) != -1){

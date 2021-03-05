@@ -24,6 +24,9 @@
 
 import Flickity from 'vue-flickity';
 export default {
+  props: [
+    'room'
+  ],
   components: {
     Flickity
   },

@@ -13,6 +13,9 @@
         />
         <span class="text-login-line">Login with LINE</span>
       </div>
+      <!-- <div>
+        <a href="/"> <button @click="Logout()">logout</button></a>
+      </div> -->
       <div style=" width:80%; hight: 100px;  margin: auto; margin-top:5%">
         <h4 style="display: inline-block;">ลงทะเบียนเป็นเจ้าของหอพัก</h4>
         <a href="/Login" @click="type_register()"><h4 style="display: inline-block; margin-left:2%;  color: #e4c275;">ลงทะเบียนที่นี้</h4></a>
@@ -31,6 +34,11 @@
           id="img-login-line"
         />
         <span class="text-login-line">Login with LINE</span>
+        
+      </div>
+      <div style=" width:80%; hight: 100px;  margin: auto; margin-top:5%">
+        <h4 style="display: inline-block;">ลงทะเบียนเป็นสมาชิกทั่วไป</h4>
+        <a href="/Login" @click="type_register2()"><h4 style="display: inline-block; margin-left:2%;  color: #e4c275;">ลงทะเบียนที่นี้</h4></a>
       </div>
     </div>
     
@@ -47,6 +55,9 @@ export default {
   methods: {
     async type_register(){
       await localStorage.setItem('typeUser',2)
+    },
+    async type_register2(){
+      await localStorage.setItem('typeUser',1)
     },
     show_registesr() {
       const liff = this.$liff // เรียก property ของ LIFF
@@ -78,6 +89,10 @@ export default {
       // document.getElementById("container-register-login-form").style =
       //   "left: 50%; ";
     },
+    Logout(){
+    const liff = this.$liff
+    liff.logout()
+    }
   },
   beforeDestroy(){
     localStorage.setItem('typeUser',1)
