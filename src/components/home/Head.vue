@@ -87,20 +87,17 @@ export default {
   props: ["hint"],
   data() {
     return {
-      check: true,
+      check: false,
       container: true,
       img_user : null,
       user : null,
-      state : localStorage.getItem('state')
+      id_user : null
     };
   },
   methods: {
 
     scrollTo(selector) {
       document.querySelector(selector).scrollIntoView({ behavior: "smooth" });
-    },
-    logout(){
-      this.$store.dispatch("logout");
     },
     myhor(){
       this.$router.push('/myhor');
@@ -112,37 +109,40 @@ export default {
     }
 
   },
-  created(){
-    const liff = this.$liff // เรียก property ของ LIFF
-    this.check = false
-    liff.init({
-      liffId: '1655683528-q1XK2z5a'
-    }).then(() => {
-      console.log('LIFF initialize finished')
-      // get user profile
+  async created(){
+    // const liff = this.$liff // เรียก property ของ LIFF
+    // this.check = false
+    // liff.init({
+    //   liffId: '1655683528-q1XK2z5a'
+    // }).then(() => {
+    //   console.log('LIFF initialize finished')
+    //   // get user profile
 
-      if (liff.isLoggedIn()) {
-        liff.getProfile()      
-        .then(profile => {
-          console.log(JSON.stringify(profile) +" :profile")
-          this.userProfile = profile
-          console.log(this.userProfile['userId'] +": userid");
-          const token = liff.getAccessToken()
-          console.log(token +" :token");
-          this.check = true;
-          this.user =  this.userProfile['displayName']
-          this.img_user = this.userProfile['pictureUrl']
-        })
-        .catch((err) => {
-          console.error(err)
-        })
+    //   if (liff.isLoggedIn()) {
+    //     liff.getProfile()      
+    //     .then(profile => {
+    //       console.log(JSON.stringify(profile) +" :profile")
+    //       this.userProfile = profile
+    //       console.log(this.userProfile['userId'] +": userid");
+    //       this.id_user = this.userProfile['userId']
+    //       const token = liff.getAccessToken()
+    //       console.log(token +" :token");
+    //       this.check = true;
+    //       this.user =  this.userProfile['displayName']
+    //       this.img_user = this.userProfile['pictureUrl']
+    //     })
+    //     .catch((err) => {
+    //       console.error(err)
+    //     })
 
         
         
-      }
-    }).catch((err) => {
-      console.error('LIFF initialize error', err)
-    })
+    //   }
+    // }).catch((err) => {
+    //   console.error('LIFF initialize error', err)
+    // })
+
+    
   }
 
 };
@@ -180,13 +180,15 @@ export default {
 a:any-link {
   color: black;
 }
-a:hover {
-  color:tomato;
+.li-head a:hover {
+
+  border-bottom: 1px solid red;
+  color: tomato;
   text-decoration: none;
 }
 .container {
   max-width: 100%;
-  height: 100px;
+  height: 80px;
   top: 0;
   z-index: 9999;
   position: fixed;
@@ -199,6 +201,7 @@ a:hover {
   margin-left: 3%;
   list-style-type: none;
 }
+
 .container-logo {
   margin-top: 1%;
   height: 100%;
@@ -206,13 +209,15 @@ a:hover {
   float: left;
 }
 .container-above {
-  height: 40%;
+  height: 100%;
   width: 50%;
   float: right;
   margin-right: 2.5%;
   transition: all 0.3s ease-in;
-  transform: translate(0, 60%);
+  text-align: center;
+  padding: 20px 16px;
 }
+
 .text-above {
   font-size: 24px;
   cursor: pointer;

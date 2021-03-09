@@ -33,16 +33,16 @@ export default {
     Sell,
   },
   mounted() {
-    window.scrollTo(0, 0);
-    window.addEventListener("scroll", function() {
-      if (document.scrollingElement.scrollTop >= 100) {
-        document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
+    window.scrollTo({top:0, left:0, behavior: 'smooth'})
+    // window.addEventListener("scroll", function() {
+    //   if (document.scrollingElement.scrollTop >= 100) {
+    //     document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
 
-      } else {
-        document.getElementById("Head").style ="background: #ECD59F; height: 100px;";
+    //   } else {
+    //     document.getElementById("Head").style ="background: #ECD59F; height: 100px;";
 
-      }
-    });
+    //   }
+    // });
 
   },
   

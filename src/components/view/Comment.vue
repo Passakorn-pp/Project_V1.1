@@ -10,7 +10,17 @@
         required
         class="input-view-comment"
         placeholder="แสดงความคิดเห็น"
+        v-if="$store.getters.getUserstate == 'User'"
       ></b-form-input>
+      <b-form-input
+        v-model="text"
+        ref="input-comment"
+        required
+        class="input-view-comment"
+        placeholder="แสดงความคิดเห็น"
+        disabled
+        v-else
+      ></b-form-input> 
       <b-button
         v-if="text == ''"
         disabled

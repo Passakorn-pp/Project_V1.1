@@ -12,14 +12,25 @@
           v-model="status"
           value="เพิ่มแล้ว"
           unchecked-value="เพิ่มในรายการที่สนใจ"
+          v-if="$store.getters.getUserstate == 'User'"
+        >
+        </b-form-checkbox>
+        <b-form-checkbox
+          style="float: right; "
+          v-model="status"
+          value="เพิ่มแล้ว"
+          unchecked-value="เพิ่มในรายการที่สนใจ"
+          disabled
+          v-else
         >
         </b-form-checkbox> 
+        
       </div>
       <br>
       <br>
       <br>
       <div style="width: 40%; float: left; text-align: left; ">
-        <h4 >{{"ราคา "+room.room[0].price+"-"+room.room[1].price+" บาท"}}</h4>
+        <h4 >{{"ราคา "+room.room[0].price+"-"+room.room[room.room.length-1].price+" บาท"}}</h4>
       </div>
       
       <!-- <div style="width: 50%; float: right; margin-right:2%">
@@ -64,7 +75,7 @@
         <h5 style="width: 17%; float: left; ">ติดต่อหอพัก </h5>
         <h6 style="width: 83%; float: left; margin-top:0.5%; "> <img src="@/assets/phone.png" style="width:20px; hight:20px"> {{room.call}} </h6>
         <h6 style="width: 83%; float: left; margin-top:0.5%; margin-left:17%; "> <img src="@/assets/line.png" style="width:20px; hight:20px"> {{room.line}} </h6>
-        <h6 style="width: 83%; float: left; margin-top:0.5%; margin-left:17%;"> <img src="@/assets/facebook.png" style="width:20px; hight:20px"> {{room.face}} </h6>
+        <h6 style="width: 83%; float: left; margin-top:0.5%; margin-left:17%;"> <img src="@/assets/facebook.png" style="width:20px; hight:20px"> {{room.facbook}} </h6>
       </div>
     </div>
   

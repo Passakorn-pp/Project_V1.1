@@ -7,6 +7,7 @@ let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default new Vuex.Store({
   state: {
     foods: localStorage.getItem('datatest')||[],
+    userstate : localStorage.getItem('user')||null
     // user: localStorage.getItem('user') || 0,
     // homeclick: localStorage.getItem('homeclick') || null,
     // homeall: localStorage.getItem('homeall') || null,
@@ -14,6 +15,9 @@ export default new Vuex.Store({
   },
   getters:{
     foods: state => state.foods,
+    getUserstate(state){
+      return state.userstate
+    }
     // getState(state){
       
     //   return state.state
@@ -42,6 +46,11 @@ export default new Vuex.Store({
       localStorage.setItem('datatest',state.foods)
       console.log(state.foods);
     },
+    setUserState(state,value){
+      state.userstate = value;
+      localStorage.setItem('user',state.userstate);
+      state.userstate = value;
+    }
     // SetView(state,value){
     //   state.homeclick = value,
     //   localStorage.setItem('homeclick',state.homeclick)
@@ -81,6 +90,9 @@ export default new Vuex.Store({
         .then(res => commit("fetchFood", { res }))
         .catch(err => alert(err));
     },
+    setUserState(context,value){
+      context.commit("setUserState",value);
+    }
     // addView(context,value){
     //   context.commit('SetView',value)   
     // },

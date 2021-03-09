@@ -34,7 +34,7 @@ import Comment from "@/components/view/Comment.vue";
 // import RecommenTap from '../components/view/RecommenTap.vue';
 import About from "@/components/home/About.vue";
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/getuser";
+let mongo_api = "http://127.0.0.1:8000/api/DormitoryClick/";
 export default {
   data() {
     return {
@@ -81,22 +81,22 @@ export default {
   async created(){
     await Axios.post(mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
-          this.room = res.data[0]
-          console.log(this.room);
+          this.room = res.data.dormitory[0]
+          console.log(this.room +" :room");
         })
         .catch(err => alert(err));
   },
   mounted() {
-    window.scrollTo(0, 0);
-    window.addEventListener("scroll", function() {
-      if (document.scrollingElement.scrollTop >= 100) {
-        document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
+    window.scrollTo({top:0, left:0, behavior: 'smooth'})
+    // window.addEventListener("scroll", function() {
+    //   if (document.scrollingElement.scrollTop >= 100) {
+    //     document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
 
-      } else {
-        document.getElementById("Head").style = "background: #ECD59F; height: 100px;";
+    //   } else {
+    //     document.getElementById("Head").style = "background: #ECD59F; height: 100px;";
 
-      }
-    });
+    //   }
+    // });
   },
 
 };
@@ -114,6 +114,7 @@ export default {
   right: 0;
   top:15%;
   height: 80%;
+
   transform: translateX(700px);
   overflow: auto;
   
@@ -123,7 +124,7 @@ export default {
   width: 70%;
   min-width: 1050px;
   margin: auto;
-  margin-top:6%;
+  margin-top:5%;
   transition: 0.5s ease-in;
   background: white;
 }

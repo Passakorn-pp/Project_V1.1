@@ -21,15 +21,15 @@ export default {
     About,
   },
   mounted() {
-    window.addEventListener("scroll", function() {
-      if (document.scrollingElement.scrollTop >= 80) {
-        document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
+    // window.addEventListener("scroll", function() {
+    //   if (document.scrollingElement.scrollTop >= 80) {
+    //     document.getElementById("Head").style ="background: #ECD59F; height: 80px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;";
 
-      } else {
-        document.getElementById("Head").style = "background: #ECD59F; height: 100px;";
+    //   } else {
+    //     document.getElementById("Head").style = "background: #ECD59F; height: 100px;";
 
-      }
-    });
+    //   }
+    // });
   }
 };
 </script>
@@ -41,7 +41,6 @@ export default {
   min-width: 800px;
   border-radius: 15px;
   border: 1px solid silver;
-  padding: 5%;
   margin: auto;
   position: relative;
   transform:  translateY(120px);

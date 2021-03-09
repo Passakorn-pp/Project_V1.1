@@ -139,8 +139,8 @@ export default {
       
     },
     setview(value){
-      this.$store.dispatch("addView",value);
-      this.$router.push('/view');
+      // this.$store.dispatch("addView",value);
+      this.$router.push({name:'view',params:{Name:value.name}});
 
   },
   },

@@ -31,6 +31,7 @@ export default {};
 .container-home-about {
   height: 150px;
   width: 100%;
+  min-width: 1500px;
   background: #e4c275;
   color: white;
   z-index: 9999;
@@ -40,9 +41,5 @@ export default {};
   padding: 1%;
   display: inline-block;
 }
-@media only screen and (max-width: 600px){
-  .container-home-about{
-    height: 250px;
-  }
-}
+
 </style>

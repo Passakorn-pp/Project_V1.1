@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-if="typeUser == null || typeUser == 1">
+    <!-- <div v-if="typeUser == null || typeUser == 1">
       <h2>เข้าสู่ระบบด้วย LINE</h2>
       <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto"></div>
       <br>
       <br>
-      <div class="container-register-login-line" @click="show_registesr">
+      <div class="container-register-login-line" @click="show_registesr('User')" >
         <img
           src="@/assets/LINE_SOCIAL_Basic.png"
           class="img-login-line"
@@ -13,12 +13,12 @@
         />
         <span class="text-login-line">Login with LINE</span>
       </div>
-      <!-- <div>
+      <div>
         <a href="/"> <button @click="Logout()">logout</button></a>
-      </div> -->
+      </div>
       <div style=" width:80%; hight: 100px;  margin: auto; margin-top:5%">
         <h4 style="display: inline-block;">ลงทะเบียนเป็นเจ้าของหอพัก</h4>
-        <a href="/Login" @click="type_register()"><h4 style="display: inline-block; margin-left:2%;  color: #e4c275;">ลงทะเบียนที่นี้</h4></a>
+        <h4 style="display: inline-block; margin-left:2%;  color: #e4c275;" @click="type_register2()">ลงทะเบียนที่นี่</h4>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
       <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto"></div>
       <br>
       <br>
-      <div class="container-register-login-line" @click="show_registesr">
+      <div class="container-register-login-line" @click="show_registesr('Dormitory')">
         <img
           src="@/assets/LINE_SOCIAL_Basic.png"
           class="img-login-line"
@@ -38,10 +38,46 @@
       </div>
       <div style=" width:80%; hight: 100px;  margin: auto; margin-top:5%">
         <h4 style="display: inline-block;">ลงทะเบียนเป็นสมาชิกทั่วไป</h4>
-        <a href="/Login" @click="type_register2()"><h4 style="display: inline-block; margin-left:2%;  color: #e4c275;">ลงทะเบียนที่นี้</h4></a>
+        <h4 style="display: inline-block; margin-left:2%;  color: #e4c275;" @click="type_register()">ลงทะเบียนที่นี่</h4>
+      </div>
+    </div> -->
+    <div class="body-login-tab" id="alltab">
+      <button v-on:click="typeUser=1" v-bind:class="[ typeUser === 1 ? 'active' : '' ]">สมาชิก</button>
+      <button v-on:click="typeUser=2" v-bind:class="[ typeUser === 2 ? 'active' : '' ]">เจ้าของหอพัก</button>
+      
+    </div>
+    <div v-if="typeUser === 1" class="container-login-body2">
+      <h2 style="margin-top: 5%">เข้าสู่ระบบด้วย LINE</h2>
+      <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto"></div>
+      <br>
+      <br>
+      <div class="container-register-login-line" @click="show_registesr('User')" >
+        <img
+          src="@/assets/LINE_SOCIAL_Basic.png"
+          class="img-login-line"
+          id="img-login-line"
+        />
+        <span class="text-login-line">Login with LINE</span>
+      </div>
+      <!-- <div>
+        <a href="/"> <button @click="Logout()">logout</button></a>
+      </div> -->
+    </div>
+    <div v-if="typeUser === 2" class="container-login-body2">
+      <h2 style="margin-top: 5%">เข้าสู่ระบบเจ้าของหอพักด้วย LINE</h2>
+      <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto"></div>
+      <br>
+      <br>
+      <div class="container-register-login-line" @click="show_registesr('Dormitory')">
+        <img
+          src="@/assets/LINE_SOCIAL_Basic.png"
+          class="img-login-line"
+          id="img-login-line"
+        />
+        <span class="text-login-line">Login with LINE</span>
+        
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -49,18 +85,19 @@
 export default {
   data() {
     return {
-      typeUser: localStorage.getItem('typeUser')||null
+      typeUser: 1
     }
   },
   methods: {
     async type_register(){
-      await localStorage.setItem('typeUser',2)
+      this.typeUser = 1
     },
     async type_register2(){
-      await localStorage.setItem('typeUser',1)
+      this.typeUser = 2
     },
-    show_registesr() {
+    async show_registesr(type) {
       const liff = this.$liff // เรียก property ของ LIFF
+      await localStorage.setItem('typeUser',type)
       liff.init({
         liffId: '1655683528-q1XK2z5a'
       }).then(() => {
@@ -70,7 +107,6 @@ export default {
         if (liff.isLoggedIn()) {
           liff.getProfile()
           .then(profile => {
-            localStorage.setItem('state',1)
             console.log(JSON.stringify(profile))
             this.userProfile = profile
            
@@ -94,38 +130,49 @@ export default {
     liff.logout()
     }
   },
-  beforeDestroy(){
-    localStorage.setItem('typeUser',1)
-  }
 };
 </script>
 
 <style scoped>
 
 
-::-webkit-scrollbar {
-  width: 10px;
+.body-login-tab button{
+  width: 50%;
+  height: 100%;
+  float: left;
+  background: #e4c785;
+  color: white;
+  border: none;
+  position: relative;
+  transition: 0.3s ease-in;
+  font-size: 25px;
+}
+.body-login-tab button.active{
+  outline: none;
+  background: tomato;
+  border-bottom: none;
+
+}
+.body-login-tab button:focus{
+  outline: none;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  background: white;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+.body-login-tab{
+  width: 100%;
+  float: left;
+  height: 50px;
+  position: relative;
+
+}
+.container-login-body2 {
+  width: 100%;
+  float: left;
+  height: 100%;
+  position: relative;
+  border-top: 1px solid silver;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: khaki;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
-}
 .container-register-login {
   width: 80%;
   height: 100%;
@@ -149,7 +196,7 @@ export default {
 .img-login-line {
   height: 50px;
   width: 50px;
-  margin-top: 5%;
+  margin-top: 4%;
   left: 10%;
   float: left;
   position: relative;

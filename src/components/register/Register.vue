@@ -37,13 +37,24 @@
 </template>
 
 <script>
+// import Axios from "axios";
+// let mongo_api = "http://127.0.0.1:8000/api/sentuserline/";
 export default {
   data(){
     return{
       faculty : null,
       gender : null,
     }
-  }
+  },
+  // async created(){
+  //     await Axios.get(mongo_api)
+  //       .then(res => {
+  //         this.listitems = res.data
+  //         this.Listitem()
+  //       })
+  //       .catch(err => alert(err));
+  // },
+  
 };
 </script>
 

@@ -103,6 +103,7 @@ export default {
   background: aquamarine;
 }
 .carousel-cell {
+
   width:100%; /* full width */
   height: 400px;
   background: #222;

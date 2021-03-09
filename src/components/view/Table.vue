@@ -11,7 +11,7 @@
         <div class="right">
           <span class="text-filter">ค่าน้ำ</span>
           <br>
-          <span class="text-filter">{{room.water_bill}}</span>
+          <span class="text-filter">{{room.water_bill}} บาท/เดือน</span>
         </div>
           
       </div>
@@ -22,10 +22,10 @@
         <div class="right">
           <span class="text-filter">ค่าไฟ</span>
           <br>
-          <span class="text-filter">{{room.elect_bill}}</span>
+          <span class="text-filter">{{room.elect_bill}} บาท/หน่วย</span>
         </div>
       </div>  
-      <div class="box-filter" v-if="showFilter('man')">
+      <!-- <div class="box-filter" v-if="showFilter('man')">
         <div class="left">
           <img src="@/assets/man.png" class="img">
         </div>
@@ -40,7 +40,7 @@
         <div class="right" style="line-height: 2.5;">
           <span class="text-filter" >หอพักหญิง</span> 
         </div>    
-      </div>
+      </div> -->
       <div class="box-filter"  v-if="showFilter('wifi')">
         <div class="left">
           <img src="@/assets/wifi.png" class="img">
@@ -140,17 +140,18 @@ export default {
   },
   methods:{
     showFilter(item){
-      var home = []
-      var h = this.room.selected.length
-      for(var i=0; i<h; i++){
-        home.push(this.room.selected[i])
+      var check = true;
+      for(var i in this.room.room.length){
+        if(this.room.room[i].filter[0][item] == false){
+          check = false
+          break;
+        }
       }
-
-      if(home.indexOf(item) != -1){
-        return true;
+      if(check == true){
+        return true
       }
       else{
-        return false;
+        return false
       }
     }
   }

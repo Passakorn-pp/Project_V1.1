@@ -5,10 +5,10 @@
       <h2>กรอกข้อมูลหอพัก</h2>
       <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto"></div>
       <br>
-      <label for="inputname" style="margin-right:3%;">ชื่อหอพัก</label>
+      <label for="inputname" style="margin-right:5.5%;">ชื่อหอพัก</label>
       <input type="text" v-model="dormitory.name">
       <br>
-      <label  style="margin-right:6.8%;">ที่อยู่</label>
+      <label  style="margin-right:9.5%;">ที่อยู่</label>
       <input type="text" v-model="dormitory.name">
       <br>
       <br>
@@ -17,7 +17,7 @@
       <label  style="margin-right:3%; margin-top:1%">Facebook</label>
       <input type="text" v-model="dormitory.name">
       <br>
-      <label  style="margin-right:8.3%;">LINE</label>
+      <label  style="margin-right:8.9%;">LINE</label>
       <input type="text" v-model="dormitory.name">
       <br>
       <label  style="margin-right:5.2%;">เบอร์โทร</label>
@@ -71,14 +71,14 @@
       <input type="number" min="1" style="width:7%" v-model="dormitory.typeroom" @change="setroom()">
       <div v-for="(r,index) in dormitory.room" :key="index" >
         <h6 style="margin-top:3%">ประเภทห้องที่{{index+1}}</h6>
-        <label style="margin-right:3%;">ชื่อห้องพัก</label>
-        <input type="text" :id="'name'+index" v-model="dormitory.room[index].nameroom">
+        <label style="margin-right:3.2%;">ชื่อห้องพัก</label>
+        <input type="text"  v-model="dormitory.room[index].nameroom">
         <br>
-        <label style="margin-right:7.5%;">ราคา</label>
-        <input type="text" :id="'price'+index" v-model="dormitory.room[index].price">
+        <label style="margin-right:8.5%;">ราคา</label>
+        <input type="text"  v-model="dormitory.room[index].price">
         <br>
-        <label style="margin-right:4.5%;">ห้องว่าง</label>
-        <input type="text" :id="'price'+index" v-model="dormitory.room[index].free">
+        <label style="margin-right:5.5%;">ห้องว่าง</label>
+        <input type="text"  v-model="dormitory.room[index].free">
         <br>
         <h5 style="margin-top:2%">สิ่งอำนวยความสะดวกภายในห้อง</h5>
         <input type="checkbox" style="margin-right:1%;" value="wifi" :id="'wifi'+index" v-model="dormitory.room[index].filter">
@@ -105,6 +105,8 @@
 </template>
 
 <script>
+// import Axios from "axios";
+// let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default {
   data(){
     return{
@@ -128,6 +130,14 @@ export default {
       
     }
   },
+  // async created(){
+  //     await Axios.get(mongo_api)
+  //       .then(res => {
+  //         this.listitems = res.data
+  //         this.Listitem()
+  //       })
+  //       .catch(err => alert(err));
+  // },
   methods:{
     setroom(){
       

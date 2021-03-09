@@ -4,23 +4,23 @@
     <h3>ประเภทหอพัก</h3>
   </div>
   <div class="container-filter2">
-    <div class="container-filter-type" @click="filter(1)" >
+    <div class="container-filter-type" @click="filter('ทั้งหมด')" >
 
       <img src="@/assets/all.png" class="container-filter-type-img">
       <p style="color:black">หอพักทั้งหมด</p>
     </div>
       
-    <div class="container-filter-type"  @click="filter(2)">
+    <div class="container-filter-type"  @click="filter('หอพักเงียบสงบ')">
 
       <img src="https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg" class="container-filter-type-img" >
       <p style="color:black">หอพักเงียบสงบ</p>
     </div>
-    <div class="container-filter-type" @click="filter(3)">
+    <div class="container-filter-type" @click="filter('หอพักครื้นเครง')">
 
       <img src="https://sv1.picz.in.th/images/2020/11/24/jdctMl.jpg" class="container-filter-type-img" >
       <p style="color:black">หอพักครื้นเครง</p>
     </div>
-    <div class="container-filter-type" @click="filter(4)">
+    <div class="container-filter-type" @click="filter('หอพักย่านของกิน')">
 
       <img src="https://sv1.picz.in.th/images/2020/11/24/jdwk2R.jpg" class="container-filter-type-img" >
       <p style="color:black">หอพักย่านของกิน</p>
@@ -33,7 +33,7 @@
 export default {
   methods:{
     filter(index){
-      console.log("click");
+      console.log(index + " :click");
       localStorage.setItem('indexfilter',index);
       this.$router.push('/recommend');
 

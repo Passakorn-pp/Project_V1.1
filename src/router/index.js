@@ -39,12 +39,12 @@ const routes = [
     component: Login
   },
   {
-    path: "/RegisterDormitory",
+    path: "/RegisterDormitory:id",
     name: "registerDormitory",
     component: RegisterDormitory
   },
   {
-    path: "/Register",
+    path: "/Register:id",
     name: "register",
     component: Register
   },

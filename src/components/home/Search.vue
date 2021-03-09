@@ -32,7 +32,7 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/getuser";
+let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
 export default {
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
   async created(){
     await Axios.get(mongo_api)
       .then(res => {
-        this.place = res.data
+        this.place = res.data.dormitory
       })
       .catch(err => alert(err));
   },

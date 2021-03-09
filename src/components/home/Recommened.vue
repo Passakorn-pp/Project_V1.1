@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-Recommened-header" id="container-detail-header" v-if="this.$store.getters.getView_use"> 
+    <div class="container-Recommened-header" id="container-detail-header" v-if="this.$store.getters.getUserstate=='User'"> 
       <h3 class="header-text" style="font-size: 50px;"><h1 style="display: inline-block; font-size: 100px;">คุณ</h1>อาจจะชอบ</h3>
     </div>
     <div class="container-Recommened-header" id="container-detail-header" v-else> 
@@ -10,23 +10,33 @@
     <div class="container-Recommened" id="axz">
 
          
-          
-          <flickity ref="flickity" :options="flickityOptions" >
-            <br>
-              <div v-for="(s,i) in recommend" :key="i" class="container-Recommened-card" @click="setview(s)">
+  
+            <flickity ref="flickity" :options="flickityOptions" >
+            
+              <div v-for="(s,i) in slides" :key="i" class="container-Recommened-card" @click="setview(s)" >
                 <img :src="s.img" class="container-Recommened-card-img" >
                 <div class="container-Recommened-card-text">
                   <h6 style="float: left;">{{s.name}} </h6>
                   <div style="display: inline-block;">
                     <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%" class="rating-recommend"></b-form-rating>      
                   </div>
-                  
-                  <h6 style="line-height: 0.5 ;">ราคา {{ s.room && s.room.length > 0 ? s.room[0].price : '' }}-{{s.room['1'].price}} บาท</h6>
-                  <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย{{s.distance}} เมตร</h6>
+                  <br>
+                  <h6 style="line-height: 0.5; margin-right:5px;   float: left;">ราคา</h6>
+                  <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
+                  <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s.room[s.room.length-1].price}}</h6>
+                  <h6 style="line-height: 0.5;   float: left;">บาท </h6>
+                  <br>
+                  <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s.distance}} เมตร</h6>
                 </div> 
+                
               </div>
+           
               
-          </flickity>
+          
+              
+              
+            </flickity>
+          
           
         
     </div>  
@@ -35,7 +45,7 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/getuser";
+let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
 // import { slider, slideritem } from 'vue-concise-slider';
 import Flickity from 'vue-flickity';
 export default {
@@ -52,13 +62,10 @@ export default {
         prevNextButtons: true,
         pageDots: false,
         wrapAround: true,
-        draggable: false
-        
+        draggable: false,
         // any options from Flickity can be used
       },
-      recommend:[
-        {}
-      ],
+      room : null,
       
       slides: [
         {
@@ -180,11 +187,14 @@ export default {
   async created(){
     await Axios.get(mongo_api)
       .then(res => {
-        this.recommend = res.data
+        this.slides = res.data.dormitory
+        console.log(this.slides);
+    
       })
       .catch(err => alert(err));
   },
   methods: {
+
     next() {
       this.$refs.flickity.next();
     },
@@ -237,10 +247,7 @@ export default {
 .container-Recommened-card:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.container-Recommened-card.is-selected{
- 
-  
-}
+
 .container-Recommened-card{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 300px;
@@ -251,7 +258,6 @@ export default {
   border-radius: 30px;
   background: white;
   float: left;
-  
 
 }
 
@@ -295,6 +301,7 @@ export default {
   border-radius: 30px;
   color: white;
   margin: auto;
+  margin-top:50px;
 
   
 }
