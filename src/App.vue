@@ -36,7 +36,7 @@ export default {
         if (liff.isLoggedIn()) {
           liff.getProfile()      
           .then(profile => {
-            
+            console.log("App");
             this.userProfile = profile
             console.log(this.userProfile);
             this.id_user = this.userProfile['userId']
@@ -55,19 +55,23 @@ export default {
                 if(this.state == "no"){
                   this.$router.push({name:'register',params:{id:this.id_user}})
                 }
+                else{
+                  this.$router.push('/')
+                }
                 
               }
               else if(this.user=="Dormitory"){
                 this.$store.dispatch("setUserState",this.user);
+                console.log(res+" :res");
                 if(this.state=="yes"){
-                  this.$router.push('/myhor')
+                  this.$router.push({name:'myhor',params:{Name:res.data["name"]}})
                 }
                 else{
                   this.$router.push({name:'registerDormitory',params:{id:this.id_user}})
                 }
               }
             })
-            .catch(err => alert(err));
+            .catch(err => alert(err+" aaaaaa"));
           })
           .catch((err) => {
             console.error(err)
@@ -94,6 +98,7 @@ export default {
   color: #2c3e50;
   outline: none;
   scroll-behavior: smooth;
+  
 }
 #nav {
   padding: 30px;

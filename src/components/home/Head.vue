@@ -57,23 +57,26 @@
           </div>
           <div v-else>
             <router-link to="/login">
-              <b-avatar icon="people-fill" style="cursor: pointer;"></b-avatar>
+              <div style="widht:100px; display: inline-block; background: white; padding: 6px 7px; border-radius: 5px;">
+                  <img src="@/assets/user.png"  class="container-login-img">
+                  <span style="margin-right:10px; line-height: 1.6em;">เข้าสู่ระบบ</span>
+                </div>
             </router-link >
           </div>
       </li>
       <div id="manu">
         
         <li class="li-head" id="Head-list" >
-          <a href="/test" class="text-above">เทส</a>
+          <router-link to="/test" class="text-above">เทส</router-link >
         </li>
         <li class="li-head" id="Head-list">
-          <a href="#about" class="text-above">เกี่ยวกับ</a>
+          <router-link to="#about" class="text-above">เกี่ยวกับ</router-link >
         </li>
         <li class="li-head" id="Head-list" >
-          <a href="/profile" class="text-above" v-if="check">ข้อมูลส่วนตัว</a>
+          <router-link to="/profile" class="text-above" v-if="check">ข้อมูลส่วนตัว</router-link >
         </li>
         <li class="li-head" id="Head-list" >
-          <a href="/profile/like" class="text-above" v-if="check">ถูกใจ</a>
+          <router-link to="/profile/like" class="text-above" v-if="check">ถูกใจ</router-link >
         </li>
       </div>
       
@@ -99,9 +102,6 @@ export default {
     scrollTo(selector) {
       document.querySelector(selector).scrollIntoView({ behavior: "smooth" });
     },
-    myhor(){
-      this.$router.push('/myhor');
-    },
     Logout(){
       const liff = this.$liff
       this.check = false
@@ -110,37 +110,37 @@ export default {
 
   },
   async created(){
-    // const liff = this.$liff // เรียก property ของ LIFF
-    // this.check = false
-    // liff.init({
-    //   liffId: '1655683528-q1XK2z5a'
-    // }).then(() => {
-    //   console.log('LIFF initialize finished')
-    //   // get user profile
+    const liff = this.$liff // เรียก property ของ LIFF
+    this.check = false
+    liff.init({
+      liffId: '1655683528-q1XK2z5a'
+    }).then(() => {
+      console.log('LIFF initialize finished')
+      // get user profile
 
-    //   if (liff.isLoggedIn()) {
-    //     liff.getProfile()      
-    //     .then(profile => {
-    //       console.log(JSON.stringify(profile) +" :profile")
-    //       this.userProfile = profile
-    //       console.log(this.userProfile['userId'] +": userid");
-    //       this.id_user = this.userProfile['userId']
-    //       const token = liff.getAccessToken()
-    //       console.log(token +" :token");
-    //       this.check = true;
-    //       this.user =  this.userProfile['displayName']
-    //       this.img_user = this.userProfile['pictureUrl']
-    //     })
-    //     .catch((err) => {
-    //       console.error(err)
-    //     })
+      if (liff.isLoggedIn()) {
+        liff.getProfile()      
+        .then(profile => {
+          console.log(JSON.stringify(profile) +" :profile")
+          this.userProfile = profile
+          console.log(this.userProfile['userId'] +": userid");
+          this.id_user = this.userProfile['userId']
+          const token = liff.getAccessToken()
+          console.log(token +" :token");
+          this.check = true;
+          this.user =  this.userProfile['displayName']
+          this.img_user = this.userProfile['pictureUrl']
+        })
+        .catch((err) => {
+          console.error(err)
+        })
 
         
         
-    //   }
-    // }).catch((err) => {
-    //   console.error('LIFF initialize error', err)
-    // })
+      }
+    }).catch((err) => {
+      console.error('LIFF initialize error', err)
+    })
 
     
   }

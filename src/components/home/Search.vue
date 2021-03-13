@@ -33,14 +33,17 @@
 <script>
 import Axios from "axios";
 let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
+let history_api = "http://127.0.0.1:8000/api/history/";
 export default {
   data() {
     return {
       place: null,
-      selec_place : null
+      selec_place : null,
+      id_user : "",
     };
   },
   async created(){
+    this.getProfile()
     await Axios.get(mongo_api)
       .then(res => {
         this.place = res.data.dormitory
@@ -48,12 +51,28 @@ export default {
       .catch(err => alert(err));
   },
   methods:{
+    getProfile(){
+      const liff = this.$liff
+      liff.getProfile()
+      .then(profile => {
+        this.userProfile = profile
+        this.id_user = this.userProfile['userId']
+      })
+      .catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+    },
     submit(){
       var check = false;
       for(var i in this.place){
         if(this.selec_place == this.place[i].name){
           check = true;
-          this.$router.push({name:'view',params:{Name:this.selec_place}});
+          Axios.post(history_api,{"name": this.selec_place,"user_id":this.id_user})
+          .then(() => {
+            this.$router.push({name:'view',params:{Name:this.selec_place}});
+          })
+          .catch(err => alert(err));
+          
         }
       }
       if(check == false){

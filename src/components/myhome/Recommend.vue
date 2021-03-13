@@ -4,8 +4,15 @@
        <h4>แนะนำผู้ใช้ที่สนใจ</h4> 
     </div>
     <div style="width:75%; border: 1px solid silver; margin: auto; background: white;">
-        <div style=" width:95%; margin:auto">
-            <flickity ref="flickity2" :options="flickityOptions" >
+        <div style=" width:100%;">
+            <flickity ref="flickity2" :options="flickityOptions">
+                <div class="flip-card" style="width:100%;  background: rgb(252, 243, 207);" >
+                  <img src="@/assets/user.png" alt="Avatar" style="width:150px;height:150px; float:left; margin-left:10%">
+                  <div style=" justify-content: center; padding: 25px 20%; ">
+                    <h5>ผู้ใช้ทั่วไปเข้ามาชมหอพัก {{data.NoUser.length}} คน</h5>
+                    <h5>ผู้ใช้ที่เป็นสมาชิกเข้ามาชมหอพัก {{data.User.length}} คน</h5>
+                  </div>
+                </div>
                 <div  div class="carousel-recommend" v-for="(user,index) in peple" :key="index" >
                     <div class="flip-card">
                         <div class="flip-card-inner">
@@ -13,9 +20,9 @@
                                 <img src="@/assets/peple5.png" alt="Avatar" style="width:150px;height:150px;">
                             </div>
                             <div class="flip-card-back">
-                                <h5>{{user.name}}</h5>
-                                <h5>{{user.faculty}}</h5>
-                                <h5>{{user.sex}}</h5>
+                                <!-- <h5>{{user.name}}</h5> -->
+                                <h5 style="margin-top:20%">{{user.datauser[0].faculty}}</h5>
+                                <h5>เพศ {{user.datauser[0].gender}}</h5>
                             </div>
                         </div>
                     </div>
@@ -26,30 +33,33 @@
     
   <div class="recommend">
       <div class="report">
-          <h5 style="float: left; width: 50%;">จำนวนคนเข้ามาดูหอพักวันนี้  30 คน</h5>
+          <h5 style="float: left; width: 50%;">จำนวนคนเข้ามาดูหอทั้งหมด {{data.NoUser.length+data.User.length}} คน</h5>
           <div style="width: 30%; float: right;">
               <b-form-rating v-model="home.star" readonly no-border variant="warning" style="background: none; "></b-form-rating>
           </div>
           <h5 style="float: left; width: 50%;">จำนวนคนกดถูกใจ 20 คน </h5>
           
       </div>
-      <div style="margin: auto; ">
+      <!-- <div style="margin: auto; ">
               <b-button  style="width: 80%; background: #e4c785;">
                 ความคิดเห็นล่าสุด
                 
                 <b-badge variant="light">9 <span class="sr-only">unread messages</span></b-badge>
               </b-button>
-        </div>
+              
+        </div> -->
   </div>
 </div>
   
 </template>
 
 <script>
+import Axios from "axios";
+let mongo_api = "http://127.0.0.1:8000/api/gethistory/";
 import Flickity from 'vue-flickity';
 export default {
   components: {
-    Flickity
+    Flickity,
   },
   props: [
     'room'
@@ -57,6 +67,7 @@ export default {
   data() {
     return {
       home :  this.room,
+      data : null,
       flickityOptions: {
         pageDots: false,
         wrapAround: false,
@@ -96,6 +107,15 @@ export default {
         
     }
   },
+  created(){
+    Axios.post(mongo_api,{"name" : this.$route.params.Name})
+        .then(res => {
+          this.data = res.data
+          this.peple = this.data.User
+          console.log(this.peple);
+        })
+        .catch(err => alert(err));
+  }
 }
 </script>
 
@@ -104,7 +124,6 @@ export default {
   background-color: transparent;
   width: 150px;
   height: 150px;
-  perspective: 1000px;
 }
 
 .flip-card-inner {
@@ -174,7 +193,7 @@ export default {
     border: 1px solid silver;
     border-radius: 15px;
     margin: 3% auto;
-    height: 200px;
+    height: 100px;
     width: 70%;
 }
 </style>

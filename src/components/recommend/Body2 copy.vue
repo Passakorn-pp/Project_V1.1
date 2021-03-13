@@ -31,7 +31,7 @@
         </div>
         <h4 style="text-align: left; margin: 2% 5%">สิ่งอำนวยความสะดวก</h4>
         <div style="width: 80%; margin: auto; text-align: left;">
-        <b-form-checkbox-group v-model="selected" :options="options" stacked switches
+        <b-form-checkbox-group v-model="selectedDor" :options="options" stacked switches
         ></b-form-checkbox-group>
         </div>
         <!-- <h4 style="text-align: left; margin: 2% 5%">คณะ</h4>
@@ -152,23 +152,23 @@
                   <br>
                   <br>
                       
-                  <div v-if="showfilter('parking_lot',user)">
+                  <div v-if="showfilterDor('parking_lot',user)">
                     <img src="@/assets/parking-area.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                   
-                  <div v-if="showfilter('elevators',user)">
+                  <div v-if="showfilterDor('elevators',user)">
                     <img src="@/assets/elevator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('security camera',user)">
+                  <div v-if="showfilterDor('security camera',user)">
                     <img src="@/assets/cctv.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('keycard',user)">
+                  <div v-if="showfilterDor('keycard',user)">
                     <img src="@/assets/key-card.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('laundry',user)">
+                  <div v-if="showfilterDor('laundry',user)">
                     <img src="@/assets/laundry-shop.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                 </div>
@@ -765,12 +765,14 @@
 import About from "@/components/home/About.vue";
 import Axios from "axios";
 let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
+let history_api = "http://127.0.0.1:8000/api/history/";
 export default {
 components: {
     About,
   },
   data() {
     return {
+      id_user : "",
       perPage: 5,
       currentPage: 1,
       listitems : [],
@@ -785,19 +787,13 @@ components: {
           { key: 'Rateing', sortable: true },
 
       ],
-      def : {
-            type : 'pie'
-      },
-      data : [
-          { label: 'London', value:'330' },
-          { label: 'Barcelona', value:'430' },
-          { label: 'Paris', value:'150' },
-          { label: 'Belgrade', value:'220' }
-      ],
       active_pic:1,
       activetab: localStorage.getItem('indexfilter'),
       value: 3000,
-      selected: ["wifi","air","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"], // Must be an array reference!
+      filterDor: ["parking_lot","elevators","security camera","keycard","laundry"],
+      filterRoom: ["air","fan","refrigerator","table" ,"tv","wifi"],
+      selectedDor: ["parking_lot","elevators","security camera","keycard","laundry"],
+      selected: ["wifi","air","fan","tv","refrigerator","table"], // Must be an array reference!
       optiontype:[
         {text: 'หอชาย', value: 'man'},
         {text: 'หอหญิง', value: 'woman'},
@@ -834,12 +830,13 @@ components: {
     
   // },
   created(){
-      Axios.get(mongo_api)
-        .then(res => {
-          this.listitems = res.data.dormitory
-          this.Listitem()
-        })
-        .catch(err => alert(err));
+    this.getProfile()
+    Axios.get(mongo_api)
+      .then(res => {
+        this.listitems = res.data.dormitory
+        this.Listitem()
+      })
+      .catch(err => alert(err));
   },
   computed:{
     rows() {
@@ -847,6 +844,17 @@ components: {
     }
   },
   methods: {
+    getProfile(){
+      const liff = this.$liff
+      liff.getProfile()
+      .then(profile => {
+        this.userProfile = profile
+        this.id_user = this.userProfile['userId']
+      })
+      .catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+    },
     changePage(){
       if(this.is_filter){
         this.filterListitem()
@@ -858,8 +866,13 @@ components: {
       window.scrollTo({top:95, left:200, behavior: 'smooth'})
     },
     setview(value){
+      Axios.post(history_api,{"name": value.name,"user_id":this.id_user})
+      .then(() => {
+        this.$router.push({name:'view',params:{Name:value.name}});
+      })
+      .catch(err => alert(err));
       // this.$store.dispatch("addView",value);
-      this.$router.push({name:'view',params:{Name:value.name}});
+
 
     },
 
@@ -902,16 +915,31 @@ components: {
       var home = this.listitems;
       var price = Number(this.value);
       var sec = this.selected.sort();
+      var secDor = this.selectedDor.sort();
       for(var index in home){
         var check = true;
         var a = Number(home[index].room[0].price );
-        
-        for(var item in home[index].filter ){
-          if(home[index].room[0].filter[0][sec[item]] == false){
+        for(var item=0; item<this.filterRoom.length; item++){   
+          if(home[index].room[0].filter[0][this.filterRoom[item]] == false && sec.indexOf(this.filterRoom[item]) != -1){
+            check = false;
+            break;
+          }
+          if(home[index].room[0].filter[0][this.filterRoom[item]] == true && sec.indexOf(this.filterRoom[item]) == -1){
             check = false;
             break;
           }
         }
+        for(var item2=0; item2<this.filterDor.length; item2++ ){
+          if(home[index].filterDor[0][this.filterDor[item2]] == false && secDor.indexOf(this.filterDor[item2]) != -1){
+            check = false;
+            break;
+          }
+          if(home[index].filterDor[0][this.filterDor[item2]] == true && secDor.indexOf(this.filterDor[item2]) == -1){
+            check = false;
+            break;
+          }
+        }
+
         if(this.activetab=="ทั้งหมด"){
           if(check == true && price >= a ){
             this.useritem2.push(home[index]);
@@ -937,10 +965,11 @@ components: {
       
     },
     showfilter(item,user){
-      var check = true;
-      for(var i in user.room.length){
-        if(user.room[i].filter[0][item] == false){
-          check = false
+      var check = false;
+      
+      for(var i=0; i<user.room.length; i++){
+        if(user.room[i].filter[0][item] == true){
+          check = true
           break;
         }
       }
@@ -949,6 +978,15 @@ components: {
       }
       else{
         return false
+      }
+      
+    },
+    showfilterDor(item,user){
+      if(user.filterDor[0][item] == false){
+        return false
+      }
+      else{
+        return true
       }
       
     },

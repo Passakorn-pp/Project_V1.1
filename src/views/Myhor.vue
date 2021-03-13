@@ -31,6 +31,7 @@
         </div>
         <div class="container-mainview" v-if="activetab === 3">
             <Recommend :room="this.room"></Recommend>
+            <Comment :room="this.room"></Comment>
         </div>
       </div>
       <br>
@@ -54,7 +55,7 @@ import Mohor from "@/components/myhome/Mohor.vue";
 import Recommend from "@/components/myhome/Recommend.vue";
 import About from "@/components/home/About.vue";
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/getuser";
+let mongo_api = "http://127.0.0.1:8000/api/DormitoryClick/";
 export default {
     components: {
     Photo,
@@ -74,9 +75,9 @@ export default {
       }
   },
   async created(){
-    await Axios.post(mongo_api,{"name" : "หอพักอนงค์"})
+    await Axios.post(mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
-          this.room = res.data[0]
+          this.room = res.data.dormitory[0]
           console.log(this.room);
         })
         .catch(err => alert(err));

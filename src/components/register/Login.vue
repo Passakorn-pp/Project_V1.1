@@ -146,6 +146,7 @@ export default {
   position: relative;
   transition: 0.3s ease-in;
   font-size: 25px;
+
 }
 .body-login-tab button.active{
   outline: none;

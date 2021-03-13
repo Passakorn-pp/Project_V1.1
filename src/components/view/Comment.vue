@@ -10,17 +10,8 @@
         required
         class="input-view-comment"
         placeholder="แสดงความคิดเห็น"
-        v-if="$store.getters.getUserstate == 'User'"
       ></b-form-input>
-      <b-form-input
-        v-model="text"
-        ref="input-comment"
-        required
-        class="input-view-comment"
-        placeholder="แสดงความคิดเห็น"
-        disabled
-        v-else
-      ></b-form-input> 
+
       <b-button
         v-if="text == ''"
         disabled
@@ -30,7 +21,7 @@
       >
       <b-button
         v-else
-        @click="addtext"
+        @click="Question()"
         class="button-view-comment"
         variant="primary"
         >Submit</b-button
@@ -45,48 +36,103 @@
           style="float: left; margin-top: 3%; margin-left:-5%;"
         ></b-avatar>
         <div class="container-view-comment-list">
-          <span class="text-view-comment-list">{{ text.text }}</span>
+          <span class="text-view-comment-list">{{ text.comment }}</span>
+        </div >
+        <div style="width:100%; margin-top:1%; margin-left:5%; display: flex; justify-content: left;">
+          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2">
+          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text)">ยืนยัน</button>
         </div>
-      </div>
-      <div v-for="(text,index) in listtext" :key="index">
-        <b-avatar
-          icon="people-fill"
-          style="float: right; margin-top: 3%; margin-right:-5%"
-        ></b-avatar>
-        <div class="container-view-comment-list2">
-          <span class="text-view-comment-list">{{ text.text }}</span>
+          
+        
+        <div style="margin-left:10%">
+          <div v-for="(text2,index) in text.answer" :key="index">
+          <b-avatar
+            icon="people-fill"
+            style="float: left; margin-top: 3%; margin-left:-5%;"
+          ></b-avatar>
+          <div class="container-view-comment-list">
+            <span class="text-view-comment-list">{{ text2.body }}</span>
+          </div>
+          </div>
         </div>
+        
       </div>
+      
     </div>
   </div>
 </template>
 
 <script>
+import Axios from "axios";
+let mongo_api = "http://127.0.0.1:8000/api/get_Question/";
+let addanswer_api = "http://127.0.0.1:8000/api/addAnswer/"
+let addquestion_api = "http://127.0.0.1:8000/api/addQuestion/"
 export default {
   props: [
     'room'
   ],
   data() {
     return {
+      text2: "",
       text: "",
       check: true,
       disabled: "disabled",
-      listtext_old: [{ text: "ดีมาก" }],
-      listtext: []
+      listtext_old: [],
+      listtext: [],
+      id_user : null,
     };
   },
 
   methods: {
-    addtext() {
-      this.listtext.push({
-        text: this.text
-      });
+    getProfile(){
+      const liff = this.$liff
+      liff.getProfile()
+      .then(profile => {
+        this.userProfile = profile
+        this.id_user = this.userProfile['userId']
+      })
+      .catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+    },
+    Answer(text){
+      text.answer.push({body : this.text2})
+      
+      Axios.post(addanswer_api,{"name": this.id_user,"id" : text.id,"body" : this.text2})
+      .catch(err => alert(err));
+      this.text2="";
+    },
+    Question() {
+      Axios.post(addquestion_api,{"name": this.$route.params.Name,"user" : this.id_user,"comment" : this.text})
+      .then(() =>{
+        Axios.post(mongo_api,{"name" : this.$route.params.Name})
+        .then(res => {
+          this.listtext_old = res.data.Question
+        })
+        .catch(err => alert(err));
+          
+      })
+      .catch(err => alert(err+" :Question"));
       this.text = "";
-      this.$refs["input-comment"].focus();
+      
+      
+    
+      // this.$refs["input-comment"].focus();
+      
+
     },
     setcheck() {
       this.check = false;
-    }
+    },
+  },
+  created(){
+    this.getProfile()
+    Axios.post(mongo_api,{"name" : this.$route.params.Name})
+        .then(res => {
+          this.listtext_old = res.data.Question
+          console.log(this.listtext_old[0]+" asadasdas");
+        })
+        .catch(err => alert(err));
   }
 };
 </script>
@@ -135,7 +181,7 @@ export default {
   border-radius: 15px;
 }
 .container-view-comment-list {
-  width: 80%;
+  width: 90%;
   height: 120px;
   background: bisque;
   position: relative;
@@ -145,19 +191,9 @@ export default {
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-.container-view-comment-list ::before {
-  content: "";
-  position: absolute;
-  right: 100%;
-  top: 26px;
-  width: 0;
-  height: 0;
-  border-top: 13px solid transparent;
-  border-right: 26px solid bisque;
-  border-bottom: 13px solid transparent;
-}
+
 .container-view-comment-list2 {
-  width: 80%;
+  width: 90%;
   height: 120px;
   background: bisque;
   position: relative;

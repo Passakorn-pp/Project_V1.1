@@ -59,7 +59,7 @@ const routes = [
     component: Profile_like
   },
   {
-    path: "/myhor",
+    path: "/myhor:Name",
     name: "myhor",
     component: Myhor
   },

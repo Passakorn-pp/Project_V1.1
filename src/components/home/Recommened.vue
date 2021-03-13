@@ -13,7 +13,7 @@
   
             <flickity ref="flickity" :options="flickityOptions" >
             
-              <div v-for="(s,i) in slides" :key="i" class="container-Recommened-card" @click="setview(s)" >
+              <div v-for="(s,i) in room" :key="i" class="container-Recommened-card" @click="setview(s)" >
                 <img :src="s.img" class="container-Recommened-card-img" >
                 <div class="container-Recommened-card-text">
                   <h6 style="float: left;">{{s.name}} </h6>
@@ -46,6 +46,7 @@
 <script>
 import Axios from "axios";
 let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
+let history_api = "http://127.0.0.1:8000/api/history/";
 // import { slider, slideritem } from 'vue-concise-slider';
 import Flickity from 'vue-flickity';
 export default {
@@ -55,7 +56,7 @@ export default {
     },
   data() {
     return {
-      
+      id_user : "",
       slideIndex: 1,
       silder: 0,
       flickityOptions: {
@@ -65,7 +66,7 @@ export default {
         draggable: false,
         // any options from Flickity can be used
       },
-      room : null,
+      room : [{},{},{},{},{},{},{},{},{},{}],
       
       slides: [
         {
@@ -175,7 +176,33 @@ export default {
           star: 4,
           distance: 500,
           selected: ["woman","man","wifi","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
-        },     
+        },    
+        {
+          name: "หอพักน้ำไทย",
+          water_bill : "150 บาท/เดือน",
+          elect_bill : "7 บาท/หน่วย",
+          img : "https://sv1.picz.in.th/images/2020/11/24/jdctMl.jpg",
+          room:
+          [
+            {
+              nameroom : "ห้องเล็ก",
+              price : "3500",
+              free : 10,
+            },
+            {
+              nameroom : "ห้องใหญ่",
+              price : "3500",
+              free : 2,
+            }
+          ],
+          face:"หอพักน้ำไทย",
+          line:"หอพักน้ำไทย",
+          call:"012-345-6789",
+          address:"",
+          star: 4,
+          distance: 500,
+          selected: ["woman","man","wifi","fan","tv","refrigerator","table","parking_lot","elevators","security camera","keycard","laundry"],
+        }, 
       ]
     };
   },
@@ -185,16 +212,27 @@ export default {
     
   // },
   async created(){
+    this.getProfile()
     await Axios.get(mongo_api)
       .then(res => {
-        this.slides = res.data.dormitory
+        this.room = res.data.dormitory
         console.log(this.slides);
     
       })
       .catch(err => alert(err));
   },
   methods: {
-
+    getProfile(){
+      const liff = this.$liff
+      liff.getProfile()
+      .then(profile => {
+        this.userProfile = profile
+        this.id_user = this.userProfile['userId']
+      })
+      .catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+    },
     next() {
       this.$refs.flickity.next();
     },
@@ -204,7 +242,12 @@ export default {
     },
     setview(value){
       // this.$store.dispatch("addView",value);
-      this.$router.push({name:'view',params:{Name:value.name}});
+      Axios.post(history_api,{"name": value.name,"user_id":this.id_user})
+      .then(() => {
+        this.$router.push({name:'view',params:{Name:value.name}});
+      })
+      .catch(err => alert(err));
+      
       
     },
     check(index) {

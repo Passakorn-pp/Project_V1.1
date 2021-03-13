@@ -5,6 +5,9 @@
     </div>
     <div class="cotainer-view-detail-head-view">
       <h1 class="text-head-view"> {{room.name}}</h1>
+      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='man'">(หอพักชาย)</h5>
+      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='woman'">(หอพักหญิง)</h5>
+      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='man/woman'">(หอพัก ชาย/หญิง)</h5>
       <div style="width: 30%; float: right; margin-top:2%" > 
       <span style="float: right; width: 70%; text-align :left;">{{ status }}</span>
         <b-form-checkbox
@@ -29,10 +32,10 @@
       <br>
       <br>
       <br>
-      <div style="width: 40%; float: left; text-align: left; ">
+      <div style="width: 40%; float: left; text-align: left; margin-top:-1%">
         <h4 >{{"ราคา "+room.room[0].price+"-"+room.room[room.room.length-1].price+" บาท"}}</h4>
       </div>
-      
+
       <!-- <div style="width: 50%; float: right; margin-right:2%">
         <div v-if="room.wifi" >
           <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: right; margin-left:15px">
@@ -134,7 +137,7 @@ export default {
   color: black;
   float: left;
   text-align: left;
-  width: 60%;
+  width: max-content;
 
 }
 .img-head-view{
