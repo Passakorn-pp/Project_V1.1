@@ -8,7 +8,7 @@
       </button> -->
       <h3 style="display: inline-block;">รายการหอพัก</h3>
     </div>
-    <div style="width:1300px">
+    <div style="width:1300px;">
       <div class="container-filter-body" id="filter">
       <div class="container-filter-body-head">
         <h2 style="  line-height: 2;" >ค้นหาตามใจชอบ</h2>
@@ -51,7 +51,6 @@
       <button v-on:click="activetab='หอพักเงียบสงบ',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'หอพักเงียบสงบ' ? 'active' : '' ]" style="width: 15%;">หอพักเงียบสงบ</button>
       <button v-on:click="activetab='หอพักครื้นแครง',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'หอพักครื้นแครง' ? 'active' : '' ]" style="width: 15%;">หอพักครื้นเครง</button>
       <button v-on:click="activetab='หอพักย่านของกิน',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'หอพักย่านของกิน' ? 'active' : '' ]" style="width: 20%;">หอพักย่านของกิน</button>
-      <button v-on:click="activetab='ลดราคา',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'ลดราคา' ? 'active' : '' ]">ลดราคา</button>
     </div>
 <!-- <div class="container-select">
               <b-table
@@ -103,11 +102,11 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room['1'].price">
-                  ราคา {{user.room['0'].price+"-"+user.room['1'].price+" บาท"}}
+                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                  ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
-                  ราคา {{user.room['1'].price+" บาท"}}
+                  ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
                   ระยะทางจากมหาลัย {{user.distance}} เมตร
@@ -629,120 +628,13 @@
               
           </div>
         </div>
-      </div>
-      <div v-if="activetab === 'ลดราคา'" class="container-recommend-body2">
-        <div v-for="(user,index) in this.useritem" :key="index"  >
-          <div class="container-ui-recommend2">
-            <div >
-              <div class="container-in-ui-recommend2" @click="setview(user)">
-                <b-img class="img-recommend2" :src="user.img"/>
-              </div>
-            </div>
-                
-            <div>
-              <div class="container-in-ui-recommend2" style="border-right: 1px solid silver; width: 42%; height: 213px;" >
-                <div class="name-home2">
-                  {{ user.name }}
-                </div>
-                    
-                <div class="name-home3" v-if="user.room['0'].price!=user.room['1'].price">
-                  ราคา {{user.room['0'].price+"-"+user.room['1'].price+" บาท"}}
-                </div>
-                <div class="name-home3" v-else>
-                  ราคา {{user.room['1'].price+" บาท"}}
-                </div>
-                <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
-                </div>
-                <div class="rating-recomend2 ">
-                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
-                </div>
-                    
-                <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
-                  <div v-if="showfilter('man',user)">
-                      <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('woman',user)">
-                    <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('wifi',user)">
-                    <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('air',user)">
-                    <img src="@/assets/air-conditioner (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('fan',user)">
-                    <img src="@/assets/fan (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-                      
-                  <div v-if="showfilter('tv',user)">
-                    <img src="@/assets/television.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('refrigerator',user)">
-                    <img src="@/assets/refrigerator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('table',user)">
-                    <img src="@/assets/desk.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <br>
-                  <br>
-                      
-                  <div v-if="showfilter('parking_lot',user)">
-                    <img src="@/assets/parking-area.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-                  
-                  <div v-if="showfilter('elevators',user)">
-                    <img src="@/assets/elevator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('security camera',user)">
-                    <img src="@/assets/cctv.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('keycard',user)">
-                    <img src="@/assets/key-card.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-
-                  <div v-if="showfilter('laundry',user)">
-                    <img src="@/assets/laundry-shop.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
-                </div>
-
-                    
-              </div>
-            </div>
-                
-            <div>
-              <div class="container-in-ui-recommend2" @click="setview(user)" style="width: 25%; height: 213px;">
-                <div class="name-home2">
-                  ขนาดห้อง
-                </div>
-                <div v-for="index in user.room.length" :key="index">
-                  <div class="ss">
-                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button> 
-                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{user.room[index-1].free}}</h3> ห้อง</h6>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-              
-          </div>
-        </div>
       </div> -->
       
+      
     </div>
       
     </div>
-    <div style="width: 100%; min-width:1500px; float: left; margin-top:2%; display: flex; justify-content: center; " >
+    <div style="width: 50%; min-width:1300px; float: left; margin-top:2%; display: flex; justify-content: center; margin-left:15%;" >
       <div @click="changePage()" style="width: max-content; " >
         <b-pagination
           v-model="currentPage"
@@ -1089,7 +981,7 @@ components: {
   float: left;
   height: 50px;
   position: relative;
-  left: 4%;
+  left: 15%;
 }
 .container-select{
   width: 100%;
@@ -1115,7 +1007,7 @@ components: {
 .container-filter-body {
   position: relative;
   min-width: 250px;
-  left: 2%;
+  left: 13%;
   width: 20%;
   height: max-content;
   float: left;
@@ -1136,7 +1028,7 @@ components: {
   float: left;
   height: 100%;
   position: relative;
-  left: 4%;
+  left: 15%;
   border-top: 1px solid silver;
 }
 .container-ui-recommend2:hover {

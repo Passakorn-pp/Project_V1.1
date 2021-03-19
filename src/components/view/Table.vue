@@ -41,54 +41,6 @@
           <span class="text-filter" >หอพักหญิง</span> 
         </div>    
       </div> -->
-      <div class="box-filter"  v-if="showFilter('wifi')">
-        <div class="left">
-          <img src="@/assets/wifi.png" class="img">
-        </div>
-        <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >wifi</span> 
-        </div>    
-      </div> 
-      <div class="box-filter"  v-if="showFilter('air')">
-        <div class="left">
-          <img src="@/assets/air-conditioner (1).png" class="img">
-        </div>
-        <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >แอร์</span> 
-        </div>    
-      </div> 
-      <div class="box-filter"  v-if="showFilter('fan')">
-        <div class="left">
-          <img src="@/assets/fan (1).png" class="img">
-        </div>
-        <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >พัดลม</span> 
-        </div>    
-      </div> 
-      <div class="box-filter"  v-if="showFilter('tv')">
-        <div class="left">
-          <img src="@/assets/television.png" class="img">
-        </div>
-        <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >ทีวี</span> 
-        </div>    
-      </div> 
-      <div class="box-filter"  v-if="showFilter('refrigerator')">
-        <div class="left">
-          <img src="@/assets/refrigerator.png" class="img">
-        </div>
-        <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >ตู้เย็น</span> 
-        </div>    
-      </div> 
-      <div class="box-filter"  v-if="showFilter('table')">
-        <div class="left">
-          <img src="@/assets/desk.png" class="img">
-        </div>
-        <div class="right" style="line-height: 2.5;">
-          <span class="text-filter" >โต๊ะ</span> 
-        </div>    
-      </div> 
       <div class="box-filter"  v-if="showFilter('parking_lot')">
         <div class="left">
           <img src="@/assets/elevator.png" class="img">

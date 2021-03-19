@@ -37,7 +37,7 @@
           <div style="width: 30%; float: right;">
               <b-form-rating v-model="home.star" readonly no-border variant="warning" style="background: none; "></b-form-rating>
           </div>
-          <h5 style="float: left; width: 50%;">จำนวนคนกดถูกใจ 20 คน </h5>
+          <h5 style="float: left; width: 50%;">จำนวนคนกดถูกใจ {{this.like.length}} คน </h5>
           
       </div>
       <!-- <div style="margin: auto; ">
@@ -56,6 +56,8 @@
 <script>
 import Axios from "axios";
 let mongo_api = "http://127.0.0.1:8000/api/gethistory/";
+let getlike_api = "http://127.0.0.1:8000/api/GetMormitoryLike/";
+
 import Flickity from 'vue-flickity';
 export default {
   components: {
@@ -68,6 +70,7 @@ export default {
     return {
       home :  this.room,
       data : null,
+      like : null,
       flickityOptions: {
         pageDots: false,
         wrapAround: false,
@@ -113,6 +116,11 @@ export default {
           this.data = res.data
           this.peple = this.data.User
           console.log(this.peple);
+        })
+        .catch(err => alert(err));
+    Axios.post(getlike_api,{"name" : this.$route.params.Name})
+        .then(res => {
+          this.like = res.data
         })
         .catch(err => alert(err));
   }

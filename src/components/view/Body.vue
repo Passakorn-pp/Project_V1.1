@@ -7,39 +7,50 @@
       <div v-for="(rooms,index) in room.room" :key="index">
         <div class="contianer-room">
           <div class="left" v-if="index==1">
-            <img src="https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg" class="img-room" />
+            <img :src="rooms.img" class="img-room" />
             
           </div>
           <div class="left" v-else>
-            <img src="https://sv1.picz.in.th/images/2020/12/10/j5fj60.jpg" class="img-room" />
+            <img :src="rooms.img" class="img-room" />
             
           </div>
           <div class="center">
-            <div class="view-center-text" >{{rooms.nameroom}}</div>
+            <div class="view-center-text" >{{rooms.name}}</div>
             <div class="text-detil-room">ราคา {{rooms.price}}</div>
-            <!-- <div style="widht:100%; margin-left:5%; margin-top:1%">
-              <div v-if="home.wifi" >
-                <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:15px">
-                
-              </div >
-              <div v-if="home.air">
-                <img src="@/assets/air-conditioner (1).png" class="img-icon-view-head" style="float: left; margin-right:15px">
-                
-              </div>
-              <div v-if="home.fan">
-                <img src="@/assets/fan (1).png" class="img-icon-view-head" style="float: left; margin-right:15px">
-                
-              </div>
-              <div v-if="home.typeMen">
-                <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:15px">
-                
-              </div>
-              
-              <div v-if="home.typeWomen">
-                <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:15px">
-                
-              </div>
-            </div> -->
+            <div class="text-detil-room" style="margin-top:3%;">มีห้องว่าง {{rooms.free}} ห้อง</div>
+            <div style="padding-left: 15px; margin-top:5%; overflow: hidden;">  
+                  <!-- <div v-if="showfilter('man',user)">
+                      <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div>
+
+                  <div v-if="showfilter('woman',user)">
+                    <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div> -->
+
+                  <div v-if="showfilter('wifi',rooms)">
+                    <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div>
+
+                  <div v-if="showfilter('air',rooms)">
+                    <img src="@/assets/air-conditioner (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div>
+
+                  <div v-if="showfilter('fan',rooms)">
+                    <img src="@/assets/fan (1).png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div>
+                      
+                  <div v-if="showfilter('tv',rooms)">
+                    <img src="@/assets/television.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div>
+
+                  <div v-if="showfilter('refrigerator',rooms)">
+                    <img src="@/assets/refrigerator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div>
+
+                  <div v-if="showfilter('table',rooms)">
+                    <img src="@/assets/desk.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
+                  </div>
+            </div>
           </div>
 
           <div class="right">
@@ -97,6 +108,17 @@ export default {
 
     }
   },
+  methods:{
+    showfilter(item,user){
+      if(user.filter[0][item] == true){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+      
+  }
   
 }
   
@@ -167,7 +189,7 @@ export default {
   float: right;
 }
 .text-detil-room{
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
   margin: 0 5%;
   margin-bottom: 2%;

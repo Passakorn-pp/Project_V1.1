@@ -9,7 +9,9 @@ import VueAgile from 'vue-agile';
 import VueSession from 'vue-session';
 import VCalendar from 'v-calendar';
 import axios from "axios";
+import FileSelector from 'vue-file-selector';
 
+Vue.use(FileSelector);
 Vue.use(axios);
 Vue.use(VueSession)
 

@@ -25,18 +25,22 @@
       <input type="text" v-model="dormitory.call" required>
       <br>
       <label  style="margin-right:8.5%;">ค่าน้ำ</label>
-      <input type="text" v-model="dormitory.water_bill" required>
+      <input type="number" v-model="dormitory.water_bill" required>
       <br>
       <label  style="margin-right:8.5%;">ค่าไฟ</label>
-      <input type="text" v-model="dormitory.elect_bill" required>
+      <input type="number" v-model="dormitory.elect_bill" required>
       <br>
+      <label  style="margin-right:8.5%;">รูปภาพ</label>
+      <br>
+      <input type="file" @change="onFileChange" accept="image/*">
+      <img :src="dormitory.img" alt="" v-if="dormitory.img">
       <br>
       <label for="gender" style="margin-right:3%;">ประเภทหอพัก</label>
-      <input name="gender" type="radio" id="one" value="หอรวม" v-model="dormitory.typedormitory" style="margin-right:1%;" required>
+      <input name="gender" type="radio" id="one" value="man/woman" v-model="dormitory.typedormitory" style="margin-right:1%;" required>
       <label for="one" style="margin-right:3%;">หอรวม</label>
-      <input name="gender" type="radio" id="one" value="หอชาย" v-model="dormitory.typedormitory" style="margin-right:1%;" required>
+      <input name="gender" type="radio" id="one" value="man" v-model="dormitory.typedormitory" style="margin-right:1%;" required>
       <label for="one" style="margin-right:3%;">หอชาย</label>
-      <input name="gender" type="radio" id="two" value="หอหญิง" v-model="dormitory.typedormitory" style="margin-right:1%;" required>
+      <input name="gender" type="radio" id="two" value="woman" v-model="dormitory.typedormitory" style="margin-right:1%;" required>
       <label for="two">หอหญิง</label>
       <br>
       <label for="typedormitory" style="margin-right:3%; margin-top:1%;">สภาพแวดล้อมหอพัก</label>
@@ -77,6 +81,7 @@
       <label  style="margin-right:3%; margin-top:3%">ห้องพักมีกี่ประเภท</label>
       <input type="number" min="1" style="width:7%" v-model="dormitory.typeroom" @change="setroom()" required>
       <div v-for="(r,index) in dormitory.room" :key="index" >
+        {{index}}
         <h6 style="margin-top:3%">ประเภทห้องที่{{index+1}}</h6>
         <label style="margin-right:3.2%;">ชื่อห้องพัก</label>
         <input type="text"  v-model="dormitory.room[index].nameroom" required>
@@ -86,6 +91,9 @@
         <br>
         <label style="margin-right:5%;">ห้องว่าง</label>
         <input type="number"  v-model="dormitory.room[index].free" required>
+        <br>
+        <input type="file" @change="onFileChange2(index, $event)" accept="image/*">
+        <img :src="dormitory.room[index].img" alt="" v-if="dormitory.room[index].img">
         <br>
         <h5 style="margin-top:2%">สิ่งอำนวยความสะดวกภายในห้อง</h5>
         <input type="checkbox" style="margin-right:1%;" value="wifi" :id="'wifi'+index" v-model="dormitory.room[index].filter">
@@ -101,7 +109,6 @@
         <input type="checkbox" style="margin-right:1%;" value="table" :id="'table'+index" v-model="dormitory.room[index].filter">
         <label style="margin-right:3%;">โต๊ะ</label>
         <br>
-        {{dormitory.room}}
       </div>
       <!-- {{dormitory.room}} -->
       <br>
@@ -120,12 +127,14 @@ let mongo_api = "http://127.0.0.1:8000/api/addDataDormitory/";
 export default {
   data(){
     return{
+      url: null,
       id_user : null,
       name_user : null,
       type_user : null,
 
       dormitory:{
         name : null,
+        img : null,
         address : null,
         facebook : null,
         line : null,
@@ -141,7 +150,7 @@ export default {
       },
       isCheckAll : true,
       languages : [],
-        
+      count:0
           
         
         
@@ -158,10 +167,44 @@ export default {
   //       .catch(err => alert(err));
   // },
   methods:{
+    onFileChange(event){
+      
+      var selcetimg = event.target.files[0];
+      this.createBase64Imange(selcetimg)
+
+    },
+    onFileChange2(index,event){
+      
+      var selcetimg = event.target.files[0];
+      console.log(selcetimg);
+      this.createBase64Imange2(selcetimg,index)
+
+    },
+    createBase64Imange(img){
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        this.dormitory.img = e.target.result;
+      }
+      reader.readAsDataURL(img)
+    },
+    createBase64Imange2(img2,index){
+      const reader2 = new FileReader();
+      reader2.onload = (e) => {
+       this.dormitory.room[index].img = e.target.result;
+       this.count++
+      }
+      reader2.readAsDataURL(img2)
+
+    },
+    upload(){
+      const fb = new FormData();
+      fb.append('image', this.url, this.url.name)
+    },
     setroom(){
       
       if(this.dormitory.room.length < this.dormitory.typeroom){
-        this.dormitory.room.push({nameroom : null, price : null, free : null,filter : [],})
+        this.dormitory.room.push({nameroom : null, price : null, free : null,filter : [],img:null})
         
       }
       else{
@@ -185,6 +228,7 @@ export default {
     PostData(){
         Axios.post(mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,
                             "name" : this.dormitory.name,
+                            "img" : this.dormitory.img,
                             "water_bill" : this.dormitory.water_bill,
                             "elect_bill" : this.dormitory.elect_bill,
                             "address" : this.dormitory.address,
@@ -207,7 +251,7 @@ export default {
   },
   created(){
     this.getProfile()
-  }
+  },
 };
 </script>
 

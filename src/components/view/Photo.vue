@@ -113,7 +113,7 @@ export default {
   justify-content: center;
   border-radius: 30px;
   overflow: hidden;
-  
+
 }
 
 .carousel.is-fullscreen .carousel-cell {

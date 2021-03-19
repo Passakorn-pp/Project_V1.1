@@ -143,7 +143,7 @@ export default {
         })
         .then(res => {
           if(res.data=="success"){
-            console.log("success");
+            alert("บันทึกสำเร็จ")
           }
         })
         .catch(err => alert(err));

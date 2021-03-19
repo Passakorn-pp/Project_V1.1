@@ -36,10 +36,10 @@
           <template #button-content>
             <b-icon icon="list" scale="2"> </b-icon> <span style="margin-left:10px;">Manu</span>
           </template>
-          <b-dropdown-item-button><router-link to="/test">เทส</router-link ></b-dropdown-item-button>
+          <!-- <b-dropdown-item-button><router-link to="/test">เทส</router-link ></b-dropdown-item-button> -->
           <b-dropdown-item-button><router-link to="#about">เกี่ยวกับ</router-link ></b-dropdown-item-button>
-          <b-dropdown-item-button><router-link to="/profile" v-if="check">ข้อมูลส่วนตัว</router-link ></b-dropdown-item-button>
-          <b-dropdown-item-button><router-link to="/profile/like" v-if="check">ถูกใจ</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="/profile" v-if="$store.getters.getUserstate == 'User'">ข้อมูลส่วนตัว</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="/profile/like" v-if="$store.getters.getUserstate == 'User'">ถูกใจ</router-link ></b-dropdown-item-button>
         </b-dropdown>
       </li>
       <li class="li-head" >
@@ -67,16 +67,16 @@
       <div id="manu">
         
         <li class="li-head" id="Head-list" >
-          <router-link to="/test" class="text-above">เทส</router-link >
+          <!-- <router-link to="/test" class="text-above">เทส</router-link > -->
         </li>
         <li class="li-head" id="Head-list">
           <router-link to="#about" class="text-above">เกี่ยวกับ</router-link >
         </li>
         <li class="li-head" id="Head-list" >
-          <router-link to="/profile" class="text-above" v-if="check">ข้อมูลส่วนตัว</router-link >
+          <router-link to="/profile" class="text-above" v-if="$store.getters.getUserstate == 'User'">ข้อมูลส่วนตัว</router-link >
         </li>
         <li class="li-head" id="Head-list" >
-          <router-link to="/profile/like" class="text-above" v-if="check">ถูกใจ</router-link >
+          <router-link to="/profile/like" class="text-above" v-if="$store.getters.getUserstate == 'User'">ถูกใจ</router-link >
         </li>
       </div>
       

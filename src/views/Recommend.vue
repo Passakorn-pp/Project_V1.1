@@ -1,15 +1,11 @@
 <template>
-  <div >
-    <div >
+  <div class="container-main-recommend">
       <Header ></Header>
-      <div class="container-main-recommend">
-        <Body2></Body2>
-      </div>
+      <Body2></Body2>
       
       <!-- <Add></Add> -->
-      <Sell></Sell>
+      <!-- <Sell></Sell> -->
       
-    </div>
     
   </div>
   
@@ -19,7 +15,7 @@
 import Body2 from "@/components/recommend/Body2 copy.vue";
 import Header from "@/components/home/Head.vue";
 // import Add from "@/components/recommend/Add.vue";
-import Sell from "@/components/recommend/Sell.vue";
+// import Sell from "@/components/recommend/Sell.vue";
 
 export default {
   data() {
@@ -30,7 +26,7 @@ export default {
     Body2,
     Header,
     // Add,
-    Sell,
+    // Sell,
   },
   mounted() {
     window.scrollTo({top:0, left:0, behavior: 'smooth'})
@@ -50,5 +46,7 @@ export default {
 </script>
 
 <style scoped>
-
+/* .container-main-recommend{
+  background: #f8f6e7;
+} */
 </style>

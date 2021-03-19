@@ -9,24 +9,29 @@
       <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='woman'">(หอพักหญิง)</h5>
       <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='man/woman'">(หอพัก ชาย/หญิง)</h5>
       <div style="width: 30%; float: right; margin-top:2%" > 
-      <span style="float: right; width: 70%; text-align :left;">{{ status }}</span>
+      <div v-if="$store.getters.getUserstate == 'User'" >
+        <span style="float: right; width: 70%; text-align :left;">{{ status }}</span>
         <b-form-checkbox
           style="float: right; "
           v-model="status"
           value="เพิ่มแล้ว"
           unchecked-value="เพิ่มในรายการที่สนใจ"
-          v-if="$store.getters.getUserstate == 'User'"
+          @click="setlike()"
         >
         </b-form-checkbox>
-        <b-form-checkbox
-          style="float: right; "
-          v-model="status"
-          value="เพิ่มแล้ว"
-          unchecked-value="เพิ่มในรายการที่สนใจ"
-          disabled
-          v-else
-        >
-        </b-form-checkbox> 
+      </div>
+      <div v-else style="display:none">
+        <span style="float: right; width: 70%; text-align :left;">{{ status }}</span>
+          <b-form-checkbox
+            style="float: right; "
+            v-model="status"
+            value="เพิ่มแล้ว"
+            unchecked-value="เพิ่มในรายการที่สนใจ"
+            @change="setlike()" 
+          >
+          </b-form-checkbox>
+        
+      </div>
         
       </div>
       <br>
@@ -89,16 +94,56 @@
 </template>
 
 <script>
+import Axios from "axios";
+let setlike_api = "http://127.0.0.1:8000/api/setlike/";
+let getlike_api = "http://127.0.0.1:8000/api/getlike/";
 export default {
   props: [
     'room'
   ],
   data() {
     return {
+      id_user : "",
       status: 'เพิ่มในรายการที่สนใจ',
-      value: 3
+      value: 3,
+      like : false
     }
   },
+  methods:{
+    getProfile(){
+      const liff = this.$liff
+      liff.getProfile()
+      .then(profile => {
+        this.userProfile = profile
+        this.id_user = this.userProfile['userId']
+      })
+      .catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+    },
+    setlike(){
+      console.log(this.like +" :like");
+      this.like = !this.like
+      let status = ""
+      if(this.like == true){
+        status = "like"
+      }
+      else{
+        status = "dislike"
+      }
+      Axios.post(setlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user,"status" : status})
+      .catch(err => alert(err));
+    }
+  },
+  created(){
+    this.getProfile()
+    Axios.post(getlike_api,{"name" : this.$route.params.Name,"user_id" : "U2adb705541e0ba188353355c15ccc074"})
+    .then(res => {
+      console.log(res + " :datalike");
+      this.status = res.data
+    })
+    .catch(err => alert(err));
+  }
 };
 </script>
 

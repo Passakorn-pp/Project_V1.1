@@ -18,9 +18,30 @@
       <br>
     </div>
     <img src="@/assets/13.jpg" class="test-img">   -->
+    
 
+     <form @submit.prevent="submitForm">
+        <div class="form-group">
+            <label for="title">Post Title</label>
+            <input type="text" name="title" class="form-control" id="title" placeholder="Enter Post Title" v-model="formFields.title">
+          </div>
 
+          <div class="form-group">
+            <label for="description">Post Description</label>
+            <textarea name="description" class="form-control" v-model="formFields.description"></textarea>
+          </div>
 
+          <div class="form-group">
+            <label for="description">Picture</label>
+            <input type="file" name="picture" class="form-control-file" id="picture" @change="onFileChange">
+          </div>
+
+          <div class="form-group">
+            <input type="submit" class="btn btn-success" />
+          </div>
+    </form>
+    <img :src="formFields.picture" alt="" v-if="formFields.picture">
+    {{formFields.picture}}
   </div>
 
   
@@ -32,6 +53,16 @@ export default {
 
  data(){
    return{
+    formFields: {
+                title: null,
+                description: null,
+                picture: null
+              },
+    imagePreview: null,
+    showPreview: false,
+
+
+
     table : true,
     chair : true,
     bed : true,
@@ -65,6 +96,20 @@ export default {
    }
  },
  methods:{
+  onFileChange(event){
+    
+    var selcetimg = event.target.files[0];
+    this.createBase64Imange(selcetimg)
+    console.log(this.formFields.picture);
+  },
+  createBase64Imange(img){
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      this.formFields.picture = e.target.result;
+    }
+    reader.readAsBinaryString(img)
+  },
     orderedItems() {
       var useitem = [];
       console.log(this.items);

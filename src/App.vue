@@ -77,6 +77,9 @@ export default {
             console.error(err)
           })  
         }
+        else{
+          this.$store.dispatch("setUserState",null);
+        }
       }).catch((err) => {
         console.error('LIFF initialize error', err)
       })

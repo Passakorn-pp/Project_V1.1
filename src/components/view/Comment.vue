@@ -4,45 +4,51 @@
       <span class="text-view-comment-header">ความคิดเห็น</span>
     </div>
     <div class="container-view-comment-body">
-      <b-form-input
-        v-model="text"
-        ref="input-comment"
-        required
-        class="input-view-comment"
-        placeholder="แสดงความคิดเห็น"
-      ></b-form-input>
+      <div id="question" style="position: relative; margin-bottom:10%;">
+         <b-form-input
+          v-model="text"
+          ref="input-comment"
+          required
+          class="input-view-comment"
+          placeholder="แสดงความคิดเห็น"
+        ></b-form-input>
 
-      <b-button
-        v-if="text == ''"
-        disabled
-        class="button-view-comment"
-        variant="primary"
-        >Submit</b-button
-      >
-      <b-button
-        v-else
-        @click="Question()"
-        class="button-view-comment"
-        variant="primary"
-        >Submit</b-button
-      >
+        <b-button
+          v-if="text == ''"
+          disabled
+          class="button-view-comment"
+          variant="primary"
+          >Submit</b-button
+        >
+        <b-button
+          v-else
+          @click="Question()"
+          class="button-view-comment"
+          variant="primary"
+          >Submit</b-button
+        >
+      </div>
+     
 
-      <br />
-      <br />
-
-      <div v-for="(text,index) in listtext_old" :key="index">
+      <div v-for="(text,index) in listtext_old" :key="index" style="position: relative;">
         <b-avatar
           icon="people-fill"
           style="float: left; margin-top: 3%; margin-left:-5%;"
         ></b-avatar>
         <div class="container-view-comment-list">
+          <div style="widht:100%; heigth:40px; border-bottom: 1px solid  silver;">
+            <h6 style="text-align: left; padding:10px 10px">{{text.user.name_user}}</h6>
+          </div>
           <span class="text-view-comment-list">{{ text.comment }}</span>
         </div >
-        <div style="width:100%; margin-top:1%; margin-left:5%; display: flex; justify-content: left;">
-          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2">
-          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text)">ยืนยัน</button>
+        <div v-if="$store.getters.getUserstate == null" style="width:100%; margin-top:1%; margin-left:5%; display: flex; justify-content: left; display:none">
+          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2"  >
+          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text)"  >ยืนยัน</button>
         </div>
-          
+        <div v-else style="width:100%; margin-top:1%; margin-left:5%; display: flex; justify-content: left;">
+          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2"  >
+          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text)"  >ยืนยัน</button>
+        </div>  
         
         <div style="margin-left:10%">
           <div v-for="(text2,index) in text.answer" :key="index">
@@ -51,6 +57,9 @@
             style="float: left; margin-top: 3%; margin-left:-5%;"
           ></b-avatar>
           <div class="container-view-comment-list">
+            <div style="widht:100%; heigth:40px; border-bottom: 1px solid  silver;">
+              <h6 style="text-align: left; padding:10px 10px">{{text2.user.name_user}}</h6>
+            </div>
             <span class="text-view-comment-list">{{ text2.body }}</span>
           </div>
           </div>
@@ -126,13 +135,23 @@ export default {
     },
   },
   created(){
-    this.getProfile()
+    if(this.$store.getters.getUserstate == 'User' || this.$store.getters.getUserstate == 'Dormitory'){
+      this.getProfile()
+    }
+
     Axios.post(mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
           this.listtext_old = res.data.Question
-          console.log(this.listtext_old[0]+" asadasdas");
+          console.log(this.listtext_old);
         })
         .catch(err => alert(err));
+  },
+  mounted(){
+    console.log(this.$store.getters.getUserstate);
+    if(this.$store.getters.getUserstate == null ){
+      document.getElementById("question").style.display = "none";
+      
+    }
   }
 };
 </script>
@@ -151,7 +170,6 @@ export default {
   width: 90%;
   position: relative;
   border-bottom: 1px solid silver;
-
   margin: auto;
 }
 .text-view-comment-header {
@@ -190,6 +208,7 @@ export default {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
+  border: 1px solid silver;
 }
 
 .container-view-comment-list2 {
@@ -218,6 +237,6 @@ export default {
   font-size: 24px;
   text-align: center;
   float: left;
-  padding: 30px;
+  padding: 8px 20px;
 }
 </style>

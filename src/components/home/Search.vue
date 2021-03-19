@@ -21,7 +21,7 @@
             variant="warning"
             class="container-home-search-submit"
             @click="submit()"
-            >Submit</b-button
+            >ไปยังหอพัก</b-button
           >
         </b-form>
       </div>

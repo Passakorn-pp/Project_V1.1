@@ -127,6 +127,7 @@ export default {
   margin-top:5%;
   transition: 0.5s ease-in;
   background: white;
+
 }
 .button-tap{
   z-index: 15;
