@@ -10,7 +10,9 @@ import VueSession from 'vue-session';
 import VCalendar from 'v-calendar';
 import axios from "axios";
 import FileSelector from 'vue-file-selector';
-
+import VueLazyload from 'vue-lazyload'
+ 
+Vue.use(VueLazyload)
 Vue.use(FileSelector);
 Vue.use(axios);
 Vue.use(VueSession)

@@ -28,7 +28,7 @@
       <br>
       <br>
 
-      <button @click="PostData()" >ยืนยัน</button>
+      <button type="submit" @click="PostData()" style="border-radius: 15px; border: none; background: #e4c275; width: 80px; color: white; height: 40px;">ยืนยัน</button>
       </form>
     </div>
 

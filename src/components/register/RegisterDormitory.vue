@@ -13,7 +13,7 @@
       <input name="address" type="text" v-model="dormitory.address" required>
       <br>
       <br>
-      <label>ส่วนติดต่อเข้าของหอพัก</label>
+      <h5  style="margin: auto; margin-top:2%;">รายละเอียดหอพัก</h5>
       <br>
       <label style="margin-right:3.3%; margin-top:1%">Facebook</label>
       <input type="text" v-model="dormitory.facebook" required>
@@ -30,11 +30,7 @@
       <label  style="margin-right:8.5%;">ค่าไฟ</label>
       <input type="number" v-model="dormitory.elect_bill" required>
       <br>
-      <label  style="margin-right:8.5%;">รูปภาพ</label>
-      <br>
-      <input type="file" @change="onFileChange" accept="image/*">
-      <img :src="dormitory.img" alt="" v-if="dormitory.img">
-      <br>
+      
       <label for="gender" style="margin-right:3%;">ประเภทหอพัก</label>
       <input name="gender" type="radio" id="one" value="man/woman" v-model="dormitory.typedormitory" style="margin-right:1%;" required>
       <label for="one" style="margin-right:3%;">หอรวม</label>
@@ -51,6 +47,29 @@
       <input name="typedormitory" type="radio" id="two" value="ย่านของกิน" v-model="dormitory.environment" style="margin-right:1%;" required>
       <label for="two">ย่านของกิน</label>
       <br>
+      <h5  style="margin: auto; margin-top:2%;">รูปภาพหน้าปก</h5>
+      <br>
+      <input type="file" @change="onFileChange" accept="image/*" required>
+      <br>
+      <img :src="dormitory.img" alt="" v-if="dormitory.img" style="heiht:100px; width:100px;">
+      <br>
+      <h5 style="margin: auto; margin-top:2%;">รูปภาพทั้งหมด</h5>
+      <br>
+      <div style="display: flex; justify-content: center;">
+        <vue-upload-multiple-image
+        @upload-success="uploadImageSuccess"
+        @before-remove="beforeRemove"
+        :data-images="images"
+        idUpload="myIdUpload"
+        editUpload="myIdEdit"
+        dragText = "คลิกเลือกรูปภาพ"
+        browseText = ""
+        :showPrimary = showPrimary
+        :maxImage = max
+        :showEdit = showEdit
+        
+        ></vue-upload-multiple-image>
+      </div>
       <!-- <h5>สิ่งอำนวยความสะดวกภายในห้อง</h5>
       <input type="checkbox" style="margin-right:1%;">
       <label style="margin-right:3%;">wifi</label>
@@ -66,6 +85,7 @@
       <label style="margin-right:3%;">โต๊ะ</label>
       <br>
       <br> -->
+      <br>
       <h5 style="margin-top:2%;">สิ่งอำนวยความสะดวกหอพัก</h5>
       <input type="checkbox" style="margin-right:1%;" value="parking_lot" v-model="dormitory.filterDor">
       <label style="margin-right:3%;">ลานจอดรถ</label>
@@ -81,7 +101,6 @@
       <label  style="margin-right:3%; margin-top:3%">ห้องพักมีกี่ประเภท</label>
       <input type="number" min="1" style="width:7%" v-model="dormitory.typeroom" @change="setroom()" required>
       <div v-for="(r,index) in dormitory.room" :key="index" >
-        {{index}}
         <h6 style="margin-top:3%">ประเภทห้องที่{{index+1}}</h6>
         <label style="margin-right:3.2%;">ชื่อห้องพัก</label>
         <input type="text"  v-model="dormitory.room[index].nameroom" required>
@@ -92,8 +111,9 @@
         <label style="margin-right:5%;">ห้องว่าง</label>
         <input type="number"  v-model="dormitory.room[index].free" required>
         <br>
-        <input type="file" @change="onFileChange2(index, $event)" accept="image/*">
-        <img :src="dormitory.room[index].img" alt="" v-if="dormitory.room[index].img">
+        <input type="file" @change="onFileChange2(index, $event)" accept="image/*" required>
+        <br>
+        <img :src="dormitory.room[index].img" alt="" v-if="dormitory.room[index].img" style="heiht:100px; width:100px;">
         <br>
         <h5 style="margin-top:2%">สิ่งอำนวยความสะดวกภายในห้อง</h5>
         <input type="checkbox" style="margin-right:1%;" value="wifi" :id="'wifi'+index" v-model="dormitory.room[index].filter">
@@ -112,7 +132,7 @@
       </div>
       <!-- {{dormitory.room}} -->
       <br>
-      <button @click="PostData()">ยืนยัน</button>
+      <button type="submit" @click="PostData()" style="border-radius: 15px; border: none; background: #e4c275; width: 80px; color: white; height: 40px;">ยืนยัน</button>
       </form>
       
       
@@ -123,15 +143,23 @@
 
 <script>
 import Axios from "axios";
+import VueUploadMultipleImage from 'vue-upload-multiple-image'
 let mongo_api = "http://127.0.0.1:8000/api/addDataDormitory/";
 export default {
+  components: {
+    VueUploadMultipleImage
+  },
   data(){
     return{
+      max: 100,
+      showPrimary : false,
+      showEdit : false,
+      images: [],
       url: null,
       id_user : null,
       name_user : null,
       type_user : null,
-
+      imgall : [],
       dormitory:{
         name : null,
         img : null,
@@ -238,7 +266,8 @@ export default {
                             "typedormitory" : this.dormitory.typedormitory,
                             "environment" : this.dormitory.environment,
                             "filterDor" : this.dormitory.filterDor,
-                            "room" : this.dormitory.room
+                            "room" : this.dormitory.room,
+                            "imgall" : this.imgall
         })
         .then(res => {
           if(res.data=="success"){
@@ -246,7 +275,27 @@ export default {
           }
         })
         .catch(err => alert(err));
-    }
+    },
+    uploadImageSuccess(formData, index, fileList) {
+      this.imgall.push({"name" : fileList[index].name,
+                        "path" : fileList[index].path})
+      console.log(this.imgall);
+      // Upload image api
+      // axios.post('http://your-url-upload', formData).then(response => {
+      //   console.log(response)
+      // })
+    },
+    beforeRemove (index, done, fileList) {
+      console.log('index', index, fileList)
+      var r = confirm("remove image")
+      if (r == true) {
+        this.imgall.splice(index, 1)
+        done()
+      }
+      
+      console.log(this.imgall);
+    },
+    
 
   },
   created(){

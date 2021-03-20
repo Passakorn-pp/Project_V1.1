@@ -93,6 +93,7 @@ export default {
   background-size: cover;
   width: 100%;
   height: 400px;
+
 }
 .container-home-search-main {
   height: 350px;
