@@ -4,7 +4,7 @@
   <div class="container-mainview" id="c-main">
     
     <Head :room="this.room"></Head>
-    <Photo :room="this.room"></Photo>
+    <Photo></Photo>
 
     <Table :room="this.room"></Table>
 
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       name: "palm",
+      allimg:null,
       check: true,
       room: null
     };
@@ -81,8 +82,8 @@ export default {
   async created(){
     await Axios.post(mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
+          console.log(res.data);
           this.room = res.data.dormitory[0]
-          console.log(this.room +" :room");
         })
         .catch(err => alert(err));
   },

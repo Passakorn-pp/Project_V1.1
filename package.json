@@ -34,7 +34,7 @@
     "vue-sessionstorage": "^1.0.0",
     "vue-sorted-table": "^1.2.0",
     "vue-upload-multiple-image": "^1.1.6",
-    "vueperslides": "^2.9.1",
+    "vueperslides": "^3.2.0",
     "vuetify": "^2.3.10",
     "vuex": "^3.4.0"
   },

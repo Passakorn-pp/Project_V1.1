@@ -48,9 +48,9 @@
     <div class="body-recommend-tab" id="alltab">
       <button v-on:click="activetab='ทั้งหมด',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'ทั้งหมด' ? 'active' : '' ]">ทั้งหมด</button>
       <button v-on:click="activetab='แนะนำ',currentPage = 1,Listitem() " v-bind:class="[ activetab === 'แนะนำ' ? 'active' : '' ]">แนะนำ</button>
-      <button v-on:click="activetab='หอพักเงียบสงบ',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'หอพักเงียบสงบ' ? 'active' : '' ]" style="width: 15%;">หอพักเงียบสงบ</button>
-      <button v-on:click="activetab='หอพักครื้นแครง',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'หอพักครื้นแครง' ? 'active' : '' ]" style="width: 15%;">หอพักครื้นเครง</button>
-      <button v-on:click="activetab='หอพักย่านของกิน',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'หอพักย่านของกิน' ? 'active' : '' ]" style="width: 20%;">หอพักย่านของกิน</button>
+      <button v-on:click="activetab='เงียบสงบ',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'เงียบสงบ' ? 'active' : '' ]" style="width: 15%;">หอพักเงียบสงบ</button>
+      <button v-on:click="activetab='ครื้นเครง',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'ครื้นเครง' ? 'active' : '' ]" style="width: 15%;">หอพักครื้นเครง</button>
+      <button v-on:click="activetab='ย่านของกิน',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'ย่านของกิน' ? 'active' : '' ]" style="width: 20%;">หอพักย่านของกิน</button>
     </div>
 <!-- <div class="container-select">
               <b-table
@@ -197,8 +197,8 @@
       </div>
     
       
-      <!-- <div v-if="activetab === 'แนะนำ'" class="container-recommend-body2" id="tab_b">
-        <div v-for="(user,index) in this.useritem" :key="index"  >
+      <div v-if="activetab === 'แนะนำ'" class="container-recommend-body2" id="tab_b">
+        <div v-for="(user,index) in this.useritem" :key="index" id="my-table"  >
           <div class="container-ui-recommend2">
             <div >
               <div class="container-in-ui-recommend2" @click="setview(user)">
@@ -212,11 +212,11 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room['1'].price">
-                  ราคา {{user.room['0'].price+"-"+user.room['1'].price+" บาท"}}
+                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                  ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
-                  ราคา {{user.room['1'].price+" บาท"}}
+                  ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
                   ระยะทางจากมหาลัย {{user.distance}} เมตร
@@ -226,13 +226,13 @@
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
-                  <div v-if="showfilter('man',user)">
+                  <!-- <div v-if="showfilter('man',user)">
                       <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
                   <div v-if="showfilter('woman',user)">
                     <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
+                  </div> -->
 
                   <div v-if="showfilter('wifi',user)">
                     <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
@@ -261,23 +261,23 @@
                   <br>
                   <br>
                       
-                  <div v-if="showfilter('parking_lot',user)">
+                  <div v-if="showfilterDor('parking_lot',user)">
                     <img src="@/assets/parking-area.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                   
-                  <div v-if="showfilter('elevators',user)">
+                  <div v-if="showfilterDor('elevators',user)">
                     <img src="@/assets/elevator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('security camera',user)">
+                  <div v-if="showfilterDor('security camera',user)">
                     <img src="@/assets/cctv.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('keycard',user)">
+                  <div v-if="showfilterDor('keycard',user)">
                     <img src="@/assets/key-card.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('laundry',user)">
+                  <div v-if="showfilterDor('laundry',user)">
                     <img src="@/assets/laundry-shop.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                 </div>
@@ -291,10 +291,10 @@
                 <div class="name-home2">
                   ขนาดห้อง
                 </div>
-                <div v-for="index in user.room.length" :key="index">
+                <div v-for="(r,index) in user.room" :key="index">
                   <div class="ss">
-                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button> 
-                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{user.room[index-1].free}}</h3> ห้อง</h6>
+                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{r.name}}</button> 
+                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{r.free}}</h3> ห้อง</h6>
                   </div>
 
                 </div>
@@ -305,8 +305,8 @@
           </div>
         </div>
       </div>
-      <div v-if="activetab === 'หอพักเงียบสงบ'" class="container-recommend-body2">
-        <div v-for="(user,index) in this.useritem" :key="index"  >
+      <div v-if="activetab === 'เงียบสงบ'" class="container-recommend-body2">
+        <div v-for="(user,index) in this.useritem" :key="index" id="my-table"  >
           <div class="container-ui-recommend2">
             <div >
               <div class="container-in-ui-recommend2" @click="setview(user)">
@@ -320,11 +320,11 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room['1'].price">
-                  ราคา {{user.room['0'].price+"-"+user.room['1'].price+" บาท"}}
+                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                  ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
-                  ราคา {{user.room['1'].price+" บาท"}}
+                  ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
                   ระยะทางจากมหาลัย {{user.distance}} เมตร
@@ -334,13 +334,13 @@
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
-                  <div v-if="showfilter('man',user)">
+                  <!-- <div v-if="showfilter('man',user)">
                       <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
                   <div v-if="showfilter('woman',user)">
                     <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
+                  </div> -->
 
                   <div v-if="showfilter('wifi',user)">
                     <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
@@ -369,23 +369,23 @@
                   <br>
                   <br>
                       
-                  <div v-if="showfilter('parking_lot',user)">
+                  <div v-if="showfilterDor('parking_lot',user)">
                     <img src="@/assets/parking-area.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                   
-                  <div v-if="showfilter('elevators',user)">
+                  <div v-if="showfilterDor('elevators',user)">
                     <img src="@/assets/elevator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('security camera',user)">
+                  <div v-if="showfilterDor('security camera',user)">
                     <img src="@/assets/cctv.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('keycard',user)">
+                  <div v-if="showfilterDor('keycard',user)">
                     <img src="@/assets/key-card.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('laundry',user)">
+                  <div v-if="showfilterDor('laundry',user)">
                     <img src="@/assets/laundry-shop.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                 </div>
@@ -399,10 +399,10 @@
                 <div class="name-home2">
                   ขนาดห้อง
                 </div>
-                <div v-for="index in user.room.length" :key="index">
+                <div v-for="(r,index) in user.room" :key="index">
                   <div class="ss">
-                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button> 
-                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{user.room[index-1].free}}</h3> ห้อง</h6>
+                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{r.name}}</button> 
+                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{r.free}}</h3> ห้อง</h6>
                   </div>
 
                 </div>
@@ -413,8 +413,8 @@
           </div>
         </div>
       </div>
-      <div v-if="activetab === 'หอพักครื้นแครง'" class="container-recommend-body2">
-        <div v-for="(user,index) in this.useritem" :key="index"  >
+      <div v-if="activetab === 'ครื้นเครง'" class="container-recommend-body2">
+        <div v-for="(user,index) in this.useritem" :key="index" id="my-table"  >
           <div class="container-ui-recommend2">
             <div >
               <div class="container-in-ui-recommend2" @click="setview(user)">
@@ -428,11 +428,11 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room['1'].price">
-                  ราคา {{user.room['0'].price+"-"+user.room['1'].price+" บาท"}}
+                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                  ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
-                  ราคา {{user.room['1'].price+" บาท"}}
+                  ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
                   ระยะทางจากมหาลัย {{user.distance}} เมตร
@@ -442,13 +442,13 @@
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
-                  <div v-if="showfilter('man',user)">
+                  <!-- <div v-if="showfilter('man',user)">
                       <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
                   <div v-if="showfilter('woman',user)">
                     <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
+                  </div> -->
 
                   <div v-if="showfilter('wifi',user)">
                     <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
@@ -477,23 +477,23 @@
                   <br>
                   <br>
                       
-                  <div v-if="showfilter('parking_lot',user)">
+                  <div v-if="showfilterDor('parking_lot',user)">
                     <img src="@/assets/parking-area.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                   
-                  <div v-if="showfilter('elevators',user)">
+                  <div v-if="showfilterDor('elevators',user)">
                     <img src="@/assets/elevator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('security camera',user)">
+                  <div v-if="showfilterDor('security camera',user)">
                     <img src="@/assets/cctv.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('keycard',user)">
+                  <div v-if="showfilterDor('keycard',user)">
                     <img src="@/assets/key-card.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('laundry',user)">
+                  <div v-if="showfilterDor('laundry',user)">
                     <img src="@/assets/laundry-shop.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                 </div>
@@ -507,10 +507,10 @@
                 <div class="name-home2">
                   ขนาดห้อง
                 </div>
-                <div v-for="index in user.room.length" :key="index">
+                <div v-for="(r,index) in user.room" :key="index">
                   <div class="ss">
-                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button> 
-                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{user.room[index-1].free}}</h3> ห้อง</h6>
+                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{r.name}}</button> 
+                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{r.free}}</h3> ห้อง</h6>
                   </div>
 
                 </div>
@@ -521,8 +521,8 @@
           </div>
         </div>
       </div>
-      <div v-if="activetab === 'หอพักย่านของกิน'" class="container-recommend-body2">
-        <div v-for="(user,index) in this.useritem" :key="index"  >
+      <div v-if="activetab === 'ย่านของกิน'" class="container-recommend-body2">
+        <div v-for="(user,index) in this.useritem" :key="index" id="my-table"  >
           <div class="container-ui-recommend2">
             <div >
               <div class="container-in-ui-recommend2" @click="setview(user)">
@@ -536,11 +536,11 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room['1'].price">
-                  ราคา {{user.room['0'].price+"-"+user.room['1'].price+" บาท"}}
+                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                  ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
-                  ราคา {{user.room['1'].price+" บาท"}}
+                  ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
                   ระยะทางจากมหาลัย {{user.distance}} เมตร
@@ -550,13 +550,13 @@
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
-                  <div v-if="showfilter('man',user)">
+                  <!-- <div v-if="showfilter('man',user)">
                       <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
                   <div v-if="showfilter('woman',user)">
                     <img src="@/assets/woman.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
-                  </div>
+                  </div> -->
 
                   <div v-if="showfilter('wifi',user)">
                     <img src="@/assets/wifi.png"  class="img-icon-view-head" style="float: left; margin-right:3px ">
@@ -585,23 +585,23 @@
                   <br>
                   <br>
                       
-                  <div v-if="showfilter('parking_lot',user)">
+                  <div v-if="showfilterDor('parking_lot',user)">
                     <img src="@/assets/parking-area.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                   
-                  <div v-if="showfilter('elevators',user)">
+                  <div v-if="showfilterDor('elevators',user)">
                     <img src="@/assets/elevator.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('security camera',user)">
+                  <div v-if="showfilterDor('security camera',user)">
                     <img src="@/assets/cctv.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('keycard',user)">
+                  <div v-if="showfilterDor('keycard',user)">
                     <img src="@/assets/key-card.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
 
-                  <div v-if="showfilter('laundry',user)">
+                  <div v-if="showfilterDor('laundry',user)">
                     <img src="@/assets/laundry-shop.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
                   </div>
                 </div>
@@ -615,10 +615,10 @@
                 <div class="name-home2">
                   ขนาดห้อง
                 </div>
-                <div v-for="index in user.room.length" :key="index">
+                <div v-for="(r,index) in user.room" :key="index">
                   <div class="ss">
-                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{user.room[index-1].nameroom}}</button> 
-                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{user.room[index-1].free}}</h3> ห้อง</h6>
+                    <button style="  float: left;  margin-left:2%;  border-radius:15px; background:#e4c785; ">{{r.name}}</button> 
+                    <h6 style="  float: right; margin-right:3%; ">ว่าง <h3 style="color:red; display: inline-block; ">{{r.free}}</h3> ห้อง</h6>
                   </div>
 
                 </div>
@@ -628,7 +628,7 @@
               
           </div>
         </div>
-      </div> -->
+      </div>
       
       
     </div>
@@ -781,6 +781,7 @@ components: {
           this.useritem2.push(home[index]);
         }
         else{
+          console.log(home[index]);
           if(this.activetab == home[index].tags){
               this.useritem2.push(home[index]);
           }

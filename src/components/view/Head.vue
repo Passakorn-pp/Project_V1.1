@@ -37,8 +37,11 @@
       <br>
       <br>
       <br>
-      <div style="width: 40%; float: left; text-align: left; margin-top:-1%">
+      <div v-if="room.room>1" style="width: 40%; float: left; text-align: left; margin-top:-1%">
         <h4 >{{"ราคา "+room.room[0].price+"-"+room.room[room.room.length-1].price+" บาท"}}</h4>
+      </div>
+      <div style="width: 40%; float: left; text-align: left; margin-top:-1%" v-else>
+        <h4 >{{"ราคา "+room.room[0].price+" บาท"}}</h4>
       </div>
 
       <!-- <div style="width: 50%; float: right; margin-right:2%">

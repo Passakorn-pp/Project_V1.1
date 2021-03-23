@@ -3,7 +3,7 @@
     <div style="margin: auto; width:70%">
       <flickity ref="flickity" :options="flickityOptions" >
         <div class="carousel-cell" v-for="(r,index) in rooms" :key="index">
-          <img :src="r.room" style="width: 100%; height: 100%;">
+          <img :src="r.img" style="width: 100%; height: 100%;">
             
         </div>
       </flickity>
@@ -11,7 +11,7 @@
     <div style="margin: 1% auto; width:70%">
       <flickity ref="flickity2" :options="flickityOptions" >
         <div class="carousel-cell-small" v-for="(r,index) in rooms" :key="index" @click="setphoto(index)">
-          <img :src="r.room" style="width: 100%; height: 100%;">
+          <img :src="r.img" style="width: 100%; height: 100%;">
               
         </div>
       </flickity>
@@ -21,12 +21,10 @@
 </template>
 
 <script>
-
+let mongo_api = "http://127.0.0.1:8000/api/DormitoryClick/";
 import Flickity from 'vue-flickity';
+import Axios from "axios";
 export default {
-  props: [
-    'room'
-  ],
   components: {
     Flickity
   },
@@ -82,13 +80,23 @@ export default {
       ]
     }
   },
-   methods: {
+  methods: {
     setphoto(index) {
-      console.log(index);
       this.$refs.flickity.select(index);
       this.$refs.flickity2.select(index);
     },
-  }
+  },
+  created(){
+    Axios.post(mongo_api,{"name" : this.$route.params.Name})
+        .then(res => {
+          this.rooms = res.data.imgall
+
+        })
+        .catch(err => alert(err));
+  },
+
+  
+  
 };
 </script>
 
@@ -100,13 +108,13 @@ export default {
   position: relative;
   float: left;
   margin-right: 15px;
-  background: aquamarine;
+  background: white;
 }
 .carousel-cell {
 
   width:100%; /* full width */
   height: 400px;
-  background: #222;
+  background: white;
   /* center images in cells with flexbox */
   display: flex;
   align-items: center;

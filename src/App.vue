@@ -78,6 +78,7 @@ export default {
           })  
         }
         else{
+          console.log("asdadasdsada");
           this.$store.dispatch("setUserState",null);
         }
       }).catch((err) => {

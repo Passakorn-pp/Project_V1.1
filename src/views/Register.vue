@@ -66,7 +66,7 @@ export default {
   overflow: hidden;
   /* background: rgb(235, 235, 233); */
   /* background: #fceecd; */
-
+  overflow: auto;
   background: white;
 }
 .register2 {

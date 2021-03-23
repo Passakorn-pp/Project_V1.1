@@ -10,17 +10,17 @@
       <p style="color:black">หอพักทั้งหมด</p>
     </div>
       
-    <div class="container-filter-type"  @click="filter('หอพักเงียบสงบ')">
+    <div class="container-filter-type"  @click="filter('เงียบสงบ')">
 
       <img src="https://sv1.picz.in.th/images/2020/11/24/jdcTue.jpg" class="container-filter-type-img" >
       <p style="color:black">หอพักเงียบสงบ</p>
     </div>
-    <div class="container-filter-type" @click="filter('หอพักครื้นเครง')">
+    <div class="container-filter-type" @click="filter('ครื้นเครง')">
 
       <img src="https://sv1.picz.in.th/images/2020/11/24/jdctMl.jpg" class="container-filter-type-img" >
       <p style="color:black">หอพักครื้นเครง</p>
     </div>
-    <div class="container-filter-type" @click="filter('หอพักย่านของกิน')">
+    <div class="container-filter-type" @click="filter('ย่านของกิน')">
 
       <img src="https://sv1.picz.in.th/images/2020/11/24/jdwk2R.jpg" class="container-filter-type-img" >
       <p style="color:black">หอพักย่านของกิน</p>

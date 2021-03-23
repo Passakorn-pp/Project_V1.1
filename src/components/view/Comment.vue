@@ -5,6 +5,8 @@
     </div>
     <div class="container-view-comment-body">
       <div id="question" style="position: relative; margin-bottom:10%;">
+         <b-form-rating v-model="room.star" variant="warning"></b-form-rating>
+         <br>
          <b-form-input
           v-model="text"
           ref="input-comment"

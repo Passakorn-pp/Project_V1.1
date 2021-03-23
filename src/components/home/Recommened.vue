@@ -22,13 +22,19 @@
                   </div>
                   <br>
                   <h6 style="line-height: 0.5; margin-right:5px;   float: left;">ราคา</h6>
-                  <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
-                  <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s.room[s.room.length-1].price}}</h6>
+                    <div v-if="s.room.length>1">
+                      <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
+                      <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s.room[s.room.length-1].price}}</h6>
+                    </div>
+                    <div v-else>
+                      <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
+                    </div>
+                
                   <h6 style="line-height: 0.5;   float: left;">บาท </h6>
                   <br>
                   <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s.distance}} เมตร</h6>
                 </div> 
-                
+
               </div>
            
               
@@ -39,13 +45,15 @@
           
           
         
-    </div>  
+    </div>
+      
   </div>
 </template>
 
 <script>
 import Axios from "axios";
 let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
+// let recommdent = "http://localhost:8080/getclass"
 let history_api = "http://127.0.0.1:8000/api/history/";
 // import { slider, slideritem } from 'vue-concise-slider';
 import Flickity from 'vue-flickity';
@@ -211,15 +219,37 @@ export default {
   //   this.slides = await response.json();
     
   // },
-  async created(){
-    this.getProfile()
-    await Axios.get(mongo_api)
+  created(){
+    // this.getProfile()
+    console.log(this.$store.getters.getUserstate +"asdas");
+    if(this.$store.getters.getUserstate == "null"){
+      Axios.get(mongo_api)
       .then(res => {
         this.room = res.data.dormitory
-        console.log(this.slides);
+        for(var i = 0; i<this.room.length; i++){
+          if(this.room[i].distance > 800){
+            console.log(this.room[i].distance);
+            this.room.splice(i, 1)
+            i=0;
+          }
+        }
+        console.log(this.room);
     
       })
       .catch(err => alert(err));
+    }
+    
+      
+    
+    // else{
+    //   Axios.post(recommdent,{"UserID": "10002"})
+    //   .then(res => {
+    //     console.log(res.data.results.dormitory);
+    
+    //   })
+    //   .catch(err => alert(err));
+    // }
+    
   },
   methods: {
     getProfile(){
