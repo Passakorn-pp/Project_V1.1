@@ -32,7 +32,7 @@ export default {
     return {
       flickityOptions: {
         pageDots: false,
-        wrapAround: true,
+        wrapAround: false,
         draggable: false,
         prevNextButtons: true,
         // any options from Flickity can be used

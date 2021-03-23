@@ -14,7 +14,7 @@
         <h2 style="  line-height: 2;" >ค้นหาตามใจชอบ</h2>
 
       </div>
-      <div class="container-filter-body-detail" @change="setfilter()">
+      <div class="container-filter-body-detail" @change="setfilter()" id="b_filter">
         <h4 style="text-align: left; margin: 2% 5%">ราคา</h4>
         <div style="width: 80%; margin: auto" >
             <b-form-input id="range-1" v-model="value" type="range" min="0" max="8000" step="100"></b-form-input>
@@ -25,14 +25,22 @@
         ></b-form-checkbox-group>
         </div> -->
         <h4 style="text-align: left; margin: 2% 5%">เครื่องใช้ภายในห้อง</h4>
-        <div style="width: 80%; margin: auto; text-align: left;">
-        <b-form-checkbox-group v-model="selected" :options="optionsroom" stacked switches
-        ></b-form-checkbox-group>
+        <div style="width: 80%; margin: auto; text-align: left;" v-if="activetab=='แนะนำ'">
+          <b-form-checkbox-group v-model="selected" :options="optionsroom" stacked switches disabled
+          ></b-form-checkbox-group>
+        </div>
+        <div style="width: 80%; margin: auto; text-align: left;" v-else>
+          <b-form-checkbox-group v-model="selected" :options="optionsroom" stacked switches
+          ></b-form-checkbox-group>
         </div>
         <h4 style="text-align: left; margin: 2% 5%">สิ่งอำนวยความสะดวก</h4>
-        <div style="width: 80%; margin: auto; text-align: left;">
-        <b-form-checkbox-group v-model="selectedDor" :options="options" stacked switches
-        ></b-form-checkbox-group>
+        <div style="width: 80%; margin: auto; text-align: left;" v-if="activetab=='แนะนำ'">
+          <b-form-checkbox-group v-model="selectedDor" :options="options" stacked switches disabled
+          ></b-form-checkbox-group>
+        </div>
+        <div style="width: 80%; margin: auto; text-align: left;" v-else>
+          <b-form-checkbox-group v-model="selectedDor" :options="options" stacked switches
+          ></b-form-checkbox-group>
         </div>
         <!-- <h4 style="text-align: left; margin: 2% 5%">คณะ</h4>
         <div style="width: 80%; margin: auto; text-align: left;">
@@ -47,7 +55,7 @@
   
     <div class="body-recommend-tab" id="alltab">
       <button v-on:click="activetab='ทั้งหมด',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'ทั้งหมด' ? 'active' : '' ]">ทั้งหมด</button>
-      <button v-on:click="activetab='แนะนำ',currentPage = 1,Listitem() " v-bind:class="[ activetab === 'แนะนำ' ? 'active' : '' ]">แนะนำ</button>
+      <button v-on:click="activetab='แนะนำ',currentPage = 1,Listitem2() " v-bind:class="[ activetab === 'แนะนำ' ? 'active' : '' ]">แนะนำ</button>
       <button v-on:click="activetab='เงียบสงบ',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'เงียบสงบ' ? 'active' : '' ]" style="width: 15%;">หอพักเงียบสงบ</button>
       <button v-on:click="activetab='ครื้นเครง',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'ครื้นเครง' ? 'active' : '' ]" style="width: 15%;">หอพักครื้นเครง</button>
       <button v-on:click="activetab='ย่านของกิน',currentPage = 1,Listitem()" v-bind:class="[ activetab === 'ย่านของกิน' ? 'active' : '' ]" style="width: 20%;">หอพักย่านของกิน</button>
@@ -658,6 +666,10 @@ import About from "@/components/home/About.vue";
 import Axios from "axios";
 let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
 let history_api = "http://127.0.0.1:8000/api/history/";
+let d_recomment = "http://127.0.0.1:8000/api/GetReccomend/"
+let data_user = "http://127.0.0.1:8000/api/GetData/"
+let recommdent = "https://accommodation.pjjop.org/getauto/"
+let recommdent_api = "https://accommodation.pjjop.org/getapri/";
 export default {
 components: {
     About,
@@ -748,7 +760,10 @@ components: {
       })
     },
     changePage(){
-      if(this.is_filter){
+      if(this.activetab=='แนะนำ'){
+        this.Listitem3()
+      }
+      else if(this.is_filter){
         this.filterListitem()
       }
       else{
@@ -767,9 +782,109 @@ components: {
 
 
     },
-
-    Listitem(){
+    Listitem3(){
+      this.start = (this.currentPage*5)-5
+      this.end = (this.currentPage*5)
+      this.useritem = [];
+      if(this.end > this.useritem2.length){
+        this.end = this.useritem2.length
+      }
+      if(this.useritem2.length>0){
+        for(var i = this.start; i<this.end; i++){
+          this.useritem.push(this.useritem2[i]);
+        }
+      } 
+    },
+    Listitem2(){
+      
+      document.getElementById("b_filter").style = "pointer-events: none;"
       document.getElementById("filter").style = "opacity: 0.5;"
+      this.is_filter = false
+      this.start = (this.currentPage*5)-5
+      this.end = (this.currentPage*5)
+      this.useritem = [];
+      this.useritem2 = [];
+      var home = this.listitems;
+      if(this.$store.getters.getUserstate == null){
+        for(var j = 0; j<home.length; j++){
+          if(home[j].distance < 800){
+            
+            this.useritem2.push(home[j]);
+          }
+        }
+        if(this.end > this.useritem2.length){
+          this.end = this.useritem2.length
+        }
+        if(this.useritem2.length>0){
+          for(var i = this.start; i<this.end; i++){
+            this.useritem.push(this.useritem2[i]);
+          }
+        }
+      }
+      else{
+        Axios.post(data_user,{"id_user" : this.id_user})
+        .then(res => {
+          const behavior = res.data[0].behavior
+          const id = res.data[0].id
+          Axios.post(recommdent,{"UserID": id})
+          .then(res => {
+            if(res.data.results.dormitory != null){
+              console.log("auto");
+              Axios.post(d_recomment,{"dormitory" : res.data.results.dormitory})
+              .then(res => {
+                home = res.data.dormitory 
+                for(var k = 0; k<home.length; k++){
+                  this.useritem2.push(home[k][0]);
+                }
+                if(this.end > this.useritem2.length){
+                  this.end = this.useritem2.length
+                }
+                if(this.useritem2.length>0){
+                  for(var i = this.start; i<this.end; i++){
+                    this.useritem.push(this.useritem2[i]);
+                  }
+                  console.log(this.useritem);
+                } 
+              })
+              .catch(err => alert(err));
+            }
+            else{
+              console.log("api");
+              Axios.post(recommdent_api,{"Act" : behavior})
+              .then(res => {
+                Axios.post(d_recomment,{"dormitory" : res.data.results.dormitory})
+                .then(res => {
+                  home = res.data.dormitory  
+                  for(var k = 0; k<home.length; k++){
+                  this.useritem2.push(home[k][0]);
+                  }
+                  if(this.end > this.useritem2.length){
+                    this.end = this.useritem2.length
+                  }
+                  if(this.useritem2.length>0){
+                    for(var i = this.start; i<this.end; i++){
+                      this.useritem.push(this.useritem2[i]);
+                    }
+                    console.log(this.useritem);
+                  } 
+                })
+                .catch(err => alert(err));
+              })
+              .catch(err => alert(err));
+            }
+          })
+          .catch(err => alert(err));
+          
+        })
+        .catch(err => alert(err));
+      }
+      
+      
+      
+    },
+    Listitem(){
+      document.getElementById("b_filter").style = "pointer-events: auto;"
+      document.getElementById("filter").style = "opacity: 0.5; pointer-events: auto;"
       this.is_filter = false
       this.start = (this.currentPage*5)-5
       this.end = (this.currentPage*5)

@@ -1,6 +1,6 @@
 <template>
   <div >
-    <h4 style="padding:2%; background: #e4c785; width: 60%; min-width: 500px; margin:auto; margin-top:3%; border-top-left-radius: 15px; border-top-right-radius: 15px;">ข้อมูลส่วนตัว</h4>
+    <h4 style="padding:2%; background: #e4c785; width: 60%; min-width: 500px; margin:auto; margin-top:3%; border-top-left-radius: 15px; border-top-right-radius: 15px; ">ข้อมูลส่วนตัว</h4>
     <div class="table-modify">
       <div style="padding:4%; ">
         <label>คณะ : </label>
@@ -21,7 +21,7 @@
         <input type="radio" id="หญิง" value="หญิง" style="margin-left:2%;" v-model="user[0].gender"/>
         <label for="หญิง" style="margin-left:1%;">หญิง</label>
       </div>
-      <button style="background: #e4c785; padding:1%; margin-top:3%; border-radius: 15px;" @click="updata()">ยืนยัน</button>
+      <button style="background: #e4c785; padding:1%; margin-top:3%; border-radius: 15px;  border: none; color:white; width: 60px; height: 40px;" @click="updata()">ยืนยัน</button>
 
     </div>
   </div>
@@ -46,7 +46,7 @@ export default {
       this.id_user = this.userProfile['userId']
       Axios.post(getdata,{"id_user" : this.id_user })
       .then(res => {
-        this.user = res.data.Data
+        this.user = res.data
         console.log(this.user);
       })
       .catch(err => alert(err));

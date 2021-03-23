@@ -7,41 +7,67 @@
       <h3 class="header-text" style="font-size: 50px;"><h1 style="display: inline-block; font-size: 100px;">ระยะทาง</h1>ใกล้มหาลัย</h3>
     </div>
     
-    <div class="container-Recommened" id="axz">
-
-         
-  
-            <flickity ref="flickity" :options="flickityOptions" >
-            
-              <div v-for="(s,i) in room" :key="i" class="container-Recommened-card" @click="setview(s)" >
-                <img :src="s.img" class="container-Recommened-card-img" >
-                <div class="container-Recommened-card-text">
-                  <h6 style="float: left;">{{s.name}} </h6>
-                  <div style="display: inline-block;">
-                    <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%" class="rating-recommend"></b-form-rating>      
-                  </div>
-                  <br>
-                  <h6 style="line-height: 0.5; margin-right:5px;   float: left;">ราคา</h6>
-                    <div v-if="s.room.length>1">
-                      <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
-                      <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s.room[s.room.length-1].price}}</h6>
-                    </div>
-                    <div v-else>
-                      <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
-                    </div>
-                
-                  <h6 style="line-height: 0.5;   float: left;">บาท </h6>
-                  <br>
-                  <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s.distance}} เมตร</h6>
-                </div> 
-
+    <div class="container-Recommened" id="axz" v-if="this.$store.getters.getUserstate=='User'">
+      <flickity ref="flickity" :options="flickityOptions" >
+      
+        <div v-for="(s,i) in room" :key="i" class="container-Recommened-card" @click="setview2(s)" >
+          <img :src="s[0].img" class="container-Recommened-card-img" >
+          <div class="container-Recommened-card-text">
+            <h6 style="float: left;">{{s[0].name}} </h6>
+            <div style="display: inline-block;">
+              <b-form-rating  v-model="s[0].star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%" class="rating-recommend"></b-form-rating>      
+            </div>
+            <br>
+            <h6 style="line-height: 0.5; margin-right:5px;   float: left;">ราคา</h6>
+              <div v-if="s[0].room.length>1">
+                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s[0].room[0].price}}</h6>
+                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s[0].room[s.room.length-1].price}}</h6>
               </div>
-           
-              
+              <div v-else>
+                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s[0].room[0].price}}</h6>
+              </div>
           
-              
-              
-            </flickity>
+            <h6 style="line-height: 0.5;   float: left;">บาท </h6>
+            <br>
+            <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s[0].distance}} เมตร</h6>
+          </div> 
+
+        </div>
+      </flickity>
+    </div>
+
+    <div class="container-Recommened" v-else>
+      <flickity ref="flickity" :options="flickityOptions" >
+      
+        <div v-for="(s,i) in room" :key="i" class="container-Recommened-card" @click="setview(s)" >
+          <img :src="s.img" class="container-Recommened-card-img" >
+          <div class="container-Recommened-card-text">
+            <h6 style="float: left;">{{s.name}} </h6>
+            <div style="display: inline-block;">
+              <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%" class="rating-recommend"></b-form-rating>      
+            </div>
+            <br>
+            <h6 style="line-height: 0.5; margin-right:5px;   float: left;">ราคา</h6>
+              <div v-if="s.room.length>1">
+                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
+                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s.room[s.room.length-1].price}}</h6>
+              </div>
+              <div v-else>
+                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s.room[0].price}}</h6>
+              </div>
+          
+            <h6 style="line-height: 0.5;   float: left;">บาท </h6>
+            <br>
+            <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s.distance}} เมตร</h6>
+          </div> 
+
+        </div>
+      
+        
+    
+        
+        
+      </flickity>
           
           
         
@@ -53,8 +79,12 @@
 <script>
 import Axios from "axios";
 let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
-// let recommdent = "http://localhost:8080/getclass"
+let recommdent = "https://accommodation.pjjop.org/getauto/"
+let recommdent_api = "https://accommodation.pjjop.org/getapri/";
 let history_api = "http://127.0.0.1:8000/api/history/";
+let d_recomment = "http://127.0.0.1:8000/api/GetReccomend/"
+let data_user = "http://127.0.0.1:8000/api/GetData/"
+
 // import { slider, slideritem } from 'vue-concise-slider';
 import Flickity from 'vue-flickity';
 export default {
@@ -221,34 +251,66 @@ export default {
   // },
   created(){
     // this.getProfile()
-    console.log(this.$store.getters.getUserstate +"asdas");
     if(this.$store.getters.getUserstate == "null"){
       Axios.get(mongo_api)
       .then(res => {
         this.room = res.data.dormitory
         for(var i = 0; i<this.room.length; i++){
           if(this.room[i].distance > 800){
-            console.log(this.room[i].distance);
             this.room.splice(i, 1)
             i=0;
           }
         }
-        console.log(this.room);
     
       })
       .catch(err => alert(err));
     }
-    
+    else{
+      const liff = this.$liff
+      liff.getProfile()
+      .then(profile => {
+        this.userProfile = profile
+        this.id_user = this.userProfile['userId']
+
+
+        Axios.post(data_user,{"id_user" : this.id_user})
+        .then(res => {
+          const behavior = res.data[0].behavior
+          const id = res.data[0].id
+          Axios.post(recommdent,{"UserID": id})
+          .then(res => {
+            if(res.data.results.dormitory != null){
+              console.log("auto");
+              Axios.post(d_recomment,{"dormitory" : res.data.results.dormitory})
+              .then(res => {
+                this.room = res.data.dormitory  
+              })
+              .catch(err => alert(err));
+            }
+            else{
+              console.log("api");
+              Axios.post(recommdent_api,{"Act" : behavior})
+              .then(res => {
+                Axios.post(d_recomment,{"dormitory" : res.data.results.dormitory})
+                .then(res => {
+                  this.room = res.data.dormitory  
+                })
+                .catch(err => alert(err));
+              })
+              .catch(err => alert(err));
+            }
+          })
+          .catch(err => alert(err));
+        })
+        .catch(err => alert(err));
+
+
+      })
+      .catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
       
-    
-    // else{
-    //   Axios.post(recommdent,{"UserID": "10002"})
-    //   .then(res => {
-    //     console.log(res.data.results.dormitory);
-    
-    //   })
-    //   .catch(err => alert(err));
-    // }
+    }
     
   },
   methods: {
@@ -269,6 +331,16 @@ export default {
     
     previous() {
       this.$refs.flickity.previous();
+    },
+    setview2(value){
+      // this.$store.dispatch("addView",value);
+      Axios.post(history_api,{"name": value[0].name,"user_id":this.id_user})
+      .then(() => {
+        this.$router.push({name:'view',params:{Name:value[0].name}});
+      })
+      .catch(err => alert(err));
+      
+      
     },
     setview(value){
       // this.$store.dispatch("addView",value);
@@ -331,7 +403,6 @@ export default {
   border-radius: 30px;
   background: white;
   float: left;
-
 }
 
 .row:after {
