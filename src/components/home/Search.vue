@@ -32,8 +32,8 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
-let history_api = "http://127.0.0.1:8000/api/history/";
+let mongo_api = "/api/getDormitory/";
+let history_api = "/api/history/";
 export default {
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
   },
   async created(){
     this.getProfile()
-    await Axios.get(mongo_api)
+    await Axios.get(this.$store.getters.getApi+mongo_api)
       .then(res => {
         this.place = res.data.dormitory
       })
@@ -67,7 +67,7 @@ export default {
       for(var i in this.place){
         if(this.selec_place == this.place[i].name){
           check = true;
-          Axios.post(history_api,{"name": this.selec_place,"user_id":this.id_user})
+          Axios.post(this.$store.getters.getApi+history_api,{"name": this.selec_place,"user_id":this.id_user})
           .then(() => {
             this.$router.push({name:'view',params:{Name:this.selec_place}});
           })

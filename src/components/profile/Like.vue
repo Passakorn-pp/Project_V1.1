@@ -106,8 +106,8 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/GetUserLike/";
-let history_api = "http://127.0.0.1:8000/api/history/";
+let mongo_api = "/api/GetUserLike/";
+let history_api = "/api/history/";
 export default {
   data(){
     return{
@@ -121,7 +121,7 @@ export default {
     .then(profile => {
       this.userProfile = profile
       this.id_user = this.userProfile['userId']
-      Axios.post(mongo_api,{"user_id" : this.id_user })
+      Axios.post(this.$store.getters.getApi+mongo_api,{"user_id" : this.id_user })
       .then(res => {
         this.useritem = res.data.dormitory
         console.log(this.useritem);
@@ -165,7 +165,7 @@ export default {
     },
     setview(value){
       // this.$store.dispatch("addView",value);
-      Axios.post(history_api,{"name": value.dormitory[0].name,"user_id":this.id_user})
+      Axios.post(this.$store.getters.getApi+history_api,{"name": value.dormitory[0].name,"user_id":this.id_user})
       .then(() => {
         this.$router.push({name:'view',params:{Name:value.dormitory[0].name}});
       })

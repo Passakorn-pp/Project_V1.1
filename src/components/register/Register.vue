@@ -86,7 +86,7 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/addDataUser/";
+let mongo_api = "/api/addDataUser/";
 export default {
   data(){
     return{
@@ -130,7 +130,7 @@ export default {
     },
     PostData(){
       this.gettext()
-      Axios.post(mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,"faculty" : this.faculty,"gender" : this.gender,"year": this.years,"behavior" : this.text})
+      Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,"faculty" : this.faculty,"gender" : this.gender,"year": this.years,"behavior" : this.text})
       .then(res => {
         if(res.data=="success"){
           console.log("success");

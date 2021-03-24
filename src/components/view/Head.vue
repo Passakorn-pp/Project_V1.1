@@ -98,8 +98,8 @@
 
 <script>
 import Axios from "axios";
-let setlike_api = "http://127.0.0.1:8000/api/setlike/";
-let getlike_api = "http://127.0.0.1:8000/api/getlike/";
+let setlike_api = "/api/setlike/";
+let getlike_api = "/api/getlike/";
 export default {
   props: [
     'room'
@@ -134,13 +134,13 @@ export default {
       else{
         status = "dislike"
       }
-      Axios.post(setlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user,"status" : status})
+      Axios.post(this.$store.getters.getApi+setlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user,"status" : status})
       .catch(err => alert(err));
     }
   },
   created(){
     this.getProfile()
-    Axios.post(getlike_api,{"name" : this.$route.params.Name,"user_id" : "U2adb705541e0ba188353355c15ccc074"})
+    Axios.post(this.$store.getters.getApi+getlike_api,{"name" : this.$route.params.Name,"user_id" : "U2adb705541e0ba188353355c15ccc074"})
     .then(res => {
       console.log(res + " :datalike");
       this.status = res.data

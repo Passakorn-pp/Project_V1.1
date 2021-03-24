@@ -29,8 +29,8 @@
 
 <script>
 import Axios from "axios";
-let getdata = "http://127.0.0.1:8000/api/GetData/";
-let updatedata = "http://127.0.0.1:8000/api/updateData/";
+let getdata = "/api/GetData/";
+let updatedata = "/api/updateData/";
 export default {
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
     .then(profile => {
       this.userProfile = profile
       this.id_user = this.userProfile['userId']
-      Axios.post(getdata,{"id_user" : this.id_user })
+      Axios.post(this.$store.getters.getApi+getdata,{"id_user" : this.id_user })
       .then(res => {
         this.user = res.data
         console.log(this.user);
@@ -57,7 +57,7 @@ export default {
   },
   methods:{
     updata(){
-      Axios.post(updatedata,{"id_user" : this.id_user,"faculty" : this.user[0].faculty,"gender" : this.user[0].gender})
+      Axios.post(this.$store.getters.getApi+updatedata,{"id_user" : this.id_user,"faculty" : this.user[0].faculty,"gender" : this.user[0].gender})
       .then(
         alert("บันทึกสำเร็จ")
       )

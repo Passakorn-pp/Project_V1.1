@@ -78,12 +78,12 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/getDormitory/";
+let mongo_api = "/api/getDormitory/";
 let recommdent = "https://accommodation.pjjop.org/getauto/"
 let recommdent_api = "https://accommodation.pjjop.org/getapri/";
-let history_api = "http://127.0.0.1:8000/api/history/";
-let d_recomment = "http://127.0.0.1:8000/api/GetReccomend/"
-let data_user = "http://127.0.0.1:8000/api/GetData/"
+let history_api = "/api/history/";
+let d_recomment = "/api/GetReccomend/"
+let data_user = "/api/GetData/"
 
 // import { slider, slideritem } from 'vue-concise-slider';
 import Flickity from 'vue-flickity';
@@ -252,7 +252,7 @@ export default {
   created(){
     // this.getProfile()
     if(this.$store.getters.getUserstate == "null"){
-      Axios.get(mongo_api)
+      Axios.get(this.$store.getters.getApi+mongo_api)
       .then(res => {
         this.room = res.data.dormitory
         for(var i = 0; i<this.room.length; i++){
@@ -273,7 +273,7 @@ export default {
         this.id_user = this.userProfile['userId']
 
 
-        Axios.post(data_user,{"id_user" : this.id_user})
+        Axios.post(this.$store.getters.getApi+data_user,{"id_user" : this.id_user})
         .then(res => {
           const behavior = res.data[0].behavior
           const id = res.data[0].id
@@ -281,7 +281,7 @@ export default {
           .then(res => {
             if(res.data.results.dormitory != null){
               console.log("auto");
-              Axios.post(d_recomment,{"dormitory" : res.data.results.dormitory})
+              Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
               .then(res => {
                 this.room = res.data.dormitory  
               })
@@ -291,7 +291,7 @@ export default {
               console.log("api");
               Axios.post(recommdent_api,{"Act" : behavior})
               .then(res => {
-                Axios.post(d_recomment,{"dormitory" : res.data.results.dormitory})
+                Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
                 .then(res => {
                   this.room = res.data.dormitory  
                 })
@@ -334,7 +334,7 @@ export default {
     },
     setview2(value){
       // this.$store.dispatch("addView",value);
-      Axios.post(history_api,{"name": value[0].name,"user_id":this.id_user})
+      Axios.post(this.$store.getters.getApi+history_api,{"name": value[0].name,"user_id":this.id_user})
       .then(() => {
         this.$router.push({name:'view',params:{Name:value[0].name}});
       })
@@ -344,7 +344,7 @@ export default {
     },
     setview(value){
       // this.$store.dispatch("addView",value);
-      Axios.post(history_api,{"name": value.name,"user_id":this.id_user})
+      Axios.post(this.$store.getters.getApi+history_api,{"name": value.name,"user_id":this.id_user})
       .then(() => {
         this.$router.push({name:'view',params:{Name:value.name}});
       })

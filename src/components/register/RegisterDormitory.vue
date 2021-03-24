@@ -144,7 +144,7 @@
 <script>
 import Axios from "axios";
 import VueUploadMultipleImage from 'vue-upload-multiple-image'
-let mongo_api = "http://127.0.0.1:8000/api/addDataDormitory/";
+let mongo_api = "/api/addDataDormitory/";
 export default {
   components: {
     VueUploadMultipleImage
@@ -254,7 +254,7 @@ export default {
       })
     },
     PostData(){
-        Axios.post(mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,
+        Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,
                             "name" : this.dormitory.name,
                             "img" : this.dormitory.img,
                             "water_bill" : this.dormitory.water_bill,

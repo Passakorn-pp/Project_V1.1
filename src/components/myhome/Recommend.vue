@@ -55,8 +55,8 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/gethistory/";
-let getlike_api = "http://127.0.0.1:8000/api/GetMormitoryLike/";
+let mongo_api = "/api/gethistory/";
+let getlike_api = "/api/GetMormitoryLike/";
 
 import Flickity from 'vue-flickity';
 export default {
@@ -111,14 +111,14 @@ export default {
     }
   },
   created(){
-    Axios.post(mongo_api,{"name" : this.$route.params.Name})
+    Axios.post(this.$store.getters.getApi+mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
           this.data = res.data
           this.peple = this.data.User
           console.log(this.peple);
         })
         .catch(err => alert(err));
-    Axios.post(getlike_api,{"name" : this.$route.params.Name})
+    Axios.post(this.$store.getters.getApi+getlike_api,{"name" : this.$route.params.Name})
         .then(res => {
           this.like = res.data
         })

@@ -7,7 +7,8 @@ let mongo_api = "http://127.0.0.1:8000/api/getuser";
 export default new Vuex.Store({
   state: {
     foods: localStorage.getItem('datatest')||[],
-    userstate : localStorage.getItem('user')||null
+    userstate : localStorage.getItem('user')||null,
+    api : "http://127.0.0.1:8000"
     // user: localStorage.getItem('user') || 0,
     // homeclick: localStorage.getItem('homeclick') || null,
     // homeall: localStorage.getItem('homeall') || null,
@@ -17,7 +18,11 @@ export default new Vuex.Store({
     foods: state => state.foods,
     getUserstate(state){
       return state.userstate
+    },
+    getApi(state){
+      return state.api
     }
+    
     // getState(state){
       
     //   return state.state

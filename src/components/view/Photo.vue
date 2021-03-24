@@ -21,7 +21,7 @@
 </template>
 
 <script>
-let mongo_api = "http://127.0.0.1:8000/api/DormitoryClick/";
+let mongo_api = "/api/DormitoryClick/";
 import Flickity from 'vue-flickity';
 import Axios from "axios";
 export default {
@@ -87,7 +87,7 @@ export default {
     },
   },
   created(){
-    Axios.post(mongo_api,{"name" : this.$route.params.Name})
+    Axios.post(this.$store.getters.getApi+mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
           this.rooms = res.data.imgall
 

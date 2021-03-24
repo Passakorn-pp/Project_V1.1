@@ -117,7 +117,7 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/updateDataDormitory/";
+let mongo_api = "/api/updateDataDormitory/";
 
 export default {
   props: [
@@ -128,7 +128,7 @@ export default {
       console.log(r.filter.wifi);
     },
     PostData(){
-        Axios.post(mongo_api,{"id_user": "หอพักอนงค์",
+        Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": "หอพักอนงค์",
                             "name" : this.room.name,
                             "water_bill" : this.room.water_bill,
                             "elect_bill" : this.room.elect_bill,

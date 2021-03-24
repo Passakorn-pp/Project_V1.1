@@ -55,7 +55,7 @@ import Mohor from "@/components/myhome/Mohor.vue";
 import Recommend from "@/components/myhome/Recommend.vue";
 import About from "@/components/home/About.vue";
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/DormitoryClick/";
+let mongo_api = "/api/DormitoryClick/";
 export default {
     components: {
     Photo,
@@ -75,7 +75,7 @@ export default {
       }
   },
   async created(){
-    await Axios.post(mongo_api,{"name" : this.$route.params.Name})
+    await Axios.post(this.$store.getters.getApi+mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
           this.room = res.data.dormitory[0]
           console.log(this.room);

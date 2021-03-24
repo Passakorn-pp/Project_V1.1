@@ -4,8 +4,35 @@
       <span class="text-view-comment-header">ความคิดเห็น</span>
     </div>
     <div class="container-view-comment-body">
-      <div id="question" style="position: relative; margin-bottom:10%;">
-         <b-form-rating v-model="room.star" variant="warning"></b-form-rating>
+      <div id="question" style="position: relative; margin-bottom:10%; display:none " v-if="$store.getters.getUserstate == null">
+         <b-form-rating v-model="rating" variant="warning" ></b-form-rating>
+         <br>
+         <b-form-input
+          v-model="text"
+          ref="input-comment"
+          required
+          class="input-view-comment"
+          placeholder="แสดงความคิดเห็น"
+        ></b-form-input>
+
+        <b-button
+          v-if="text == ''"
+          disabled
+          class="button-view-comment"
+          variant="primary"
+          >Submit</b-button
+        >
+        <b-button
+          v-else
+          @click="Question()"
+          class="button-view-comment"
+          variant="primary"
+          >Submit</b-button
+        >
+      </div>
+      <div id="question" style="position: relative; margin-bottom:10%;" v-else>
+         <h5>ให้คะแนนหอพัก</h5>
+         <b-form-rating v-model="rating" variant="warning" @change="changeRating()"></b-form-rating>
          <br>
          <b-form-input
           v-model="text"
@@ -75,9 +102,12 @@
 
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/get_Question/";
-let addanswer_api = "http://127.0.0.1:8000/api/addAnswer/"
-let addquestion_api = "http://127.0.0.1:8000/api/addQuestion/"
+let mongo_api = "/api/get_Question/";
+let addanswer_api = "=/api/addAnswer/"
+let addquestion_api = "/api/addQuestion/"
+let getRatingAll = "https://accommodation.pjjop.org/getrating/"
+let setRating = "/api/SetRating/"
+let getRating = "/api/GetRating/"
 export default {
   props: [
     'room'
@@ -91,16 +121,40 @@ export default {
       listtext_old: [],
       listtext: [],
       id_user : null,
+      rating : 0
     };
   },
 
   methods: {
+    changeRating(){
+      Axios.post(getRatingAll ,{"Dorname" : this.$route.params.Name})
+      .then(res => {
+        var rating = res.data.results.Rating;
+        var count = 0;
+        for(var i=0; i<rating.length; i++){
+          count += rating[i];
+        }
+        count += this.rating
+        Axios.post(this.$store.getters.getApi+setRating,{"name" : this.$route.params.Name,"user" : this.id_user,"rating" : this.rating,"ratingAll" : count/(rating.length+1)})
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => alert(err));
+      })
+      .catch(err => alert(err));
+    },
     getProfile(){
       const liff = this.$liff
       liff.getProfile()
       .then(profile => {
         this.userProfile = profile
         this.id_user = this.userProfile['userId']
+        Axios.post(this.$store.getters.getApi+getRating,{"name" : this.$route.params.Name,"user" : this.id_user})
+        .then(res => {
+          this.rating = res.data
+          console.log(this.rating+"rating");
+        })
+        .catch(err => alert(err));
       })
       .catch((err) => {
         console.error('LIFF initialize error', err)
@@ -109,12 +163,12 @@ export default {
     Answer(text){
       text.answer.push({body : this.text2})
       
-      Axios.post(addanswer_api,{"name": this.id_user,"id" : text.id,"body" : this.text2})
+      Axios.post(this.$store.getters.getApi+addanswer_api,{"name": this.id_user,"id" : text.id,"body" : this.text2})
       .catch(err => alert(err));
       this.text2="";
     },
     Question() {
-      Axios.post(addquestion_api,{"name": this.$route.params.Name,"user" : this.id_user,"comment" : this.text})
+      Axios.post(this.$store.getters.getApi+addquestion_api,{"name": this.$route.params.Name,"user" : this.id_user,"comment" : this.text})
       .then(() =>{
         Axios.post(mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
@@ -140,21 +194,15 @@ export default {
     if(this.$store.getters.getUserstate == 'User' || this.$store.getters.getUserstate == 'Dormitory'){
       this.getProfile()
     }
+    
 
-    Axios.post(mongo_api,{"name" : this.$route.params.Name})
+    Axios.post(this.$store.getters.getApi+mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
           this.listtext_old = res.data.Question
           console.log(this.listtext_old);
         })
         .catch(err => alert(err));
   },
-  mounted(){
-    console.log(this.$store.getters.getUserstate);
-    if(this.$store.getters.getUserstate == null ){
-      document.getElementById("question").style.display = "none";
-      
-    }
-  }
 };
 </script>
 <style scoped>
