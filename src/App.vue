@@ -7,7 +7,7 @@
 </template>
 <script>
 import Axios from "axios";
-let mongo_api = "http://127.0.0.1:8000/api/sentuserline/";
+let mongo_api = "/api/sentuserline/";
 export default {
   data(){
     return{
@@ -45,7 +45,7 @@ export default {
             console.log(this.name_user +" :id_user");
             this.type_user = localStorage.getItem('typeUser')
             console.log(this.type_user  +" :id_user");
-            Axios.post(mongo_api,{"id_user"  : this.id_user ,"name_user" : this.name_user , "type_user" : this.type_user})
+            Axios.post(this.$store.getters.getApi+mongo_api,{"id_user"  : this.id_user ,"name_user" : this.name_user , "type_user" : this.type_user})
             .then(res => {
               console.log(res);
               this.user = res.data["user"]
@@ -88,6 +88,7 @@ export default {
   },
   created(){
     // this.fetchFood()
+    console.log(this.$store.getters.getUserstate);
     this.line();
     },
 }

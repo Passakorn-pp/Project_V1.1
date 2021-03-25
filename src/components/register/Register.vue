@@ -5,7 +5,6 @@
       <div style="width: 80%; height:20px; border-bottom:0.5px solid silver; margin:auto;"></div>
       <br>
       <br>
-      <form action="">
       <label for="inputname" style="margin-right:3%;">คณะ</label>
       <select name="inputname" v-model="faculty" required>
         <option>คณะวิทยาศาสตร์</option>
@@ -76,7 +75,6 @@
       <br>
       <br>
       <button type="submit" @click="PostData()" style="border-radius: 15px; border: none; background: #e4c275; width: 80px; color: white; height: 40px;">ยืนยัน</button>
-      </form>
     </div>
 
     
@@ -133,7 +131,7 @@ export default {
       Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,"faculty" : this.faculty,"gender" : this.gender,"year": this.years,"behavior" : this.text})
       .then(res => {
         if(res.data=="success"){
-          console.log("success");
+          this.$router.push({ path: '/' })
         }
       })
       .catch(err => alert(err));

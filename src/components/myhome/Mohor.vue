@@ -120,6 +120,11 @@ import Axios from "axios";
 let mongo_api = "/api/updateDataDormitory/";
 
 export default {
+  data(){
+    return{
+      id_user : "",
+    }
+  },
   props: [
     'room'
   ],
@@ -128,7 +133,12 @@ export default {
       console.log(r.filter.wifi);
     },
     PostData(){
-        Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": "หอพักอนงค์",
+      const liff = this.$liff
+      liff.getProfile()
+      .then(profile => {
+        this.userProfile = profile
+        this.id_user = this.userProfile['userId']
+        Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,
                             "name" : this.room.name,
                             "water_bill" : this.room.water_bill,
                             "elect_bill" : this.room.elect_bill,
@@ -147,6 +157,11 @@ export default {
           }
         })
         .catch(err => alert(err));
+      })
+      .catch((err) => {
+        console.error('LIFF initialize error', err)
+      })
+        
     }
     
   }

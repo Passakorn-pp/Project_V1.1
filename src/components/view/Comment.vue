@@ -103,7 +103,7 @@
 <script>
 import Axios from "axios";
 let mongo_api = "/api/get_Question/";
-let addanswer_api = "=/api/addAnswer/"
+let addanswer_api = "/api/addAnswer/"
 let addquestion_api = "/api/addQuestion/"
 let getRatingAll = "https://accommodation.pjjop.org/getrating/"
 let setRating = "/api/SetRating/"
@@ -121,7 +121,8 @@ export default {
       listtext_old: [],
       listtext: [],
       id_user : null,
-      rating : 0
+      rating : 0,
+      name_user : null
     };
   },
 
@@ -149,6 +150,7 @@ export default {
       .then(profile => {
         this.userProfile = profile
         this.id_user = this.userProfile['userId']
+        this.name_user =  this.userProfile['displayName']
         Axios.post(this.$store.getters.getApi+getRating,{"name" : this.$route.params.Name,"user" : this.id_user})
         .then(res => {
           this.rating = res.data
@@ -161,17 +163,21 @@ export default {
       })
     },
     Answer(text){
-      text.answer.push({body : this.text2})
+      text.answer.push({body : this.text2,user : {name_user :  this.name_user}})
       
       Axios.post(this.$store.getters.getApi+addanswer_api,{"name": this.id_user,"id" : text.id,"body" : this.text2})
+      .then(res => {
+        console.log(res);
+      })
       .catch(err => alert(err));
       this.text2="";
     },
     Question() {
       Axios.post(this.$store.getters.getApi+addquestion_api,{"name": this.$route.params.Name,"user" : this.id_user,"comment" : this.text})
       .then(() =>{
-        Axios.post(mongo_api,{"name" : this.$route.params.Name})
+        Axios.post(this.$store.getters.getApi+mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
+          
           this.listtext_old = res.data.Question
         })
         .catch(err => alert(err));

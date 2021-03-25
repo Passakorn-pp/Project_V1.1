@@ -55,7 +55,7 @@ export default {
 }
 .container-home-register2 {
   width: 60%;
-  height: 450px;
+  height: 600px;
   min-width: 800px;
   border-radius: 15px;
   border: 1px solid silver;
@@ -72,6 +72,6 @@ export default {
 .register2 {
   /* background: #fceecd; */
   background: rgb(235, 235, 233);
-  height: 600px;
+  height: 800px;
 }
 </style>
