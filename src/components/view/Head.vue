@@ -16,7 +16,7 @@
           v-model="status"
           value="เพิ่มแล้ว"
           unchecked-value="เพิ่มในรายการที่สนใจ"
-          @click="setlike()"
+          @change="setlike()"
         >
         </b-form-checkbox>
       </div>
@@ -119,10 +119,17 @@ export default {
       .then(profile => {
         this.userProfile = profile
         this.id_user = this.userProfile['userId']
-        Axios.post(this.$store.getters.getApi+getlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user})
+        Axios.post(this.$store.getters.getApi+getlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user })
         .then(res => {
           console.log(res + " :datalike");
           this.status = res.data
+          console.log(this.status+" :like");
+          if(this.status == "เพิ่มแล้ว"){
+            this.like = true;
+          }
+          else{
+            this.like = false;
+          }
         })
         .catch(err => alert(err));
       })
@@ -140,7 +147,7 @@ export default {
       else{
         status = "dislike"
       }
-      Axios.post(this.$store.getters.getApi+setlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user,"status" : status})
+      Axios.post(this.$store.getters.getApi+setlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user ,"status" : status})
       .catch(err => alert(err));
     }
   },

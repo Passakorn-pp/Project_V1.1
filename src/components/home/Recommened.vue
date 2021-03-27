@@ -59,7 +59,8 @@
           
             <h6 style="line-height: 0.5;   float: left;">บาท </h6>
             <br>
-            <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-if="user.distance==0"> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
           </div> 
 
         </div>
@@ -274,7 +275,7 @@ export default {
         this.id_user = this.userProfile['userId']
 
 
-        Axios.post(this.$store.getters.getApi+data_user,{"id_user" : "U2adb705541e0ba188353355c15ccc074"})
+        Axios.post(this.$store.getters.getApi+data_user,{"id_user" : this.id_user})
         .then(res => {
           
           const behavior = res.data[0].behavior

@@ -89,6 +89,7 @@ export default {
   data(){
     return{
       text : "",
+      img : "",
       faculty : null,
       gender : null,
       id_user : null,
@@ -120,6 +121,7 @@ export default {
         this.userProfile = profile
         this.id_user = this.userProfile['userId']
         this.name_user =  this.userProfile['displayName']
+        this.img = this.userProfile['pictureUrl']
         this.type_user = localStorage.getItem('typeUser')
       })
       .catch((err) => {
@@ -128,7 +130,7 @@ export default {
     },
     PostData(){
       this.gettext()
-      Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,"faculty" : this.faculty,"gender" : this.gender,"year": this.years,"behavior" : this.text})
+      Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,"faculty" : this.faculty,"gender" : this.gender,"year": this.years,"behavior" : this.text,"img" : this.img})
       .then(res => {
         if(res.data=="success"){
           alert("สำเร็จ")

@@ -39,7 +39,7 @@
           <!-- <b-dropdown-item-button><router-link to="/test">เทส</router-link ></b-dropdown-item-button> -->
           <b-dropdown-item-button><router-link to="#about">เกี่ยวกับ</router-link ></b-dropdown-item-button>
           <b-dropdown-item-button><router-link to="/profile" v-if="$store.getters.getUserstate == 'User'">ข้อมูลส่วนตัว</router-link ></b-dropdown-item-button>
-          <b-dropdown-item-button><router-link to="/profile/like" v-if="$store.getters.getUserstate == 'User'">ถูกใจ</router-link ></b-dropdown-item-button>
+          <b-dropdown-item-button><router-link to="/profile/like" v-if="$store.getters.getUserstate == 'User'">รายการที่คุณสนใจ</router-link ></b-dropdown-item-button>
         </b-dropdown>
       </li>
       <li class="li-head" >
@@ -76,7 +76,7 @@
           <router-link to="/profile" class="text-above" v-if="$store.getters.getUserstate == 'User'">ข้อมูลส่วนตัว</router-link >
         </li>
         <li class="li-head" id="Head-list" >
-          <router-link to="/profile/like" class="text-above" v-if="$store.getters.getUserstate == 'User'">ถูกใจ</router-link >
+          <router-link to="/profile/like" class="text-above" v-if="$store.getters.getUserstate == 'User'">รายการที่คุณสนใจ</router-link >
         </li>
       </div>
       

@@ -6,7 +6,7 @@
       <div style="transform: translateY(150px);">
         <div class="profile-tab">       
           <router-link to="/profile"><button v-on:click="activetab=1" v-bind:class="[ activetab === 1 ? 'active' : '' ]">ข้อมูลส่วนตัว</button></router-link>
-          <router-link to="/profile/like"><button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">ถูกใจ</button></router-link>         
+          <router-link to="/profile/like"><button v-on:click="activetab=2" v-bind:class="[ activetab === 2 ? 'active' : '' ]">รายการที่คุณสนใจ</button></router-link>         
         </div>
         <div class="container-mainview" v-if="activetab === 1">
           <Moregister></Moregister>
