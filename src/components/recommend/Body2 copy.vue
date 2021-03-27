@@ -110,14 +110,17 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                <div class="name-home3" v-if="user.room.length>1">
                   ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
-                <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                <div class="name-home3" v-if="user.distance==0">
+                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                </div>
+                <div class="name-home3" v-else>
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -220,14 +223,17 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                <div class="name-home3" v-if="user.room.length>1">
                   ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
-                <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                <div class="name-home3" v-if="user.distance==0">
+                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                </div>
+                <div class="name-home3" v-else>
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -328,14 +334,17 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                <div class="name-home3" v-if="user.room.length>1">
                   ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
-                <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                <div class="name-home3" v-if="user.distance==0">
+                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                </div>
+                <div class="name-home3" v-else>
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -436,14 +445,17 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                <div class="name-home3" v-if="user.room.length>1">
                   ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
-                <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                <div class="name-home3" v-if="user.distance==0">
+                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                </div>
+                <div class="name-home3" v-else>
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -544,14 +556,17 @@
                   {{ user.name }}
                 </div>
                     
-                <div class="name-home3" v-if="user.room['0'].price!=user.room[user.room.length-1].price">
+                <div class="name-home3" v-if="user.room.length>1">
                   ราคา {{user.room['0'].price+"-"+user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-else>
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
-                <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                <div class="name-home3" v-if="user.distance==0">
+                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                </div>
+                <div class="name-home3" v-else>
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -694,10 +709,10 @@ components: {
       active_pic:1,
       activetab: localStorage.getItem('indexfilter'),
       value: 3000,
-      filterDor: ["parking_lot","elevators","security camera","keycard","laundry"],
+      filterDor: ["parking_lot","elevators","security_camera","keycard","laundry"],
       filterRoom: ["air","fan","refrigerator","table" ,"tv","wifi"],
-      selectedDor: ["parking_lot","elevators","security camera","keycard","laundry"],
-      selected: ["wifi","air","fan","tv","refrigerator","table"], // Must be an array reference!
+      selectedDor: [],
+      selected: [],
       optiontype:[
         {text: 'หอชาย', value: 'man'},
         {text: 'หอหญิง', value: 'woman'},
@@ -713,7 +728,7 @@ components: {
       options: [
         { text: 'ลานจอดรถ', value: 'parking_lot' },
         { text: 'ลิฟท์', value: 'elevators' },
-        { text: 'กล้องวงจร', value: 'security camera' },
+        { text: 'กล้องวงจร', value: 'security_camera' },
         { text: 'ระบบคีย์การ์ด', value: 'keycard' },
         { text: 'ร้านซักรีด', value: 'laundry' },
       ],
@@ -807,8 +822,7 @@ components: {
       var home = this.listitems;
       if(this.$store.getters.getUserstate == null){
         for(var j = 0; j<home.length; j++){
-          if(home[j].distance < 800){
-            
+          if(home[j].distance < 0.8){
             this.useritem2.push(home[j]);
           }
         }
@@ -843,7 +857,7 @@ components: {
                   for(var i = this.start; i<this.end; i++){
                     this.useritem.push(this.useritem2[i]);
                   }
-                  console.log(this.useritem);
+                  
                 } 
               })
               .catch(err => alert(err));
@@ -854,19 +868,38 @@ components: {
               .then(res => {
                 Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
                 .then(res => {
-                  home = res.data.dormitory  
-                  for(var k = 0; k<home.length; k++){
-                  this.useritem2.push(home[k][0]);
-                  }
-                  if(this.end > this.useritem2.length){
-                    this.end = this.useritem2.length
-                  }
-                  if(this.useritem2.length>0){
-                    for(var i = this.start; i<this.end; i++){
-                      this.useritem.push(this.useritem2[i]);
+                  if(res.data.dormitory != null){
+                    home = res.data.dormitory  
+                    for(var k = 0; k<home.length; k++){
+                    this.useritem2.push(home[k][0]);
                     }
-                    console.log(this.useritem);
-                  } 
+                    if(this.end > this.useritem2.length){
+                      this.end = this.useritem2.length
+                    }
+                    if(this.useritem2.length>0){
+                      for(var i = this.start; i<this.end; i++){
+                        this.useritem.push(this.useritem2[i]);
+                      }
+                    
+                    }
+                  }
+                  else{
+                    var home = this.listitems;
+                    for(var j = 0; j<home.length; j++){
+                      if(home[j].distance < 0.8){
+                        this.useritem2.push(home[j]);
+                      }
+                    }
+                    if(this.end > this.useritem2.length){
+                      this.end = this.useritem2.length
+                    }
+                    if(this.useritem2.length>0){
+                      for(var p = this.start; p<this.end; p++){
+                        this.useritem.push(this.useritem2[p]);
+                      }
+                    }
+                  }
+                   
                 })
                 .catch(err => alert(err));
               })
@@ -896,7 +929,6 @@ components: {
           this.useritem2.push(home[index]);
         }
         else{
-          console.log(home[index]);
           if(this.activetab == home[index].tags){
               this.useritem2.push(home[index]);
           }

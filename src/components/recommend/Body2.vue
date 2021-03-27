@@ -108,7 +108,7 @@
                   ราคา {{user.room[1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -218,7 +218,7 @@
                   ราคา {{user.room[1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -326,7 +326,7 @@
                   ราคา {{user.room[1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -434,7 +434,7 @@
                   ราคา {{user.room[1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -542,7 +542,7 @@
                   ราคา {{user.room[1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
@@ -650,7 +650,7 @@
                   ราคา {{user.room[1].price+" บาท"}}
                 </div>
                 <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.distance}} เมตร
+                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>

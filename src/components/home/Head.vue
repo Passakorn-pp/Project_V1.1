@@ -34,7 +34,7 @@
       <li class="li-head" id="manu-mini">
         <b-dropdown right  variant="light">
           <template #button-content>
-            <b-icon icon="list" scale="2"> </b-icon> <span style="margin-left:10px;">Manu</span>
+            <b-icon icon="list" scale="2"> </b-icon> <span style="margin-left:10px;">Menu</span>
           </template>
           <!-- <b-dropdown-item-button><router-link to="/test">เทส</router-link ></b-dropdown-item-button> -->
           <b-dropdown-item-button><router-link to="#about">เกี่ยวกับ</router-link ></b-dropdown-item-button>
@@ -106,6 +106,7 @@ export default {
       const liff = this.$liff
       this.check = false
       liff.logout();
+      location.reload()
     }
 
   },

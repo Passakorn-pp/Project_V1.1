@@ -108,7 +108,7 @@
             <input style="margin-right:2%; width:100px; hight:80px; float: right;   border: 1px solid silver;"> -->
             
           <!-- </div> -->
-          <button @click="PostData()">ยืนยัน</button>
+          <button @click="PostData()" style="background: #e4c785; padding:1%; margin-top:3%; border-radius: 15px;  border: none; color:white; width: 60px; height: 40px;">ยืนยัน</button>
         </div>
         
     </div>

@@ -55,9 +55,9 @@ export default {
                 if(this.state == "no"){
                   this.$router.push({name:'register',params:{id:this.id_user}})
                 }
-                else{
-                  this.$router.push('/')
-                }
+                // else{
+                //   location.reload()
+                // }
                 
               }
               else if(this.user=="Dormitory"){

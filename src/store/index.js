@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     foods: localStorage.getItem('datatest')||[],
     userstate : localStorage.getItem('user')||null,
-    api : "https://gokoball123.pythonanywhere.com"
+    api : "http://127.0.0.1:8000"
     // user: localStorage.getItem('user') || 0,
     // homeclick: localStorage.getItem('homeclick') || null,
     // homeall: localStorage.getItem('homeall') || null,

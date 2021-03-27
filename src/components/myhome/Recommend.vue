@@ -17,7 +17,7 @@
                     <div class="flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <img src="@/assets/peple5.png" alt="Avatar" style="width:150px;height:150px;">
+                                <img :src="user.datauser[0].img" alt="Avatar" style="width:150px;height:150px;">
                             </div>
                             <div class="flip-card-back">
                                 <!-- <h5>{{user.name}}</h5> -->

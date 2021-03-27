@@ -37,7 +37,7 @@
       <br>
       <br>
       <br>
-      <div v-if="room.room>1" style="width: 40%; float: left; text-align: left; margin-top:-1%">
+      <div v-if="room.room.length>1" style="width: 40%; float: left; text-align: left; margin-top:-1%">
         <h4 >{{"ราคา "+room.room[0].price+"-"+room.room[room.room.length-1].price+" บาท"}}</h4>
       </div>
       <div style="width: 40%; float: left; text-align: left; margin-top:-1%" v-else>
@@ -72,13 +72,13 @@
       <br>
       <br>
       <div style="width: 20%; float: left; margin-top:-3%; margin-left:-2%" >
-        <b-form-rating v-model="value" readonly no-border  variant="warning" style="background: none;"></b-form-rating>
+        <b-form-rating v-model="room.star" readonly no-border  variant="warning" style="background: none;"></b-form-rating>
       </div>
       <br>
       <br>
       <div style="width: 100%; text-align: left; margin-top:-3%;" >
         <h5 style="width: 15%; float: left; ">ที่อยู่หอพัก </h5>
-        <h6 style="width: 85%; float: left; margin-top:0.5%; "> หอพัก แขวง เขต จังหวัด รหัสไปษณี</h6>
+        <h6 style="width: 85%; float: left; margin-top:0.5%; "> {{room.address}}</h6>
       </div>
       <br>
       <br>
@@ -119,6 +119,12 @@ export default {
       .then(profile => {
         this.userProfile = profile
         this.id_user = this.userProfile['userId']
+        Axios.post(this.$store.getters.getApi+getlike_api,{"name" : this.$route.params.Name,"user_id" : this.id_user})
+        .then(res => {
+          console.log(res + " :datalike");
+          this.status = res.data
+        })
+        .catch(err => alert(err));
       })
       .catch((err) => {
         console.error('LIFF initialize error', err)
@@ -140,12 +146,7 @@ export default {
   },
   created(){
     this.getProfile()
-    Axios.post(this.$store.getters.getApi+getlike_api,{"name" : this.$route.params.Name,"user_id" : "U2adb705541e0ba188353355c15ccc074"})
-    .then(res => {
-      console.log(res + " :datalike");
-      this.status = res.data
-    })
-    .catch(err => alert(err));
+    
   }
 };
 </script>

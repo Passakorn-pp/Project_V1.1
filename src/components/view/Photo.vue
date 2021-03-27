@@ -3,7 +3,7 @@
     <div style="margin: auto; width:70%">
       <flickity ref="flickity" :options="flickityOptions" >
         <div class="carousel-cell" v-for="(r,index) in rooms" :key="index">
-          <img :src="r.img" style="width: 100%; height: 100%;">
+          <img :src="r.img" style="width: 100%; height: auto;">
             
         </div>
       </flickity>
@@ -113,7 +113,7 @@ export default {
 .carousel-cell {
 
   width:100%; /* full width */
-  height: 400px;
+  height: 500px;
   background: white;
   /* center images in cells with flexbox */
   display: flex;

@@ -36,9 +36,9 @@
       <label style="margin-right:3%;">3</label>
       <input type="radio" id="year" value="4"  style="margin-right:1%;" name="year" v-model="years" required>
       <label style="margin-right:3%;">4</label>
-      <input type="radio" id="year" value="มากกว่า 4"  style="margin-right:1%;" name="year" v-model="years" required>
+      <input type="radio" id="year" value="5"  style="margin-right:1%;" name="year" v-model="years" required>
       <label style="margin-right:3%;">มากกว่า 4</label>
-      <input type="radio" id="year" value="จบแล้ว"  style="margin-right:1%;" name="year" v-model="years" required>
+      <input type="radio" id="year" value="6"  style="margin-right:1%;" name="year" v-model="years" required>
       <label style="margin-right:3%;">จบแล้ว</label>
       <br>
       <br>
@@ -74,7 +74,7 @@
       <label style="margin-right:3%;">นอนเล่น</label>
       <br>
       <br>
-      <button type="submit" @click="PostData()" style="border-radius: 15px; border: none; background: #e4c275; width: 80px; color: white; height: 40px;">ยืนยัน</button>
+      <button @click="PostData()" style="border-radius: 15px; border: none; background: #e4c275; width: 80px; color: white; height: 40px;">ยืนยัน</button>
     </div>
 
     
@@ -131,6 +131,7 @@ export default {
       Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,"faculty" : this.faculty,"gender" : this.gender,"year": this.years,"behavior" : this.text})
       .then(res => {
         if(res.data=="success"){
+          alert("สำเร็จ")
           this.$router.push({ path: '/' })
         }
       })

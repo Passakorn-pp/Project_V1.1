@@ -21,7 +21,7 @@
             <h6 style="line-height: 0.5; margin-right:5px;   float: left;">ราคา</h6>
               <div v-if="s[0].room.length>1">
                 <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s[0].room[0].price}}</h6>
-                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s[0].room[s.room.length-1].price}}</h6>
+                <h6 style="line-height: 0.5; margin-right:5px;   float: left;">- {{s[0].room[s[0].room.length-1].price}}</h6>
               </div>
               <div v-else>
                 <h6 style="line-height: 0.5; margin-right:5px;   float: left;">{{s[0].room[0].price}}</h6>
@@ -40,6 +40,7 @@
       <flickity ref="flickity" :options="flickityOptions" >
       
         <div v-for="(s,i) in room" :key="i" class="container-Recommened-card" @click="setview(s)" >
+          
           <img :src="s.img" class="container-Recommened-card-img" >
           <div class="container-Recommened-card-text">
             <h6 style="float: left;">{{s.name}} </h6>
@@ -58,7 +59,7 @@
           
             <h6 style="line-height: 0.5;   float: left;">บาท </h6>
             <br>
-            <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s.distance}} เมตร</h6>
+            <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
           </div> 
 
         </div>
@@ -256,7 +257,7 @@ export default {
       .then(res => {
         this.room = res.data.dormitory
         for(var i = 0; i<this.room.length; i++){
-          if(this.room[i].distance > 800){
+          if(this.room[i].distance > 0.8){
             this.room.splice(i, 1)
             i=0;
           }
@@ -273,10 +274,12 @@ export default {
         this.id_user = this.userProfile['userId']
 
 
-        Axios.post(this.$store.getters.getApi+data_user,{"id_user" : this.id_user})
+        Axios.post(this.$store.getters.getApi+data_user,{"id_user" : "U2adb705541e0ba188353355c15ccc074"})
         .then(res => {
+          
           const behavior = res.data[0].behavior
           const id = res.data[0].id
+          console.log(behavior);
           Axios.post(recommdent,{"UserID": id})
           .then(res => {
             if(res.data.results.dormitory != null){
@@ -291,13 +294,38 @@ export default {
               console.log("api");
               Axios.post(recommdent_api,{"Act" : behavior})
               .then(res => {
-                Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
-                .then(res => {
-                  this.room = res.data.dormitory  
-                })
-                .catch(err => alert(err));
+                console.log(res.data.results.dormitory);
+                if(res.data.results.dormitory != null){
+                  Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
+                  .then(res => {
+                    this.room = res.data.dormitory  
+                  })
+                  .catch(err => alert(err));
+                }
+                else{
+                  console.log("ระยะทาง");
+                  Axios.get(this.$store.getters.getApi+mongo_api)
+                  .then(res => {
+                    var r = res.data.dormitory
+                    var r2 = []
+                    for(var i in r){
+                      console.log(r[i]);
+                      if(r[i].distance < 0.8){
+                        r2.push([r[i]])
+                      }
+                    }
+                    
+                    this.room = r2;
+                    console.log(this.room);
+                  })
+                  .catch(err => alert(err));
+                }
+                
               })
-              .catch(err => alert(err));
+              .catch(err => {
+                console.log(err);
+                
+              });
             }
           })
           .catch(err => alert(err));

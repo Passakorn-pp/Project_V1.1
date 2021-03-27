@@ -55,7 +55,7 @@
 
           <div class="right">
             
-            <img src="@/assets/QRCode.png" class="contianer-Qrcode" />
+            <img :src="rooms.qrcode" class="contianer-Qrcode" />
             
           </div>
           <!-- <img src="@/assets/33.jpg" class="img-room" />

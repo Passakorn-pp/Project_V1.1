@@ -53,6 +53,6 @@ export default {
 .register {
   /* background: #fceecd; */
   background: rgb(235, 235, 233);
-  height: 600px;
+  height: 650px;
 }
 </style>
