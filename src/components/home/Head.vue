@@ -107,6 +107,7 @@ export default {
       this.check = false
       liff.logout();
       location.reload()
+      this.$router.push({ path: '/' })
     }
 
   },

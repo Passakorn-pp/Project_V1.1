@@ -31,8 +31,11 @@
         >
       </div>
       <div id="question" style="position: relative; margin-bottom:10%;" v-else>
-         <h5>ให้คะแนนหอพัก</h5>
-         <b-form-rating v-model="rating" variant="warning" @change="changeRating()"></b-form-rating>
+         <div v-if="$store.getters.getUserstate == 'User'">
+            <h5>ให้คะแนนหอพัก</h5>
+            <b-form-rating v-model="rating" variant="warning" @change="changeRating()"></b-form-rating>
+         </div>
+        
          <br>
          <b-form-input
           v-model="text"
