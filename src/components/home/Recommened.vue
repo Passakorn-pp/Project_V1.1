@@ -29,7 +29,8 @@
           
             <h6 style="line-height: 0.5;   float: left;">บาท </h6>
             <br>
-            <h6 style="line-height: 0.5 ;"> ระยะทางจากมหาลัย {{s[0].distance}} เมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-if="s[0].distance==0"> ระยะทางจากมหาลัย {{s[0].distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาลัย {{s[0].distance}} กิโลเมตร</h6>
           </div> 
 
         </div>
@@ -59,7 +60,7 @@
           
             <h6 style="line-height: 0.5;   float: left;">บาท </h6>
             <br>
-            <h6 style="line-height: 0.5 ;" v-if="user.distance==0"> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-if="s.distance==0"> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
             <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
           </div> 
 
