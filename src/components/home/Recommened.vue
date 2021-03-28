@@ -41,8 +41,8 @@
       <flickity ref="flickity" :options="flickityOptions" >
       
         <div v-for="(s,i) in room" :key="i" class="container-Recommened-card" @click="setview(s)" >
-          
-          <img :src="s.img" class="container-Recommened-card-img" >
+          <div v-if="s.distance != 0">
+            <img :src="s.img" class="container-Recommened-card-img" >
           <div class="container-Recommened-card-text">
             <h6 style="float: left;">{{s.name}} </h6>
             <div style="display: inline-block;">
@@ -60,10 +60,11 @@
           
             <h6 style="line-height: 0.5;   float: left;">บาท </h6>
             <br>
-            <h6 style="line-height: 0.5 ;" v-if="s.distance==0"> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
-            <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" > ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
           </div> 
-
+          </div>
+          
+          
         </div>
       
         
