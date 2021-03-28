@@ -195,7 +195,7 @@ export default {
   position: relative;
   float: left;
   margin-right: 15px;
-  background: aquamarine;
+  background: rgb(252, 243, 207);;
 }
 .recommend{
     border: 1px solid silver;
