@@ -22,8 +22,11 @@
                 <div class="name-home3" v-else>
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
+                <div class="name-home3" v-if="user.dormitory[0].distance==0">
+                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                </div>
                 <div class="name-home3">
-                  ระยะทางจากมหาลัย {{user.dormitory[0].distance}} เมตร
+                  ระยะทางจากมหาลัย {{user.dormitory[0].distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.dormitory[0].star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
