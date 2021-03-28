@@ -74,12 +74,12 @@
           <span class="text-view-comment-list">{{ text.comment }}</span>
         </div >
         <div v-if="$store.getters.getUserstate == null" style="width:100%; margin-top:1%; margin-left:5%; display: flex; justify-content: left; display:none">
-          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2"  >
-          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text)"  >ยืนยัน</button>
+          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2[index]"  >
+          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text,index)"  >ยืนยัน</button>
         </div>
         <div v-else style="width:100%; margin-top:1%; margin-left:5%; display: flex; justify-content: left;">
-          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2"  >
-          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text)"  >ยืนยัน</button>
+          <input placeholder="ตอบกลับ" type="text" style="  border-radius: 15px; border: 1px solid silver;" v-model="text2[index]"  >
+          <button style="margin-left:2%;  border-radius: 15px; border: 1px solid silver;" @click="Answer(text,index)"  >ยืนยัน</button>
         </div>  
         
         <div style="margin-left:10%">
@@ -117,7 +117,7 @@ export default {
   ],
   data() {
     return {
-      text2: "",
+      text2: [],
       text: "",
       check: true,
       disabled: "disabled",
@@ -165,15 +165,16 @@ export default {
         console.error('LIFF initialize error', err)
       })
     },
-    Answer(text){
-      text.answer.push({body : this.text2,user : {name_user :  this.name_user}})
+    Answer(text,index){
+      console.log(this.text2[index]+" :index");
+      text.answer.push({body : this.text2[index],user : {name_user :  this.name_user}})
       
-      Axios.post(this.$store.getters.getApi+addanswer_api,{"name": this.id_user,"id" : text.id,"body" : this.text2})
+      Axios.post(this.$store.getters.getApi+addanswer_api,{"name": this.id_user,"id" : text.id,"body" : this.text2[index]})
       .then(res => {
         console.log(res);
       })
       .catch(err => alert(err));
-      this.text2="";
+      this.text2[index] = ""
     },
     Question() {
       Axios.post(this.$store.getters.getApi+addquestion_api,{"name": this.$route.params.Name,"user" : this.id_user,"comment" : this.text})
@@ -208,7 +209,7 @@ export default {
     Axios.post(this.$store.getters.getApi+mongo_api,{"name" : this.$route.params.Name})
         .then(res => {
           this.listtext_old = res.data.Question
-          console.log(this.listtext_old);
+          // console.log(this.listtext_old);
         })
         .catch(err => alert(err));
   },

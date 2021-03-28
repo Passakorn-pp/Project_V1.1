@@ -243,7 +243,7 @@ export default {
       .then(profile => {
         this.userProfile = profile
         this.id_user = this.userProfile['userId']
-        this.id_user =  this.userProfile['displayName']
+        this.name_user =  this.userProfile['displayName']
         this.type_user = localStorage.getItem('typeUser')
       })
       .catch((err) => {
@@ -251,7 +251,7 @@ export default {
       })
     },
     PostData(){
-        Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.id_user,"type_user" : this.type_user,
+        Axios.post(this.$store.getters.getApi+mongo_api,{"id_user": this.id_user,"name_user" : this.name_user,"type_user" : this.type_user,
                             "name" : this.dormitory.name,
                             "img" : this.dormitory.img,
                             "water_bill" : this.dormitory.water_bill,

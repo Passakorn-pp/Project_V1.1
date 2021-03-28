@@ -98,6 +98,7 @@ export default {
     async show_registesr(type) {
       const liff = this.$liff // เรียก property ของ LIFF
       await localStorage.setItem('typeUser',type)
+      this.$store.dispatch("setUserState", type);
       liff.init({
         liffId: '1655683528-q1XK2z5a'
       }).then(() => {

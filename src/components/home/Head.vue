@@ -43,7 +43,15 @@
         </b-dropdown>
       </li>
       <li class="li-head" >
-          <div v-if="this.check" >
+        <div v-if="$store.getters.getUserstate == null">
+          <router-link to="/login">
+            <div style="widht:100px; display: inline-block; background: white; padding: 6px 7px; border-radius: 5px;" @click="setlogin()">
+                <img src="@/assets/user.png"  class="container-login-img">
+                <span style="margin-right:10px; line-height: 1.6em;">เข้าสู่ระบบ</span>
+              </div>
+          </router-link >
+        </div>
+          <div v-else >
             <b-dropdown right  variant="light">
               <template #button-content>
                 <div style="widht:100px; display: inline-block;">
@@ -55,14 +63,7 @@
               <b-dropdown-item-button @click="Logout()">Logout</b-dropdown-item-button>
             </b-dropdown>
           </div>
-          <div v-else>
-            <router-link to="/login">
-              <div style="widht:100px; display: inline-block; background: white; padding: 6px 7px; border-radius: 5px;">
-                  <img src="@/assets/user.png"  class="container-login-img">
-                  <span style="margin-right:10px; line-height: 1.6em;">เข้าสู่ระบบ</span>
-                </div>
-            </router-link >
-          </div>
+          
       </li>
       <div id="manu">
         
@@ -105,13 +106,17 @@ export default {
     Logout(){
       const liff = this.$liff
       this.check = false
-      liff.logout();
-      location.reload()
+      liff.logout(); 
+      this.$store.dispatch("setUserState", null);
       this.$router.push({ path: '/' })
+      location.reload();
+    },
+    setlogin(){
+      this.$store.dispatch("setlogin", "1");
     }
 
   },
-  async created(){
+  created(){
     const liff = this.$liff // เรียก property ของ LIFF
     this.check = false
     liff.init({

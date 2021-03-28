@@ -152,11 +152,10 @@ export default {
   display: block;
 }
 .container-home-search {
-  display: none;
   height: 300px;
   width: 70%;
   top: 20%;
-  left: 20%;
+  left: 15%;
   position: absolute;
   z-index: 9998;
 }

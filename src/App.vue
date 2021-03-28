@@ -55,9 +55,13 @@ export default {
                 if(this.state == "no"){
                   this.$router.push({name:'register',params:{id:this.id_user}})
                 }
-                // else{
-                //   location.reload()
-                // }
+                else{
+                  if(this.$store.getters.getlogin == "1"){
+                    this.$store.dispatch("setlogin", null);
+                    location.reload();
+                  }
+                  
+                }
                 
               }
               else if(this.user=="Dormitory"){
@@ -88,9 +92,8 @@ export default {
   },
   created(){
     // this.fetchFood()
-    console.log(this.$store.getters.getUserstate);
     this.line();
-    },
+  },
 }
 </script>
 <style lang="scss">

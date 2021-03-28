@@ -25,7 +25,9 @@ export default {
         Logout(){
             const liff = this.$liff
             liff.logout()
+            this.$store.dispatch("setUserState", null);
             this.$router.push('/')
+            location.reload();
         }
     },
     mounted() {

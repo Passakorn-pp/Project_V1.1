@@ -9,7 +9,8 @@ export default new Vuex.Store({
     foods: localStorage.getItem('datatest')||[],
     userstate : localStorage.getItem('user')||null,
     // api : "http://127.0.0.1:8000"
-    api :"https://gokoball123.pythonanywhere.com"
+    api :"https://gokoball123.pythonanywhere.com",
+    login : localStorage.getItem('login')||null
     // user: localStorage.getItem('user') || 0,
     // homeclick: localStorage.getItem('homeclick') || null,
     // homeall: localStorage.getItem('homeall') || null,
@@ -22,8 +23,10 @@ export default new Vuex.Store({
     },
     getApi(state){
       return state.api
+    },
+    getlogin(state){
+      return state.login
     }
-    
     // getState(state){
       
     //   return state.state
@@ -56,6 +59,11 @@ export default new Vuex.Store({
       state.userstate = value;
       localStorage.setItem('user',state.userstate);
       state.userstate = value;
+    },
+    setlogin(state,value){
+      state.login = value;
+      localStorage.setItem('login',state.login);
+      state.login = value;
     }
     // SetView(state,value){
     //   state.homeclick = value,
@@ -98,6 +106,9 @@ export default new Vuex.Store({
     },
     setUserState(context,value){
       context.commit("setUserState",value);
+    },
+    setlogin(context,value){
+      context.commit("setlogin",value);
     }
     // addView(context,value){
     //   context.commit('SetView',value)   

@@ -281,7 +281,7 @@ export default {
           
           const behavior = res.data[0].behavior
           const id = res.data[0].id
-          console.log(behavior);
+          // console.log(behavior);
           Axios.post(recommdent,{"UserID": id})
           .then(res => {
             if(res.data.results.dormitory != null){
@@ -296,7 +296,7 @@ export default {
               console.log("api");
               Axios.post(recommdent_api,{"Act" : behavior})
               .then(res => {
-                console.log(res.data.results.dormitory);
+                // console.log(res.data.results.dormitory);
                 if(res.data.results.dormitory != null){
                   Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
                   .then(res => {
@@ -311,14 +311,14 @@ export default {
                     var r = res.data.dormitory
                     var r2 = []
                     for(var i in r){
-                      console.log(r[i]);
+                      // console.log(r[i]);
                       if(r[i].distance < 0.8){
                         r2.push([r[i]])
                       }
                     }
                     
                     this.room = r2;
-                    console.log(this.room);
+                    // console.log(this.room);
                   })
                   .catch(err => alert(err));
                 }
