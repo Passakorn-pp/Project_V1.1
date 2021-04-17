@@ -93,14 +93,14 @@ export default {
 }
 .container-mainview{
   border: 1px solid silver;
-  width: 70%;
+  width: 80%;
   min-width: 1050px;
   margin:auto;
   background: white;
   transition: 0.5s ease-in;
 }
 .myhor-tab{
-  width: 70%;
+  width: 80%;
   min-width: 1050px;
   height: 50px;
   margin: auto;

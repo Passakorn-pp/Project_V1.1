@@ -123,9 +123,14 @@
                   ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
-                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
+                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
+                  <!-- <img src="@/assets/group.png" style="width:20px; height:20px; float: left; margin-top:2.5%;"> -->
+                  <div style="float: left; margin-top:2%;">
+                    <b-icon icon="person-circle" variant="secondary"></b-icon>
+                  </div>
+                  <h6 style="float: left; margin-top:2.5%; margin-left:2%; color: rgb(143, 143, 143)">{{user.preper}}</h6>
                 </div>
-                    
+
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
                   <!-- <div v-if="showfilter('man',user)">
                       <img src="@/assets/man.png" class="img-icon-view-head" style="float: left; margin-right:3px ">
@@ -236,7 +241,12 @@
                   ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
-                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
+                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
+                  <div style="float: left; margin-top:2%;">
+                    <b-icon icon="person-circle" variant="secondary"></b-icon>
+                  </div>
+                  <!-- <img src="@/assets/group.png" style="width:20px; height:20px; float: left; margin-top:2.5%;"> -->
+                  <h6 style="float: left; margin-top:2.5%; margin-left:2%; color: rgb(143, 143, 143)">{{user.preper}}</h6>
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
@@ -347,7 +357,12 @@
                   ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
-                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
+                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
+                  <div style="float: left; margin-top:2%;">
+                    <b-icon icon="person-circle" variant="secondary"></b-icon>
+                  </div>
+                  <!-- <img src="@/assets/group.png" style="width:20px; height:20px; float: left; margin-top:2.5%;"> -->
+                  <h6 style="float: left; margin-top:2.5%; margin-left:2%; color: rgb(143, 143, 143)">{{user.preper}}</h6>
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
@@ -458,7 +473,12 @@
                   ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
-                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
+                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
+                  <!-- <img src="@/assets/group.png" style="width:20px; height:20px; float: left; margin-top:2.5%;"> -->
+                  <div style="float: left; margin-top:2%;">
+                    <b-icon icon="person-circle" variant="secondary"></b-icon>
+                  </div>
+                  <h6 style="float: left; margin-top:2.5%; margin-left:2%; color: rgb(143, 143, 143)">{{user.preper}}</h6>
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
@@ -569,7 +589,13 @@
                   ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
-                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none;"></b-form-rating>
+                  <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
+                  <!-- <img src="@/assets/group.png" style="width:20px; height:20px; float: left; margin-top:2.5%;"> -->
+                  <div style="float: left; margin-top:2%;">
+                    <b-icon icon="person-circle" variant="secondary"></b-icon>
+                  </div>
+                  
+                  <h6 style="float: left; margin-top:2.5%; margin-left:2%; color: rgb(143, 143, 143)">{{user.preper}}</h6>
                 </div>
                     
                 <div style="padding-left: 15px; margin-top:-2%; overflow: hidden;">  
@@ -1055,13 +1081,14 @@ components: {
   margin-bottom: 0.5%;
   overflow: hidden;
   border-bottom: 1px solid silver;
+  
 }
 .filter-sort{
   width: 33.3%;
   text-align: left;
   float: left;
   overflow: hidden;
-  
+  border: 1px solid silver
 }
 .filter-sort h6{
     margin: 5% 30%;
@@ -1217,12 +1244,13 @@ components: {
   text-align: left;
 }
 .rating-recomend2 {
-  width: max-content;
+  width: 100%;
   margin-bottom: 3%;
   position: relative;
   left: 0;
   top: -2%;
   overflow: hidden;
+  
 }
 .ui-recommend-price2 {
   position: relative;

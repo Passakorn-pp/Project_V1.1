@@ -71,9 +71,19 @@
       </div> -->
       <br>
       <br>
-      <div style="width: 20%; float: left; margin-top:-3%; margin-left:-2%" >
+      <div style="width: 20%; float: left; margin-top:-3%; margin-left:-2%; " >
         <b-form-rating v-model="room.star" readonly no-border  variant="warning" style="background: none;"></b-form-rating>
+        
       </div>
+      <div style="width: 20%; float: left; margin-top:-1.7%;" >
+        <!-- <img src="@/assets/group.png" style="width:20px; height:20px; float: left; "> -->
+        <div style="float: left; margin-top:-1.5%">
+          <b-icon icon="person-circle" variant="secondary"></b-icon>
+        </div>
+        <h6 style="float: left; margin-left:4%; color: rgb(143, 143, 143)">{{room.preper}}</h6>
+        
+      </div>
+      
       <br>
       <br>
       <div style="width: 100%; text-align: left; margin-top:-3%;" >

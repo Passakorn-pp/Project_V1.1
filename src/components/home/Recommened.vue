@@ -46,8 +46,12 @@
           <div class="container-Recommened-card-text">
             <h6 style="float: left;">{{s.name}} </h6>
             <div style="display: inline-block;">
-              <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%" class="rating-recommend"></b-form-rating>      
+              <b-form-rating  v-model="s.star" readonly no-border variant="warning" style="background: none; float: left; margin-top:-7%;" ></b-form-rating>      
             </div>
+            <div style="display: inline-block;">
+              <h6 style="float: left;">({{s.preper}})</h6>
+            </div>
+            
             <br>
             <h6 style="line-height: 0.5; margin-right:5px;   float: left;">ราคา</h6>
               <div v-if="s.room.length>1">
@@ -425,8 +429,8 @@ export default {
 
 .container-Recommened-card{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   color: black;
   position: relative;
   margin-right: 15px;

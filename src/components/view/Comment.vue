@@ -111,6 +111,9 @@ let addquestion_api = "/api/addQuestion/"
 let getRatingAll = "https://accommodation.pjjop.org/getrating/"
 let setRating = "/api/SetRating/"
 let getRating = "/api/GetRating/"
+import { create, all } from 'mathjs'
+const config = { }
+const math = create(all, config)
 export default {
   props: [
     'room'
@@ -133,13 +136,11 @@ export default {
     changeRating(){
       Axios.post(getRatingAll ,{"Dorname" : this.$route.params.Name})
       .then(res => {
+        console.log(res);
         var rating = res.data.results.Rating;
-        var count = 0;
-        for(var i=0; i<rating.length; i++){
-          count += rating[i];
-        }
-        count += this.rating
-        Axios.post(this.$store.getters.getApi+setRating,{"name" : this.$route.params.Name,"user" : this.id_user,"rating" : this.rating,"ratingAll" : count/(rating.length+1)})
+        rating.push(this.rating)
+        var count2 = math.mode(rating)
+        Axios.post(this.$store.getters.getApi+setRating,{"name" : this.$route.params.Name,"user" : this.id_user,"rating" : this.rating,"ratingAll" : count2[0],"preper" : rating.length})
         .then(res => {
           console.log(res);
         })
