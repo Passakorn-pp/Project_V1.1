@@ -117,10 +117,10 @@
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-if="user.distance==0">
-                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                  ระยะทางจากมหาวิทยาลัย "ยังไม่ทราบระยะทาง" 
                 </div>
                 <div class="name-home3" v-else>
-                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
+                  ระยะทางจากมหาวิทยาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
@@ -235,10 +235,10 @@
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-if="user.distance==0">
-                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                  ระยะทางจากมหาวิทยาลัย "ยังไม่ทราบระยะทาง" 
                 </div>
                 <div class="name-home3" v-else>
-                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
+                  ระยะทางจากมหาวิทยาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
@@ -351,10 +351,10 @@
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-if="user.distance==0">
-                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                  ระยะทางจากมหาวิทยาลัย "ยังไม่ทราบระยะทาง" 
                 </div>
                 <div class="name-home3" v-else>
-                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
+                  ระยะทางจากมหาวิทยาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
@@ -467,10 +467,10 @@
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-if="user.distance==0">
-                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                  ระยะทางจากมหาวิทยาลัย "ยังไม่ทราบระยะทาง" 
                 </div>
                 <div class="name-home3" v-else>
-                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
+                  ระยะทางจากมหาวิทยาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>
@@ -583,10 +583,10 @@
                   ราคา {{user.room[user.room.length-1].price+" บาท"}}
                 </div>
                 <div class="name-home3" v-if="user.distance==0">
-                  ระยะทางจากมหาลัย "ยังไม่ทราบระยะทาง" 
+                  ระยะทางจากมหาวิทยาลัย "ยังไม่ทราบระยะทาง" 
                 </div>
                 <div class="name-home3" v-else>
-                  ระยะทางจากมหาลัย {{user.distance}} กิโลเมตร
+                  ระยะทางจากมหาวิทยาลัย {{user.distance}} กิโลเมตร
                 </div>
                 <div class="rating-recomend2 ">
                   <b-form-rating v-model="user.star" readonly no-border variant="warning" style="background: none; float: left; width: 40%;"></b-form-rating>

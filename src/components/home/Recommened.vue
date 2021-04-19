@@ -29,8 +29,8 @@
           
             <h6 style="line-height: 0.5;   float: left;">บาท </h6>
             <br>
-            <h6 style="line-height: 0.5 ;" v-if="s[0].distance==0"> ระยะทางจากมหาลัย {{s[0].distance}} กิโลเมตร</h6>
-            <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาลัย {{s[0].distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-if="s[0].distance==0"> ระยะทางจากมหาวิทยาลัย {{s[0].distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาวิทยาลัย {{s[0].distance}} กิโลเมตร</h6>
           </div> 
 
         </div>
@@ -64,8 +64,8 @@
           
             <h6 style="line-height: 0.5;   float: left;">บาท </h6>
             <br>
-            <h6 style="line-height: 0.5 ;" v-if="s.distance==0"> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
-            <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาลัย {{s.distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-if="s.distance==0"> ระยะทางจากมหาวิทยาลัย {{s.distance}} กิโลเมตร</h6>
+            <h6 style="line-height: 0.5 ;" v-else> ระยะทางจากมหาวิทยาลัย {{s.distance}} กิโลเมตร</h6>
           </div> 
 
         </div>
@@ -91,7 +91,7 @@ let recommdent_api = "https://accommodation.pjjop.org/getapri/";
 let history_api = "/api/history/";
 let d_recomment = "/api/GetReccomend/"
 let data_user = "/api/GetData/"
-
+let reating_user = "/api/GetRating_user/"
 // import { slider, slideritem } from 'vue-concise-slider';
 import Flickity from 'vue-flickity';
 export default {
@@ -286,54 +286,103 @@ export default {
           const behavior = res.data[0].behavior
           const id = res.data[0].id
           // console.log(behavior);
-          Axios.post(recommdent,{"UserID": id})
+          Axios.post(this.$store.getters.getApi+reating_user,{"user" : this.id_user})
           .then(res => {
-            if(res.data.results.dormitory != null){
-              console.log("auto");
-              Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
-              .then(res => {
-                this.room = res.data.dormitory  
-              })
-              .catch(err => alert(err));
-            }
-            else{
-              console.log("api");
-              Axios.post(recommdent_api,{"Act" : behavior})
-              .then(res => {
-                // console.log(res.data.results.dormitory);
-                if(res.data.results.dormitory != null){
-                  Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
-                  .then(res => {
-                    this.room = res.data.dormitory  
-                  })
-                  .catch(err => alert(err));
-                }
-                else{
-                  console.log("ระยะทาง");
-                  Axios.get(this.$store.getters.getApi+mongo_api)
-                  .then(res => {
-                    var r = res.data.dormitory
-                    var r2 = []
-                    for(var i in r){
-                      // console.log(r[i]);
-                      if(r[i].distance < 0.8){
-                        r2.push([r[i]])
+              if(res.data == "true"){
+                Axios.post(recommdent,{"UserID": id})
+                .then(res => {
+                    Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
+                    .then(res => {
+                      this.room = res.data.dormitory  
+                    })
+                    .catch(err => alert(err));
+                })
+              }
+              else{
+                Axios.post(recommdent_api,{"Act" : behavior})
+                .then(res => {
+                  // console.log(res.data.results.dormitory);
+                  if(res.data.results.dormitory != null){
+                    Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
+                    .then(res => {
+                      this.room = res.data.dormitory  
+                    })
+                    .catch(err => alert(err));
+                  }
+                  else{
+                    console.log("ระยะทาง");
+                    Axios.get(this.$store.getters.getApi+mongo_api)
+                    .then(res => {
+                      var r = res.data.dormitory
+                      var r2 = []
+                      for(var i in r){
+                        // console.log(r[i]);
+                        if(r[i].distance < 0.8){
+                          r2.push([r[i]])
+                        }
                       }
-                    }
-                    
-                    this.room = r2;
-                    // console.log(this.room);
-                  })
-                  .catch(err => alert(err));
-                }
-                
-              })
-              .catch(err => {
-                console.log(err);
-                
-              });
-            }
+                      
+                      this.room = r2;
+                      // console.log(this.room);
+                    })
+                    .catch(err => alert(err));
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                  
+                });  
+              }
+              
           })
+          // Axios.post(recommdent,{"UserID": id})
+          // .then(res => {
+          //   if(res.data.results.dormitory != null){
+          //     console.log("auto");
+          //     Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
+          //     .then(res => {
+          //       this.room = res.data.dormitory  
+          //     })
+          //     .catch(err => alert(err));
+          //   }
+          //   else{
+          //     console.log("api");
+          //     Axios.post(recommdent_api,{"Act" : behavior})
+          //     .then(res => {
+          //       // console.log(res.data.results.dormitory);
+          //       if(res.data.results.dormitory != null){
+          //         Axios.post(this.$store.getters.getApi+d_recomment,{"dormitory" : res.data.results.dormitory})
+          //         .then(res => {
+          //           this.room = res.data.dormitory  
+          //         })
+          //         .catch(err => alert(err));
+          //       }
+          //       else{
+          //         console.log("ระยะทาง");
+          //         Axios.get(this.$store.getters.getApi+mongo_api)
+          //         .then(res => {
+          //           var r = res.data.dormitory
+          //           var r2 = []
+          //           for(var i in r){
+          //             // console.log(r[i]);
+          //             if(r[i].distance < 0.8){
+          //               r2.push([r[i]])
+          //             }
+          //           }
+                    
+          //           this.room = r2;
+          //           // console.log(this.room);
+          //         })
+          //         .catch(err => alert(err));
+          //       }
+                
+          //     })
+          //     .catch(err => {
+          //       console.log(err);
+                
+          //     });
+          //   }
+          // })
           .catch(err => alert(err));
         })
         .catch(err => alert(err));

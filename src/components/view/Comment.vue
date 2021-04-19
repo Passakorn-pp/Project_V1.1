@@ -111,6 +111,8 @@ let addquestion_api = "/api/addQuestion/"
 let getRatingAll = "https://accommodation.pjjop.org/getrating/"
 let setRating = "/api/SetRating/"
 let getRating = "/api/GetRating/"
+let getData = "/api/GetData/"
+let update_rating = "https://accommodation.pjjop.org/updateuser/"
 import { create, all } from 'mathjs'
 const config = { }
 const math = create(all, config)
@@ -128,7 +130,8 @@ export default {
       listtext: [],
       id_user : null,
       rating : 0,
-      name_user : null
+      name_user : null,
+      id : null
     };
   },
 
@@ -136,10 +139,12 @@ export default {
     changeRating(){
       Axios.post(getRatingAll ,{"Dorname" : this.$route.params.Name})
       .then(res => {
-        console.log(res);
+        console.log(this.room+"room");
         var rating = res.data.results.Rating;
         rating.push(this.rating)
         var count2 = math.mode(rating)
+        Axios.post(update_rating,{"UserID" : this.id,"IDDor" : this.room.dormitory[0].id_dor,"rating" : this.rating})
+        
         Axios.post(this.$store.getters.getApi+setRating,{"name" : this.$route.params.Name,"user" : this.id_user,"rating" : this.rating,"ratingAll" : count2[0],"preper" : rating.length})
         .then(res => {
           console.log(res);
@@ -155,6 +160,13 @@ export default {
         this.userProfile = profile
         this.id_user = this.userProfile['userId']
         this.name_user =  this.userProfile['displayName']
+
+        Axios.post(this.$store.getters.getApi+getData,{"id_user":this.id_user })
+        .then(res => {
+          this.id = res.data[0].id
+        })
+        .catch(err => alert(err));
+
         Axios.post(this.$store.getters.getApi+getRating,{"name" : this.$route.params.Name,"user" : this.id_user})
         .then(res => {
           this.rating = res.data

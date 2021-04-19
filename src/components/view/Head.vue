@@ -5,9 +5,9 @@
     </div>
     <div class="cotainer-view-detail-head-view">
       <h1 class="text-head-view"> {{room.name}}</h1>
-      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='man'">(หอพักชาย)</h5>
-      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='woman'">(หอพักหญิง)</h5>
-      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='man/woman'">(หอพัก ชาย/หญิง)</h5>
+      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='man'">( หอพักชาย )</h5>
+      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='woman'">( หอพักหญิง )</h5>
+      <h5 style="float: left; text-align: left; line-height: 3;" v-if="room.gender=='man/woman'">( หอพัก ชาย/หญิง )</h5>
       <div style="width: 30%; float: right; margin-top:2%" > 
       <div v-if="$store.getters.getUserstate == 'User'" >
         <span style="float: right; width: 70%; text-align :left;">{{ status }}</span>
